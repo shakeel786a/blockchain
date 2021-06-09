@@ -4,9 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import Landing from './pages/Landing'
+import Form from './pages/Form'
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
+    <Form />
   </React.StrictMode>,
   document.getElementById('root')
 );
