@@ -26,6 +26,8 @@ function FileDropSection(props) {
 
   useEffect(() => () => files.forEach(file => URL.revokeObjectURL(file.preview)), [])
 
+  console.log('Files=============', files)
+
   return (
       <div {...getRootProps({ className: 'dropzone cursor-pointer' })}>
         <input {...getInputProps()} />

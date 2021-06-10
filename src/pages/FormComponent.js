@@ -4,49 +4,83 @@ import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 
 import { FileDropSection, Avatar } from '../commonPages'
+import { valiation } from './formUtility'
 
 function FormComponent(props) {
-    const { onClickSubmit } = props
-    const [file, setFile] = useState()
+    const { isLoading, onClickFormSubmit } = props
     const [uri, setUri] = useState('')
     const [dateTime, setDateTime] = useState(new Date())
-    const [properties, setProperties] = useState([{ key: '', value: '' }])
+    const [properties, setProperties] = useState([{ Key: '', Value: '' }])
+    const [formInfo, setFormInfo] = useState({ dateTime: new Date() })
+
+    const { name, description, sellerFee, startingPrice, minimumPrice, reservePrice } = formInfo || {}
 
     useEffect(() => {
         if (properties && properties.length) {
-            const { key, value } = properties[properties.length - 1]
-            if (key !== '' && value !== '') {
-                setProperties([ ...properties, { key: '', value: '' }])
+            const { Key, Value } = properties[properties.length - 1]
+            if (Key !== '' && Value !== '') {
+                setProperties([ ...properties, { Key: '', Value: '' }])
             }
+
+            handleOnChange({ properties })
         }
     }, [properties])
 
-    const handleOnSelectFile = ({ file }) => {
-    const uri = file && file.type && file.type.split('/')[1] === 'pdf' ? file.path : file.preview
-        setUri(uri)
-        setFile(file)
+    const onClickSubmit = () => {
+        if (valiation(formInfo)) {
+            onClickFormSubmit(formInfo)
+        }
     }
 
-    const onChangeDate = dateTime => setDateTime(dateTime)
-    const onChangePropertiesKey = (index, key) => console.log('index==========', key, index)
-    const onChangePropertiesValue = (index, value) => console.log('index==========', value, index)
+    const handleOnSelectFile = ({ file }) => {
+        const uri = file && file.type && file.type.split('/')[1] === 'pdf' ? file.path : file.preview
+        setUri(uri)
+        handleOnChange({ file })
+    }
 
-    console.log('properties===========', properties)
+    const onChangeDate = dateTime => {
+        handleOnChange({ dateTime })
+        setDateTime(dateTime)
+    }
+    const onChangePropertiesKey = (index, Key) => {
+        const tempArray = properties
+        tempArray[index].Key = Key
+        setProperties([...tempArray])
+    }
+    const onChangePropertiesValue = (index, Value) => {
+        const tempArray = properties
+        tempArray[index].Value = Value
+        setProperties([...tempArray])
+    }
+
+    const handleOnChange = info => {
+        setFormInfo({ ...formInfo, ...info })
+    }
 
     let propertiesSection = null
     if (properties && properties.length) {
-        propertiesSection = properties.map(({ key, value }, index) => {
+        propertiesSection = properties.map(({ Key, Value }, index) => {
             return (
-                <div class="row">
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" placeholder="e.g. size" value={key} onChange={() => onChangePropertiesKey(index, key)} />
+                <>
+                    {index !== 0 ? <br /> : null}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="e.g. size" value={Key} onChange={e => onChangePropertiesKey(index, e.target.value)} />
+                        </div>
+                        <div class="col-sm-6 mt-2 mt-sm-0">
+                            <input type="text" class="form-control" placeholder="e.g. M, L, XL" value={Value} onChange={e => onChangePropertiesValue(index, e.target.value)} />
+                        </div>
                     </div>
-                    <div class="col-sm-6 mt-2 mt-sm-0">
-                        <input type="text" class="form-control" placeholder="e.g. M, L, XL" value={value} onChange={() => onChangePropertiesValue(index, value)} />
-                    </div>
-                </div>
+                </>
             )
         })
+    }
+
+    let buttonSection = null
+    if (isLoading) {
+        buttonSection = <button type="submit" class="btn btn-success col-md-6">Loading...</button>  
+    } else {
+        buttonSection = <button type="submit" class="btn btn-success col-md-6" onClick={onClickSubmit}>Submit</button>
     }
 
     return (
@@ -63,23 +97,22 @@ function FormComponent(props) {
                     <div class="col-xl-6 col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                {/* <button type="submit" class="btn btn-info">Choose File</button>
-                                <input type="text" readonly class="form-control-plaintext" value="PNG, GIF, WEBP, MP4 or MP3. MAX 30mb" /> */}
                                 <div>
                                     <FileDropSection name="Choose File" formatText="PNG, GIF, JPG" selectedFile={handleOnSelectFile} />
                                 </div>
+                                {/* <input type="file" class="form-control" placeholder="e.g. redeemable card with logo" onChange={e => handleOnChange({ file: e.target.value })} /> */}
 
                                 <br />
                                 <label><b>Name</b></label>
-                                <input type="text" class="form-control" placeholder="e.g. redeemable card with logo" />
+                                <input type="text" class="form-control" placeholder="e.g. redeemable card with logo" value={name} onChange={e => handleOnChange({ name: e.target.value })} />
 
                                 <br />
                                 <label><b>Description</b> (Optional)</label>
-                                <textarea class="form-control" placeholder="e.g. after purchasing you will able to real cards"></textarea>
+                                <textarea class="form-control" placeholder="e.g. after purchasing you will able to real cards" value={description} onChange={e => handleOnChange({ description: e.target.value })}></textarea>
 
                                 <br />
-                                <label><b>Royalities</b></label>
-                                <input type="text" class="form-control" placeholder="e.g. 10%, 20%, 30%" />
+                                <label><b>Seller Fee</b></label>
+                                <input type="text" class="form-control" placeholder="e.g. 5%" value={sellerFee} onChange={e => handleOnChange({ sellerFee: e.target.value })} />
 
                                 <br />
                                 <label><b>Properties (Optional)</b></label>
@@ -93,18 +126,18 @@ function FormComponent(props) {
 
                                 <br />
                                 <label><b>Starting Price</b></label>
-                                <input type="text" class="form-control" placeholder="e.g. Price" id="mdate" />
+                                <input type="text" class="form-control" placeholder="e.g. Price" value={startingPrice} onChange={e => handleOnChange({ startingPrice: e.target.value })} />
 
                                 <br />
                                 <label><b>Minimum Price</b></label>
-                                <input type="text" class="form-control" placeholder="e.g. Price" id="mdate" />
+                                <input type="text" class="form-control" placeholder="e.g. Price" value={minimumPrice} onChange={e => handleOnChange({ minimumPrice: e.target.value })} />
 
                                 <br />
                                 <label><b>Reserve Price</b></label>
-                                <input type="text" class="form-control" placeholder="e.g. Price" id="mdate" />
+                                <input type="text" class="form-control" placeholder="e.g. Price" value={reservePrice} onChange={e => handleOnChange({ reservePrice: e.target.value })} />
 
                                 <br />
-                                <button type="submit" class="btn btn-success col-md-6" onClick={onClickSubmit}>Submit</button>
+                                {buttonSection}
                             </div>
                         </div>
                     </div>
@@ -113,7 +146,6 @@ function FormComponent(props) {
                     <div class="col-xl-6 col-lg-12" style={{ height: "400px" }}>
                         <label><b>Preview</b></label>
                         <div class="card" style={{ alignItems: 'center', justifyContent: 'center' }}>
-                            {/* <label>Prevlew of collection</label> */}
                             {uri ? <Avatar uri={uri} style={{ height: '300px', width: '300px' }} /> : <label>Prevlew of collection</label>}
                         </div>
                     </div>
