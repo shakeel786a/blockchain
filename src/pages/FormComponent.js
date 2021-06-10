@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 
-import { FileDropSection, Avatar } from '../commonPages'
+import { EditorComponent, FileDropSection, Avatar } from '../commonPages'
 import { valiation } from './formUtility'
 
 function FormComponent(props) {
@@ -13,7 +13,7 @@ function FormComponent(props) {
     const [properties, setProperties] = useState([{ Key: '', Value: '' }])
     const [formInfo, setFormInfo] = useState({ dateTime: new Date() })
 
-    const { name, description, sellerFee, startingPrice, minimumPrice, reservePrice } = formInfo || {}
+    const { name, description, sellerFee = '5%', startingPrice, minimumPrice, reservePrice } = formInfo || {}
 
     useEffect(() => {
         if (properties && properties.length) {
@@ -108,11 +108,12 @@ function FormComponent(props) {
 
                                 <br />
                                 <label><b>Description</b> (Optional)</label>
-                                <textarea class="form-control" placeholder="e.g. after purchasing you will able to real cards" value={description} onChange={e => handleOnChange({ description: e.target.value })}></textarea>
+                                {/* <textarea class="form-control" placeholder="e.g. after purchasing you will able to real cards" value={description} onChange={e => handleOnChange({ description: e.target.value })}></textarea> */}
+                                <EditorComponent onChange={info => handleOnChange({ description: info })} value={description || ' '} />
 
                                 <br />
                                 <label><b>Seller Fee</b></label>
-                                <input type="text" class="form-control" placeholder="e.g. 5%" value={sellerFee} onChange={e => handleOnChange({ sellerFee: e.target.value })} />
+                                <input type="text" readOnly class="form-control" placeholder="e.g. 5%" value={sellerFee} />
 
                                 <br />
                                 <label><b>Properties (Optional)</b></label>
