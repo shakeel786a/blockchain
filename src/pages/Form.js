@@ -3,7 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { Header, Sidebar } from '../commonPages'
 import FormComponent from './FormComponent'
 import { useFetchAPI } from '../hooks'
-import { postUploadFileAPI } from '../http/common.http.service'
+import { postUploadFileAPI, saveTokenAPI } from '../http/common.http.service'
+import * as fixedData from '../helper/settings'
+import { getFullRoute } from '../helper/utility'
+
+const {
+    nftTokenListRoute
+} = fixedData.routeName
 
 function Form(props) {
     const { history } = props
@@ -11,19 +17,34 @@ function Form(props) {
 
     const [
         {
-            isLoading,
-            response
+            isLoading: isFileUploadLoading,
+            response: { path: filePath = "" } = {}
         },
         getFileUpload
     ] = useFetchAPI()
 
-    useEffect(() => {
-        if (isLoading === false && response) {
-            setUploadedFile(response.path)
-        }
-    }, [isLoading, response])
+    const [
+        {
+            isLoading: isSaveTokenLoading,
+            response: saveTokenData
+        },
+        postSaveToken
+    ] = useFetchAPI()
 
-    const uploadFile = file => {
+    useEffect(() => {
+        if (isFileUploadLoading === false && filePath) {
+            setUploadedFile(filePath)
+        }
+    }, [isFileUploadLoading, filePath])
+
+    useEffect(() => {
+        if (isSaveTokenLoading === false && saveTokenData) {
+            // console.log('saveTokenData===========-------------', saveTokenData)
+            history.push({ pathname: getFullRoute(nftTokenListRoute) })
+        }
+    }, [isSaveTokenLoading, saveTokenData])
+
+    const handleOnSelectFile = file => {
         getFileUpload({
             api: postUploadFileAPI,
             payload: {
@@ -36,18 +57,23 @@ function Form(props) {
         })
     }
 
-    const handleOnSelectFile = file => {
-        uploadFile(file)
+    const handleOnClickSubmit = formInfo => {
+        const properties = formInfo.properties && JSON.stringify(formInfo.properties)
+        const body = { ...formInfo, properties }
+
+        postSaveToken({
+            api: saveTokenAPI,
+            payload: {
+               body
+            }
+        })
     }
-
-    const handleOnClickSubmit = formInfo => {}
-
 
     return (
         <>
             <Header history={history} />
-            <Sidebar />
-            <FormComponent isLoading={isLoading} uploadedFile={uploadedFile} onSelectFile={handleOnSelectFile} onClickFormSubmit={handleOnClickSubmit} />
+            <Sidebar history={history} />
+            <FormComponent isFileUploadLoading={isFileUploadLoading} isLoading={isSaveTokenLoading} uploadedFile={uploadedFile} onSelectFile={handleOnSelectFile} onClickFormSubmit={handleOnClickSubmit} />
         </>
     )
 }

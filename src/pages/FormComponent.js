@@ -3,19 +3,18 @@ import React, { useEffect, useState } from 'react'
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 
-import { EditorComponent, FileDropSection, Avatar, Text } from '../commonPages'
+import { Avatar, Button, EditorComponent, FileDropSection, Text } from '../commonPages'
 import { validation } from './formUtility'
 
 function FormComponent(props) {
-    const { isLoading, uploadedFile, onSelectFile, onClickFormSubmit } = props
-    // const [uri, setUri] = useState('')
+    const { isLoading, isFileUploadLoading, uploadedFile, onSelectFile, onClickFormSubmit } = props
     const [dateTime, setDateTime] = useState(new Date())
     const [properties, setProperties] = useState([{ Key: '', Value: '' }])
-    const [formInfo, setFormInfo] = useState({ name: undefined, sellerFee: '5%', dateTime: new Date(), startingPrice: undefined, minimumPrice: undefined, reservePrice: undefined })
+    const [formInfo, setFormInfo] = useState({ name: undefined, royalties: '5', dateTime: new Date(), startingPrice: undefined, minimumPrice: undefined, reservePrice: undefined })
     const [validationMessage, setValidationMessage] = useState({})
     const [editorValue, setEditorValue] = useState(null)
 
-    const { file, name, sellerFee, startingPrice, minimumPrice, reservePrice } = formInfo || {}
+    const { imageUrl, name, royalties, startingPrice, minimumPrice, reservePrice } = formInfo || {}
     const {
         fileValidationMessage,
         nameValidationMessage,
@@ -38,28 +37,18 @@ function FormComponent(props) {
     }, [properties])
 
     useEffect(() => {
-        handleOnChange({ file: uploadedFile || undefined })
+        handleOnChange({ imageUrl: uploadedFile || undefined })
     }, [uploadedFile])
 
     const onClickSubmit = () => {
         const { status, formValidationMessage } = validation(formInfo)
         setValidationMessage(formValidationMessage)
         if (status) {
-            onClickFormSubmit(formInfo)
+            onClickFormSubmit({ ...formInfo, description: editorValue || '' })
         }
     }
 
-    const handleOnSelectFile = ({ file }) => {
-        // const uri = file && file.type && file.type.split('/')[1] === 'pdf' ? file.path : file.preview
-        // setUri(uri)
-        onSelectFile(file)
-        // handleOnChange({ file })
-    }
-
-    const onChangeFile = e => {
-        onSelectFile(e)
-        handleOnChange({ file: e.target.value })
-    }
+    const handleOnSelectFile = ({ file }) => onSelectFile(file)
 
     const onChangeDate = dateTime => {
         handleOnChange({ dateTime })
@@ -82,7 +71,7 @@ function FormComponent(props) {
         setFormInfo({ ...formInfo, ...info })
     }
 
-    console.log('formInfo==================', formInfo)
+    // console.log('formInfo==================', formInfo)
 
     let propertiesSection = null
     if (properties && properties.length) {
@@ -105,9 +94,9 @@ function FormComponent(props) {
 
     let buttonSection = null
     if (isLoading) {
-        buttonSection = <button type="submit" class="btn btn-success col-md-6">Loading...</button>  
+        buttonSection = <Button isLoading={isLoading} />  
     } else {
-        buttonSection = <button type="submit" class="btn btn-success col-md-6" onClick={onClickSubmit}>Submit</button>
+        buttonSection = <Button label="Submit" onClick={onClickSubmit} />
     }
 
     return (
@@ -126,9 +115,8 @@ function FormComponent(props) {
                         <div class="card">
                             <div class="card-body">
                                 <div>
-                                    <FileDropSection name="Choose File" formatText="PNG, GIF, JPG" selectedFile={handleOnSelectFile} />
+                                    <FileDropSection name="Choose File" formatText="PNG, GIF, JPG" selectedFile={handleOnSelectFile} isLoading={isFileUploadLoading} />
                                 </div>
-                                {/* <input type="file" class="form-control" placeholder="e.g. redeemable card with logo" onChange={onChangeFile} /> */}
                                 {fileValidationMessage ? (
                                     <>
                                         <lable className='validation-label'>{fileValidationMessage}</lable>
@@ -151,8 +139,8 @@ function FormComponent(props) {
                                 <EditorComponent onChange={info => setEditorValue(info)} value={editorValue || ''} />
 
                                 <br />
-                                <label><b>Seller Fee</b></label>
-                                <input type="text" readOnly class="form-control" placeholder="e.g. 5%" value={sellerFee} />
+                                <label><b>Seller Fee (%)</b></label>
+                                <input type="text" readOnly class="form-control" placeholder="e.g. 5%" value={royalties} />
                                 {sellerFeeValidationMessage ? (
                                     <>
                                         <lable className='validation-label'>{sellerFeeValidationMessage}</lable>
@@ -178,7 +166,6 @@ function FormComponent(props) {
                                 
                                 <br />
                                 <label><b>Starting Price</b></label>
-                                {/* <input type="text" class="form-control" placeholder="e.g. 10" value={startingPrice} onChange={e => handleOnChange({ startingPrice: e.target.value })} /> */}
                                 <Text.NumberInput
                                     class="form-control"
                                     placeholder="e.g. 10"
@@ -195,7 +182,6 @@ function FormComponent(props) {
                                 
                                 <br />
                                 <label><b>Minimum Price</b></label>
-                                {/* <input type="text" class="form-control" placeholder="e.g. 10" value={minimumPrice} onChange={e => handleOnChange({ minimumPrice: e.target.value })} /> */}
                                 <Text.NumberInput
                                     class="form-control"
                                     placeholder="e.g. 10"
@@ -212,7 +198,6 @@ function FormComponent(props) {
                                 
                                 <br />
                                 <label><b>Reserve Price</b></label>
-                                {/* <input type="text" class="form-control" placeholder="e.g. 10" value={reservePrice} onChange={e => handleOnChange({ reservePrice: e.target.value })} /> */}
                                 <Text.NumberInput
                                     class="form-control"
                                     placeholder="e.g. 10"
@@ -237,7 +222,7 @@ function FormComponent(props) {
                     <div class="col-xl-6 col-lg-12" style={{ height: "400px" }}>
                         <label><b>Preview</b></label>
                         <div class="card" style={{ alignItems: 'center', justifyContent: 'center' }}>
-                            {file ? <Avatar uri={file} style={{ height: '300px', width: '300px' }} /> : <label>Prevlew of collection</label>}
+                            {imageUrl ? <Avatar uri={imageUrl} style={{ height: '300px', width: '300px' }} /> : <label>Prevlew of collection</label>}
                         </div>
                     </div>
                     {/* Preview section of file end */}

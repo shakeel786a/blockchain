@@ -1,7 +1,7 @@
 import { showToastMessage } from "../helper/utility"
 
 export const validation = formInfo => {
-    const { file, name, description, sellerFee, dateTime, startingPrice, minimumPrice, reservePrice } = formInfo || {}
+    const { file, name, description, royalties, dateTime, startingPrice, minimumPrice, reservePrice } = formInfo || {}
 
     const formValidationMessage = {
         fileValidationMessage: undefined,
@@ -29,7 +29,7 @@ export const validation = formInfo => {
         formValidationMessage.nameValidationMessage = undefined
     }
     
-    if (!sellerFee && formInfo.hasOwnProperty('sellerFee')) {
+    if (!royalties && formInfo.hasOwnProperty('royalties')) {
         formValidationMessage.sellerFeeValidationMessage = 'Seller fee required'
         status = false
     } else {

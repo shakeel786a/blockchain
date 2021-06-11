@@ -178,6 +178,7 @@ module.exports = {
   ],
   routeName: {
     formRoute: { path: '/form' },
+    nftTokenListRoute: { path: '/nft-token-list' },
     homeRoute: { path: '/' },
     fourZeroFourRoute: { path: '/404' },
     ccavenueResponseRoute: { path: '/ccavenue-response' },
