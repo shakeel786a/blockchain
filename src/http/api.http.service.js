@@ -3,7 +3,7 @@ const API_BASE = 'http://codetentacles-006-site18.htempurl.com'
 const ERROR_MESSAGE = 'Something went wrong. Please try again later.'
 
 const formatHTTPResponse = httpResponse => {
-    console.log('status', httpResponse.status)
+    // console.log('status', httpResponse.status)
     if (httpResponse.ok && httpResponse.status === 200) {
       return httpResponse.json()
     }
@@ -16,10 +16,11 @@ const formatErrorResponse = error => {
 
 const header = payload => {
     const headers = {
-    //   'Content-type': 'application/json',
-      'Content-type': 'application/x-www-form-urlencoded',
-      ...(payload.token && { Authorization: payload.token }),
-      ...payload.headers
+      // 'Content-type': 'application/json',
+      // 'Content-type': 'application/x-www-form-urlencoded',
+      ...(payload.token && { token: payload.token }),
+      ...payload.headers,
+      ...(payload.APPKEY && { APPKEY: payload.APPKEY})
     }
   
     if (headers['Content-type'] === null) {
@@ -27,7 +28,7 @@ const header = payload => {
     }
   
     Object.keys(headers).forEach(key => !headers[key] && delete headers[key])
-  
+
     return headers
   }
 
@@ -40,7 +41,6 @@ const APIPath = (endPoint, params) => {
     }
     // const path = `${API_BASE + getApiPort(endPoint)}/${endPoint}`
     const path = `${API_BASE}/${endPoint}`
-    console.log("Path===============-----------", path)
     return querystring === '' ? path : `${path}?${querystring}`
 }
 
@@ -73,8 +73,6 @@ const GET = subPath => payload => {
         }
     })
 
-    console.log('formdata===============', formdata)
-
     return fetch(APIPath(subpath, payload.params), {
         method: 'POST',
         headers: header(payload),
@@ -83,22 +81,6 @@ const GET = subPath => payload => {
     })
         .then(response => formatHTTPResponse(response))
         .catch(error => formatErrorResponse(error))
-
-    // var formdata = new FormData();
-    // formdata.append("file", "/C:/Users/Shakeel Ansari/Downloads/favicon.png");
-
-    // console.log('formdata===============', formdata)
-
-    // var requestOptions = {
-    //   method: 'POST',
-    //   body: formdata,
-    //   redirect: 'follow'
-    // };
-
-    // fetch("http://codetentacles-006-site18.htempurl.com/api/api/UploadFile", requestOptions)
-    // .then(response => response.text())
-    // .then(result => console.log('result==============', result))
-    // .catch(error => console.log('error', error))
   }
 
   const PUT = subPath => payload => {

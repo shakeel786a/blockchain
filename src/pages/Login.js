@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { getFullRoute } from '../helper/utility'
 import * as fixedData from '../helper/settings'
+
+import { useFetchAPI } from '../hooks'
+import { getUserAPI } from '../http/common.http.service'
 
 const {
     formRoute
@@ -9,6 +12,30 @@ const {
 
 function Login(props) {
     const { history } = props
+
+    const [
+        {
+            isLoading,
+            response
+        },
+        getUserInfo
+    ] = useFetchAPI()
+
+    useEffect(() => {
+        getUserInfo({
+            api: getUserAPI,
+            payload: {
+                params: {
+                    address: '0xEC4E8CC19a6f05ee4298127758bF34876910F08A'
+                }
+            }
+        })
+    }, [])
+
+    useEffect(() => {
+        response && console.log('response================', response)
+    }, [isLoading, response])
+
     const onClickSignIn = () => history.push({ pathname: getFullRoute(formRoute) })
     return (
         <div class="authincation h-100">

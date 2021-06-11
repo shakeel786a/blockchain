@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Header, Sidebar } from '../commonPages'
 import FormComponent from './FormComponent'
@@ -7,6 +7,7 @@ import { postUploadFileAPI } from '../http/common.http.service'
 
 function Form(props) {
     const { history } = props
+    const [uploadedFile, setUploadedFile] = useState(undefined)
 
     const [
         {
@@ -17,8 +18,10 @@ function Form(props) {
     ] = useFetchAPI()
 
     useEffect(() => {
-        response && console.log('uploaded file link============', response)
-    }, [response])
+        if (isLoading === false && response) {
+            setUploadedFile(response.path)
+        }
+    }, [isLoading, response])
 
     const uploadFile = file => {
         getFileUpload({
@@ -33,17 +36,18 @@ function Form(props) {
         })
     }
 
-    const handleOnClickSubmit = formInfo => {
-        console.log('formInfo===========', formInfo)
-        uploadFile(formInfo && formInfo.file)
+    const handleOnSelectFile = file => {
+        uploadFile(file)
     }
+
+    const handleOnClickSubmit = formInfo => {}
 
 
     return (
         <>
             <Header history={history} />
             <Sidebar />
-            <FormComponent isLoading={isLoading} onClickFormSubmit={handleOnClickSubmit} />
+            <FormComponent isLoading={isLoading} uploadedFile={uploadedFile} onSelectFile={handleOnSelectFile} onClickFormSubmit={handleOnClickSubmit} />
         </>
     )
 }

@@ -4,6 +4,6 @@ export function postUploadFileAPI(payload) {
     return POST('api/api/UploadFile')(payload)
 }
 
-// export function postAdminBannerAddAPI(payload) {
-//     return GET('content/adminBannerAdd')(payload)
-// }
+export function getUserAPI(payload) {
+    return GET('api/api/GetUser')(payload)
+}
