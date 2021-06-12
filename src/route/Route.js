@@ -6,8 +6,10 @@ import { getFullRoute } from '../helper/utility'
 // import { useMetaInformation } from 'hooks/api'
 
 // #region Import Pages
-import Login from '../pages/Login'
 import Form from '../pages/Form'
+import Login from '../pages/auth/Login'
+import Register from '../pages/auth/Register'
+import NftTokenList from '../pages/NftTokenList'
 
 // import Test from 'components/Test'
 // import Footer from 'components/Footer'
@@ -17,8 +19,9 @@ import Form from '../pages/Form'
 // import Demo from '../components/Demo'
 
 const {
-  auth: { loginRoute },
-  formRoute
+  auth: { loginRoute, registerRoute },
+  formRoute,
+  nftTokenListRoute
 } = fixedData.routeName
 
 const Routes = () => {
@@ -32,6 +35,8 @@ const Routes = () => {
         <Route exact path='/' component={Form} />
         <Route exact path={getFullRoute(formRoute)} component={Form} />
         <Route exact path={getFullRoute(loginRoute)} component={Login} />
+        <Route exact path={getFullRoute(nftTokenListRoute)} component={NftTokenList} />
+        <Route exact path={getFullRoute(registerRoute)} component={Register} />
       </Switch>
       {/* <Footer /> */}
     </BrowserRouter>

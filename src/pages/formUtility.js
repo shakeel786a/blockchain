@@ -1,36 +1,66 @@
-import { showToastMessage } from "../helper/utility"
+export const validation = formInfo => {
+    const { imageUrl, name, royalties, dateTime, startingPrice, minimumPrice, reservePrice } = formInfo || {}
 
-export const valiation = formInfo => {
-    const { file, name, description, sellerFee, dateTime, startingPrice, minimumPrice, reservePrice } = formInfo || {}
+    const formValidationMessage = {
+        fileValidationMessage: undefined,
+        nameValidationMessage: undefined,
+        sellerFeeValidationMessage: undefined,
+        dateTimeValidationMessage: undefined,
+        startingPriceValidationMessage: undefined,
+        minimumPriceValidationMessage: undefined,
+        reservePriceValidationMessage: undefined
+    }
+
+    let status = true
     
-    if (!file) {
-        showToastMessage('File required')
-        return false
-    }
-    if (!name) {
-        showToastMessage('Name required')
-        return false
-    }
-    if (!sellerFee) {
-        showToastMessage('Seller fee required')
-        return false
-    }
-    if (!dateTime) {
-        showToastMessage('Date and Time required')
-        return false
-    }
-    if (!startingPrice) {
-        showToastMessage('Starting price required')
-        return false
-    }
-    if (!minimumPrice) {
-        showToastMessage('Minimum price required')
-        return false
-    }
-    if (!reservePrice) {
-        showToastMessage('Reserve price required')
-        return false
+    if (!imageUrl && formInfo.hasOwnProperty('imageUrl')) {
+        formValidationMessage.fileValidationMessage = 'File required'
+        status = false
+    } else {
+        formValidationMessage.fileValidationMessage = undefined
     }
 
-    return true
+    if (!name && formInfo.hasOwnProperty('name')) {
+        formValidationMessage.nameValidationMessage = 'Name required'
+        status = false
+    } else {
+        formValidationMessage.nameValidationMessage = undefined
+    }
+    
+    if (!royalties && formInfo.hasOwnProperty('royalties')) {
+        formValidationMessage.sellerFeeValidationMessage = 'Seller fee required'
+        status = false
+    } else {
+        formValidationMessage.sellerFeeValidationMessage = undefined
+    }
+
+    if (!dateTime && formInfo.hasOwnProperty('dateTime')) {
+        formValidationMessage.dateTimeValidationMessage = 'Date and Time required'
+        status = false
+    } else {
+        formValidationMessage.dateTimeValidationMessage = undefined
+    }
+
+    if (!startingPrice && formInfo.hasOwnProperty('startingPrice')) {
+        formValidationMessage.startingPriceValidationMessage = 'Starting price required'
+        status = false
+    } else {
+        formValidationMessage.startingPriceValidationMessage = undefined
+    }
+
+    if (!minimumPrice && formInfo.hasOwnProperty('minimumPrice')) {
+        formValidationMessage.minimumPriceValidationMessage = 'Minimum price required'
+        status = false
+    } else {
+        formValidationMessage.minimumPriceValidationMessage = undefined
+    }
+
+    if (!reservePrice && formInfo.hasOwnProperty('reservePrice')) {
+        formValidationMessage.reservePriceValidationMessage = 'Reserve price required'
+        status = false
+    } else {
+        formValidationMessage.reservePriceValidationMessage = undefined
+    }
+
+    return { status, formValidationMessage }
 }

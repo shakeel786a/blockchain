@@ -35,7 +35,7 @@ export const manipulateFetchedData = ({ isMounted, result, dispatch }) => {
  */
  export const fetchData = async (api, payload) => {
   const response = await api(payload)
-  console.log('response==============', response)
+  // console.log('response==============', response)
   return response
 }
 

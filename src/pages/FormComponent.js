@@ -3,17 +3,27 @@ import React, { useEffect, useState } from 'react'
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 
-import { EditorComponent, FileDropSection, Avatar } from '../commonPages'
-import { valiation } from './formUtility'
+import { Avatar, Button, EditorComponent, FileDropSection, Text, ValidationTextComponent } from '../commonPages'
+import { validation } from './formUtility'
 
 function FormComponent(props) {
-    const { isLoading, onClickFormSubmit } = props
-    const [uri, setUri] = useState('')
+    const { isLoading, isFileUploadLoading, uploadedFile, onSelectFile, onClickFormSubmit } = props
     const [dateTime, setDateTime] = useState(new Date())
     const [properties, setProperties] = useState([{ Key: '', Value: '' }])
-    const [formInfo, setFormInfo] = useState({ dateTime: new Date() })
+    const [formInfo, setFormInfo] = useState({ name: undefined, royalties: '5', dateTime: new Date(), startingPrice: undefined, minimumPrice: undefined, reservePrice: undefined })
+    const [validationMessage, setValidationMessage] = useState({})
+    const [editorValue, setEditorValue] = useState(null)
 
-    const { name, description, sellerFee = '5%', startingPrice, minimumPrice, reservePrice } = formInfo || {}
+    const { imageUrl, name, royalties, startingPrice, minimumPrice, reservePrice } = formInfo || {}
+    const {
+        fileValidationMessage,
+        nameValidationMessage,
+        sellerFeeValidationMessage,
+        dateTimeValidationMessage,
+        startingPriceValidationMessage,
+        minimumPriceValidationMessage,
+        reservePriceValidationMessage
+    } = validationMessage || {}
 
     useEffect(() => {
         if (properties && properties.length) {
@@ -26,27 +36,31 @@ function FormComponent(props) {
         }
     }, [properties])
 
+    useEffect(() => {
+        handleOnChange({ imageUrl: uploadedFile || undefined })
+    }, [uploadedFile])
+
     const onClickSubmit = () => {
-        if (valiation(formInfo)) {
-            onClickFormSubmit(formInfo)
+        const { status, formValidationMessage } = validation(formInfo)
+        setValidationMessage(formValidationMessage)
+        if (status) {
+            onClickFormSubmit({ ...formInfo, description: editorValue || '' })
         }
     }
 
-    const handleOnSelectFile = ({ file }) => {
-        const uri = file && file.type && file.type.split('/')[1] === 'pdf' ? file.path : file.preview
-        setUri(uri)
-        handleOnChange({ file })
-    }
+    const handleOnSelectFile = ({ file }) => onSelectFile(file)
 
     const onChangeDate = dateTime => {
         handleOnChange({ dateTime })
         setDateTime(dateTime)
     }
+
     const onChangePropertiesKey = (index, Key) => {
         const tempArray = properties
         tempArray[index].Key = Key
         setProperties([...tempArray])
     }
+
     const onChangePropertiesValue = (index, Value) => {
         const tempArray = properties
         tempArray[index].Value = Value
@@ -56,6 +70,8 @@ function FormComponent(props) {
     const handleOnChange = info => {
         setFormInfo({ ...formInfo, ...info })
     }
+
+    // console.log('formInfo==================', formInfo)
 
     let propertiesSection = null
     if (properties && properties.length) {
@@ -76,13 +92,6 @@ function FormComponent(props) {
         })
     }
 
-    let buttonSection = null
-    if (isLoading) {
-        buttonSection = <button type="submit" class="btn btn-success col-md-6">Loading...</button>  
-    } else {
-        buttonSection = <button type="submit" class="btn btn-success col-md-6" onClick={onClickSubmit}>Submit</button>
-    }
-
     return (
         <div class="content-body">
             <div class="container-fluid">
@@ -93,28 +102,30 @@ function FormComponent(props) {
                     </ol>
                 </div>
                 {/* Page titled end */}
+
                 <div class="row">
                     <div class="col-xl-6 col-lg-12">
                         <div class="card">
                             <div class="card-body">
                                 <div>
-                                    <FileDropSection name="Choose File" formatText="PNG, GIF, JPG" selectedFile={handleOnSelectFile} />
+                                    <FileDropSection name="Choose File" formatText="PNG, GIF, JPG" selectedFile={handleOnSelectFile} isLoading={isFileUploadLoading} />
                                 </div>
-                                {/* <input type="file" class="form-control" placeholder="e.g. redeemable card with logo" onChange={e => handleOnChange({ file: e.target.value })} /> */}
-
+                                <ValidationTextComponent validationMessage={fileValidationMessage} />
+                                                                
                                 <br />
                                 <label><b>Name</b></label>
                                 <input type="text" class="form-control" placeholder="e.g. redeemable card with logo" value={name} onChange={e => handleOnChange({ name: e.target.value })} />
-
+                                <ValidationTextComponent validationMessage={nameValidationMessage} />
+                                
                                 <br />
                                 <label><b>Description</b> (Optional)</label>
-                                {/* <textarea class="form-control" placeholder="e.g. after purchasing you will able to real cards" value={description} onChange={e => handleOnChange({ description: e.target.value })}></textarea> */}
-                                <EditorComponent onChange={info => handleOnChange({ description: info })} value={description || ' '} />
+                                <EditorComponent onChange={info => setEditorValue(info)} value={editorValue || ''} />
 
                                 <br />
-                                <label><b>Seller Fee</b></label>
-                                <input type="text" readOnly class="form-control" placeholder="e.g. 5%" value={sellerFee} />
-
+                                <label><b>Seller Fee (%)</b></label>
+                                <input type="text" readOnly class="form-control" placeholder="e.g. 5%" value={royalties} />
+                                <ValidationTextComponent validationMessage={sellerFeeValidationMessage} />
+                                
                                 <br />
                                 <label><b>Properties (Optional)</b></label>
                                 {propertiesSection}
@@ -123,22 +134,44 @@ function FormComponent(props) {
                                 <label><b>Date and Time</b></label>  
                                 <div style={{ flex: 1 }}>
                                     <DatePicker placeholderText="Date and time" dateFormat="Pp" className="form-control" selected={dateTime} showTimeSelect onChange={onChangeDate} />
-                                </div>                              
-
+                                </div>
+                                <ValidationTextComponent validationMessage={dateTimeValidationMessage} />
+                                
                                 <br />
                                 <label><b>Starting Price</b></label>
-                                <input type="text" class="form-control" placeholder="e.g. Price" value={startingPrice} onChange={e => handleOnChange({ startingPrice: e.target.value })} />
-
+                                <Text.NumberInput
+                                    class="form-control"
+                                    placeholder="e.g. 10"
+                                    value={startingPrice}
+                                    onChange={e => handleOnChange({ startingPrice: e.target.value })}
+                                    maxLength={10}
+                                />
+                                <ValidationTextComponent validationMessage={startingPriceValidationMessage} />
+                                
                                 <br />
                                 <label><b>Minimum Price</b></label>
-                                <input type="text" class="form-control" placeholder="e.g. Price" value={minimumPrice} onChange={e => handleOnChange({ minimumPrice: e.target.value })} />
-
+                                <Text.NumberInput
+                                    class="form-control"
+                                    placeholder="e.g. 10"
+                                    value={minimumPrice}
+                                    onChange={e => handleOnChange({ minimumPrice: e.target.value })}
+                                    maxLength={10}
+                                />
+                                <ValidationTextComponent validationMessage={minimumPriceValidationMessage} />
+                                
                                 <br />
                                 <label><b>Reserve Price</b></label>
-                                <input type="text" class="form-control" placeholder="e.g. Price" value={reservePrice} onChange={e => handleOnChange({ reservePrice: e.target.value })} />
-
+                                <Text.NumberInput
+                                    class="form-control"
+                                    placeholder="e.g. 10"
+                                    value={reservePrice}
+                                    onChange={e => handleOnChange({ reservePrice: e.target.value })}
+                                    maxLength={10}
+                                />
+                                <ValidationTextComponent validationMessage={reservePriceValidationMessage} />
+                                
                                 <br />
-                                {buttonSection}
+                                <Button isLoading={isLoading} label="Submit" onClick={onClickSubmit} />
                             </div>
                         </div>
                     </div>
@@ -147,7 +180,7 @@ function FormComponent(props) {
                     <div class="col-xl-6 col-lg-12" style={{ height: "400px" }}>
                         <label><b>Preview</b></label>
                         <div class="card" style={{ alignItems: 'center', justifyContent: 'center' }}>
-                            {uri ? <Avatar uri={uri} style={{ height: '300px', width: '300px' }} /> : <label>Prevlew of collection</label>}
+                            {imageUrl ? <Avatar uri={imageUrl} style={{ height: '300px', width: '300px' }} /> : <label>Prevlew of collection</label>}
                         </div>
                     </div>
                     {/* Preview section of file end */}
