@@ -4,7 +4,8 @@ import { Avatar } from '../commonPages'
 
 function NftTokenListCell(props) {
     const { item } = props
-    const { NFTtokenid, Image_Url, Name, Description, Royalties, Properties, datetime, Starting_Price, Minimum_Price, Reserve_Price } = item
+    const { NFTtokenid, Image_Url, Name, datetime, Starting_Price } = item
+    
     return (
         <tr class="btn-reveal-trigger">
             <td class="py-3">

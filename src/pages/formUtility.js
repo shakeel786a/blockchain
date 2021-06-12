@@ -1,7 +1,5 @@
-import { showToastMessage } from "../helper/utility"
-
 export const validation = formInfo => {
-    const { imageUrl, name, description, royalties, dateTime, startingPrice, minimumPrice, reservePrice } = formInfo || {}
+    const { imageUrl, name, royalties, dateTime, startingPrice, minimumPrice, reservePrice } = formInfo || {}
 
     const formValidationMessage = {
         fileValidationMessage: undefined,

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 
-import { Button, ValidationTextComponent } from '../commonPages'
+import { Button, ValidationTextComponent } from '../../commonPages'
 
 function LoginComponent(props) {
-    const { isLoading, onClickSignIn } = props
+    const { isLoading, onClickSignIn, onClickSignUp } = props
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -34,8 +34,6 @@ function LoginComponent(props) {
 
     const onClickSubmit = () => {
         const status = validation()
-
-        console.log('status---------------', status)
         if (status) {
             onClickSignIn({ username, password })
         }
@@ -79,7 +77,7 @@ function LoginComponent(props) {
                                             <Button className="btn bg-white text-primary btn-block" label="Sign In" isLoading={isLoading} onClick={onClickSubmit} />
                                         </div>
                                         <div class="new-account mt-3">
-                                            <p class="text-white">Don't have an account? <a class="text-white" href="./page-register.html">Sign up</a></p>
+                                            <p class="text-white">Don't have an account? <a class="text-white" role="button" onClick={onClickSignUp}>Sign Up</a></p>
                                         </div>
                                     </div>
                                 </div>
