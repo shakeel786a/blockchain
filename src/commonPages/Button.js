@@ -5,7 +5,7 @@ function Button(props) {
 
     let buttonSection = null
     if (isLoading) {
-        buttonSection = <button type="submit" class={className} {...restProps}>Loading...</button>  
+        buttonSection = <button type="submit" class={className}>Loading...</button>  
     } else {
         buttonSection = <button type="submit" class={className} {...restProps}>{label}</button>
     }

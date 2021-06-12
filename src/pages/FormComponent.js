@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 
-import { Avatar, Button, EditorComponent, FileDropSection, Text } from '../commonPages'
+import { Avatar, Button, EditorComponent, FileDropSection, Text, ValidationTextComponent } from '../commonPages'
 import { validation } from './formUtility'
 
 function FormComponent(props) {
@@ -92,13 +92,6 @@ function FormComponent(props) {
         })
     }
 
-    let buttonSection = null
-    if (isLoading) {
-        buttonSection = <Button isLoading={isLoading} />  
-    } else {
-        buttonSection = <Button label="Submit" onClick={onClickSubmit} />
-    }
-
     return (
         <div class="content-body">
             <div class="container-fluid">
@@ -117,23 +110,13 @@ function FormComponent(props) {
                                 <div>
                                     <FileDropSection name="Choose File" formatText="PNG, GIF, JPG" selectedFile={handleOnSelectFile} isLoading={isFileUploadLoading} />
                                 </div>
-                                {fileValidationMessage ? (
-                                    <>
-                                        <lable className='validation-label'>{fileValidationMessage}</lable>
-                                        <br />
-                                    </>
-                                 ) : null}
-                                
+                                <ValidationTextComponent validationMessage={fileValidationMessage} />
+                                                                
                                 <br />
                                 <label><b>Name</b></label>
                                 <input type="text" class="form-control" placeholder="e.g. redeemable card with logo" value={name} onChange={e => handleOnChange({ name: e.target.value })} />
-                                {nameValidationMessage ? (
-                                    <>
-                                        <lable className='validation-label'>{nameValidationMessage}</lable>
-                                        <br />
-                                    </>
-                                ) : null}
-
+                                <ValidationTextComponent validationMessage={nameValidationMessage} />
+                                
                                 <br />
                                 <label><b>Description</b> (Optional)</label>
                                 <EditorComponent onChange={info => setEditorValue(info)} value={editorValue || ''} />
@@ -141,12 +124,7 @@ function FormComponent(props) {
                                 <br />
                                 <label><b>Seller Fee (%)</b></label>
                                 <input type="text" readOnly class="form-control" placeholder="e.g. 5%" value={royalties} />
-                                {sellerFeeValidationMessage ? (
-                                    <>
-                                        <lable className='validation-label'>{sellerFeeValidationMessage}</lable>
-                                        <br />
-                                    </>
-                                ) : null}
+                                <ValidationTextComponent validationMessage={sellerFeeValidationMessage} />
                                 
                                 <br />
                                 <label><b>Properties (Optional)</b></label>
@@ -157,12 +135,7 @@ function FormComponent(props) {
                                 <div style={{ flex: 1 }}>
                                     <DatePicker placeholderText="Date and time" dateFormat="Pp" className="form-control" selected={dateTime} showTimeSelect onChange={onChangeDate} />
                                 </div>
-                                {dateTimeValidationMessage ? (
-                                    <>
-                                        <lable className='validation-label'>{dateTimeValidationMessage}</lable>
-                                        <br />
-                                    </>
-                                ) : null}                           
+                                <ValidationTextComponent validationMessage={dateTimeValidationMessage} />
                                 
                                 <br />
                                 <label><b>Starting Price</b></label>
@@ -173,12 +146,7 @@ function FormComponent(props) {
                                     onChange={e => handleOnChange({ startingPrice: e.target.value })}
                                     maxLength={10}
                                 />
-                                {startingPriceValidationMessage ? (
-                                    <>
-                                        <lable className='validation-label'>{startingPriceValidationMessage}</lable>
-                                        <br />
-                                    </>
-                                ) : null}
+                                <ValidationTextComponent validationMessage={startingPriceValidationMessage} />
                                 
                                 <br />
                                 <label><b>Minimum Price</b></label>
@@ -189,12 +157,7 @@ function FormComponent(props) {
                                     onChange={e => handleOnChange({ minimumPrice: e.target.value })}
                                     maxLength={10}
                                 />
-                                {minimumPriceValidationMessage ? (
-                                    <>
-                                        <lable className='validation-label'>{minimumPriceValidationMessage}</lable>
-                                        <br />
-                                    </>
-                                ) : null}
+                                <ValidationTextComponent validationMessage={minimumPriceValidationMessage} />
                                 
                                 <br />
                                 <label><b>Reserve Price</b></label>
@@ -205,15 +168,10 @@ function FormComponent(props) {
                                     onChange={e => handleOnChange({ reservePrice: e.target.value })}
                                     maxLength={10}
                                 />
-                                {reservePriceValidationMessage ? (
-                                    <>
-                                        <lable className='validation-label'>{reservePriceValidationMessage}</lable>
-                                        <br />
-                                    </>
-                                ) : null}
-
+                                <ValidationTextComponent validationMessage={reservePriceValidationMessage} />
+                                
                                 <br />
-                                {buttonSection}
+                                <Button isLoading={isLoading} label="Submit" onClick={onClickSubmit} />
                             </div>
                         </div>
                     </div>

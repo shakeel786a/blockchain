@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 
-import { getFullRoute } from '../helper/utility'
+import { getFullRoute, showToastMessage } from '../helper/utility'
 import * as fixedData from '../helper/settings'
-
 import { useFetchAPI } from '../hooks'
-import { getUserAPI } from '../http/common.http.service'
+import { LoginAPI } from '../http/common.http.service'
+import LoginComponent from './LoginComponent'
 
 const {
     formRoute
@@ -15,76 +15,34 @@ function Login(props) {
 
     const [
         {
-            isLoading,
-            response
+            isLoading: isSignInLoading,
+            response: { isSuccess: isSignInSuccess, data }
         },
-        getUserInfo
+        getSignIn
     ] = useFetchAPI()
 
     useEffect(() => {
-        getUserInfo({
-            api: getUserAPI,
+        if (isSignInLoading === false && isSignInSuccess) {
+            history.push({ pathname: getFullRoute(formRoute) })
+        } else {
+            data && showToastMessage(data)
+        }
+    }, [isSignInLoading, isSignInSuccess, data])
+
+    const onClickSignIn = ({ username, password }) => {
+        getSignIn({
+            api: LoginAPI,
             payload: {
-                params: {
-                    address: '0xEC4E8CC19a6f05ee4298127758bF34876910F08A'
+                body: {
+                    username,
+                    password
                 }
             }
         })
-    }, [])
+    }
 
-    useEffect(() => {
-        response && console.log('response================', response)
-    }, [isLoading, response])
-
-    const onClickSignIn = () => history.push({ pathname: getFullRoute(formRoute) })
     return (
-        <div class="authincation h-100">
-            <div class="container h-100">
-                <div class="row justify-content-center h-100 align-items-center">
-                    <div class="col-md-6">
-                        <div class="authincation-content">
-                            <div class="row no-gutters">
-                                <div class="col-xl-12">
-                                    <div class="auth-form">
-                                        <div class="text-center mb-3">
-                                            <a href="index.html"><img src="images/logo-full.png" alt="" /></a>
-                                        </div>
-                                        <h4 class="text-center mb-4 text-white">Sign in your account</h4>
-                                        <form>
-                                            <div class="form-group">
-                                                <label class="mb-1 text-white"><strong>Email</strong></label>
-                                                <input type="email" class="form-control" value="hello@example.com" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="mb-1 text-white"><strong>Password</strong></label>
-                                                <input type="password" class="form-control" value="Password" />
-                                            </div>
-                                            <div class="form-row d-flex justify-content-between mt-4 mb-2">
-                                                <div class="form-group">
-                                                <div class="custom-control custom-checkbox ml-1 text-white">
-                                                        <input type="checkbox" class="custom-control-input" id="basic_checkbox_1" />
-                                                        <label class="custom-control-label" for="basic_checkbox_1">Remember my preference</label>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <a class="text-white" href="page-forgot-password.html">Forgot Password?</a>
-                                                </div>
-                                            </div>
-                                            <div class="text-center">
-                                                <button type="submit" class="btn bg-white text-primary btn-block" onClick={onClickSignIn}>Sign Me In</button>
-                                            </div>
-                                        </form>
-                                        <div class="new-account mt-3">
-                                            <p class="text-white">Don't have an account? <a class="text-white" href="./page-register.html">Sign up</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <LoginComponent isLoading={isSignInLoading} onClickSignIn={onClickSignIn} />
     )
 }
 

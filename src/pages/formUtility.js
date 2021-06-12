@@ -1,7 +1,7 @@
 import { showToastMessage } from "../helper/utility"
 
 export const validation = formInfo => {
-    const { file, name, description, royalties, dateTime, startingPrice, minimumPrice, reservePrice } = formInfo || {}
+    const { imageUrl, name, description, royalties, dateTime, startingPrice, minimumPrice, reservePrice } = formInfo || {}
 
     const formValidationMessage = {
         fileValidationMessage: undefined,
@@ -15,7 +15,7 @@ export const validation = formInfo => {
 
     let status = true
     
-    if (!file && formInfo.hasOwnProperty('file')) {
+    if (!imageUrl && formInfo.hasOwnProperty('imageUrl')) {
         formValidationMessage.fileValidationMessage = 'File required'
         status = false
     } else {
