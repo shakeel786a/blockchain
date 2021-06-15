@@ -7,10 +7,11 @@ import { DateTimePicker } from '../../commonPages'
 function FormComponent(props) {
     const { isLoading, isFileUploadLoading, uploadedFile, selectedItem, onSelectFile, onClickFormSubmit } = props
     const [properties, setProperties] = useState([{ Key: '', Value: '' }])
-    const [formInfo, setFormInfo] = useState({})
+    const [formInfo, setFormInfo] = useState({ dateTime: new Date(), ...selectedItem })
     const [validationMessage, setValidationMessage] = useState({})
     const [editorValue, setEditorValue] = useState(null)
-    const [isDisableFile, setIsDisableFile] = useState(false)
+
+    const isEditing = selectedItem && Object.keys(selectedItem) && Object.keys(selectedItem).length ? true : false
 
     const { imageOrVideo, nftName, startingPrice, reservePrice, startTime, protectionTime, endTime, additionalPrice, physcicalArtworkIsAvailable, status, step } = formInfo || {}
     const {
@@ -27,14 +28,11 @@ function FormComponent(props) {
         statusValidationMessage
     } = validationMessage || {}
 
-    console.log('selectedItem=========formInfo=================', selectedItem, formInfo)
+    console.log('formInfo==============', formInfo)
 
     useEffect(() => {
         if (selectedItem && Object.keys(selectedItem) && Object.keys(selectedItem).length) {
-            setIsDisableFile(true)
-            setFormInfo({ ...selectedItem })
-        } else {
-            setFormInfo({ dateTime: new Date() })
+            setEditorValue(selectedItem.shortDescription || '')
         }
     }, [selectedItem])
 
@@ -50,7 +48,7 @@ function FormComponent(props) {
     }, [properties])
 
     useEffect(() => {
-        handleOnChange({ imageOrVideo: uploadedFile || undefined })
+        uploadedFile && handleOnChange({ imageOrVideo: uploadedFile || undefined })
     }, [uploadedFile])
 
     const handleOnSelectFile = ({ file }) => onSelectFile(file)
@@ -118,7 +116,7 @@ function FormComponent(props) {
                         <div class="card">
                             <div class="card-body">
                                 <div>
-                                    <FileDropSection name="Choose File" formatText="PNG, GIF, JPG" selectedFile={handleOnSelectFile} isLoading={isFileUploadLoading} isDisable={isDisableFile} />
+                                    <FileDropSection name="Choose File" formatText="PNG, GIF, JPG" selectedFile={handleOnSelectFile} isLoading={isFileUploadLoading} isDisable={isEditing} />
                                 </div>
                                 <ValidationTextComponent validationMessage={fileValidationMessage} />
                                                                 
@@ -168,8 +166,8 @@ function FormComponent(props) {
                                 <br />
                                 <label><b>Physical Artwork</b></label>
                                 <div class="form-group mb-0">
-                                    <label class="radio-inline mr-3 c-pointer"><input type="radio" name="artworkGroup" onClick={e => handleOnChange({ physcicalArtworkIsAvailable: e.target.checked })} /> Yes</label>
-                                    <label class="radio-inline mr-3 c-pointer"><input type="radio" name="artworkGroup" onClick={e => handleOnChange({ physcicalArtworkIsAvailable: !e.target.checked })} /> No</label>
+                                    <label class="radio-inline mr-3 c-pointer"><input type="radio" name="artworkGroup" checked={physcicalArtworkIsAvailable} onClick={e => handleOnChange({ physcicalArtworkIsAvailable: e.target.checked })} /> Yes</label>
+                                    <label class="radio-inline mr-3 c-pointer"><input type="radio" name="artworkGroup" checked={!physcicalArtworkIsAvailable} onClick={e => handleOnChange({ physcicalArtworkIsAvailable: !e.target.checked })} /> No</label>
                                 </div>
                                 <ValidationTextComponent validationMessage={physicalArtworkValidationMessage} />
 
@@ -217,14 +215,14 @@ function FormComponent(props) {
                                 <div class="form-group">
                                     <select class="form-control default-select" onChange={e => handleOnChange({ status: e.target.value })}>
                                         <option>Select</option>
-                                        <option value={1}>1</option>
-                                        <option value={2}>2</option>
+                                        <option value={1} selected={status === "1"}>1</option>
+                                        <option value={2} selected={status === "2"}>2</option>
                                     </select>
                                 </div>
                                 <ValidationTextComponent validationMessage={statusValidationMessage} />
 
                                 <br />
-                                <Button isLoading={isLoading} label="Submit" onClick={onClickSubmit} />
+                                {!isEditing ? <Button isLoading={isLoading} label="Submit" onClick={onClickSubmit} /> : null}
                             </div>
                         </div>
                     </div>
