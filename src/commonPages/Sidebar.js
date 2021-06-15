@@ -4,12 +4,15 @@ import * as fixedData from '../helper/settings'
 import { getFullRoute } from '../helper/utility'
 
 const {
+    formRoute,
     nftTokenListRoute
 } = fixedData.routeName
 
 function Sidebar(props) {
     const { history } = props
-    const onClickNftToken = () => history.push({ pathname: getFullRoute(nftTokenListRoute) })
+
+    const onClickNftToken = type => history.push({ pathname: getFullRoute(nftTokenListRoute), type })
+    const onClickCreateCollection = () => history.push({ pathname: getFullRoute(formRoute) })
 
     return (
         <div class="deznav">
@@ -18,13 +21,15 @@ function Sidebar(props) {
                     <li>
                         <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-381-networking"></i>
-							<span class="nav-text">Dashboard</span>
+							<span class="nav-text"> NFT Token List</span>
 						</a>
                         <ul aria-expanded="false">
-							<li><a href="#">Dashboard</a></li>
-							<li><a role='button' onClick={onClickNftToken}>NFT Token list</a></li>
+							<li><a role='button' onClick={() => onClickNftToken('sold')}>Sold</a></li>
+							<li><a role='button' onClick={() => onClickNftToken('active')}>Active</a></li>
+							<li><a role='button' onClick={() => onClickNftToken('comingSoon')}>Coming Soon</a></li>
 						</ul>
                     </li>
+                    <li><a role='button' onClick={onClickCreateCollection}>Create Collection</a></li>
                     {/* <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-381-television"></i>
 							<span class="nav-text">Apps</span>

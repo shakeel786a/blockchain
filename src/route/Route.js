@@ -6,10 +6,10 @@ import { getFullRoute } from '../helper/utility'
 // import { useMetaInformation } from 'hooks/api'
 
 // #region Import Pages
-import Form from '../pages/Form'
+import Form from '../pages/collection/Form'
 import Login from '../pages/auth/Login'
 import Register from '../pages/auth/Register'
-import NftTokenList from '../pages/NftTokenList'
+import NftTokenList from '../pages/nftToken/NftTokenList'
 
 // import Test from 'components/Test'
 // import Footer from 'components/Footer'
