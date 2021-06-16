@@ -178,7 +178,7 @@ function FormComponent(props) {
                                 <label><b>Physical Artwork</b></label>
                                 <div class="form-group mb-0">
                                     <label class="radio-inline mr-3 c-pointer"><input type="radio" name="artworkGroup" checked={physcicalArtworkIsAvailable} onClick={e => handleOnChange({ physcicalArtworkIsAvailable: e.target.checked })} /> Yes</label>
-                                    <label class="radio-inline mr-3 c-pointer"><input type="radio" name="artworkGroup" checked={!physcicalArtworkIsAvailable} onClick={e => handleOnChange({ physcicalArtworkIsAvailable: !e.target.checked })} /> No</label>
+                                    <label class="radio-inline mr-3 c-pointer"><input type="radio" name="artworkGroup" checked={!physcicalArtworkIsAvailable && physcicalArtworkIsAvailable !== undefined} onClick={e => handleOnChange({ physcicalArtworkIsAvailable: !e.target.checked })} /> No</label>
                                 </div>
                                 <ValidationTextComponent validationMessage={physicalArtworkValidationMessage} />
 
