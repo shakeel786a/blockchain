@@ -49,8 +49,8 @@ function NftTokenList(props) {
 
     const onClickAction = (item, action) => {
         // console.log('action=====================', action, item)
-        if (action === "edit") {
-            history.push({ pathname: getFullRoute(formRoute), item })
+        if (action === "edit" || action === 'view') {
+            history.push({ pathname: getFullRoute(formRoute), actionInfo: { item, action } })
         }
     }
 

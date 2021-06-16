@@ -5,13 +5,17 @@ import { validation } from './formUtility'
 import { DateTimePicker } from '../../commonPages'
 
 function FormComponent(props) {
-    const { isLoading, isFileUploadLoading, uploadedFile, selectedItem, onSelectFile, onClickFormSubmit } = props
+    const { isLoading, isFileUploadLoading, uploadedFile, actionInfo, onSelectFile, onClickFormSubmit } = props
+
+    const { item: selectedItem = {}, action } = actionInfo || {}
+
     const [properties, setProperties] = useState([{ Key: '', Value: '' }])
     const [formInfo, setFormInfo] = useState({ dateTime: new Date(), ...selectedItem })
     const [validationMessage, setValidationMessage] = useState({})
     const [editorValue, setEditorValue] = useState(null)
 
-    const isEditing = selectedItem && Object.keys(selectedItem) && Object.keys(selectedItem).length ? true : false
+    const isEditing = action === 'edit'
+    const isView = action === 'view'
 
     const { imageOrVideo, nftName, startingPrice, reservePrice, startTime, protectionTime, endTime, additionalPrice, physcicalArtworkIsAvailable, status, step } = formInfo || {}
     const {
@@ -28,7 +32,7 @@ function FormComponent(props) {
         statusValidationMessage
     } = validationMessage || {}
 
-    console.log('formInfo==============', formInfo)
+    // console.log('formInfo==============', formInfo)
 
     useEffect(() => {
         if (selectedItem && Object.keys(selectedItem) && Object.keys(selectedItem).length) {
@@ -61,11 +65,11 @@ function FormComponent(props) {
         setFormInfo({ ...formInfo, ...info })
     }
 
-    const onClickSubmit = () => {
+    const onClickSubmit = type => {
         const { status, formValidationMessage } = validation(formInfo)
         setValidationMessage(formValidationMessage)
         if (status) {
-            onClickFormSubmit({ ...formInfo, shortDescription: editorValue || '' })
+            onClickFormSubmit({ ...formInfo, shortDescription: editorValue || '' }, type)
         }
     }
 
@@ -100,6 +104,13 @@ function FormComponent(props) {
         })
     }
 
+    let buttonSection = <Button isLoading={isLoading} label="Submit" onClick={() => onClickSubmit('submit')} />
+    if (isEditing) {
+        buttonSection = <Button isLoading={isLoading} label="Update" onClick={() => onClickSubmit('update')} />
+    } else if (isView) {
+        buttonSection = null
+    }
+
     return (
         <div class="content-body">
             <div class="container-fluid">
@@ -116,7 +127,7 @@ function FormComponent(props) {
                         <div class="card">
                             <div class="card-body">
                                 <div>
-                                    <FileDropSection name="Choose File" formatText="PNG, GIF, JPG" selectedFile={handleOnSelectFile} isLoading={isFileUploadLoading} isDisable={isEditing} />
+                                    <FileDropSection name="Choose File" formatText="PNG, GIF, JPG" selectedFile={handleOnSelectFile} isLoading={isFileUploadLoading} isDisable={isEditing || isView} />
                                 </div>
                                 <ValidationTextComponent validationMessage={fileValidationMessage} />
                                                                 
@@ -196,7 +207,7 @@ function FormComponent(props) {
                                 <ValidationTextComponent validationMessage={aucationEndTimeValidationMessage} />
 
                                 <br />
-                                <label><b>Step</b></label>
+                                <label><b>Step for bid</b></label>
                                 <Text.NumberInput
                                     class="form-control"
                                     placeholder="e.g. 1"
@@ -222,7 +233,7 @@ function FormComponent(props) {
                                 <ValidationTextComponent validationMessage={statusValidationMessage} />
 
                                 <br />
-                                {!isEditing ? <Button isLoading={isLoading} label="Submit" onClick={onClickSubmit} /> : null}
+                                {buttonSection}
                             </div>
                         </div>
                     </div>

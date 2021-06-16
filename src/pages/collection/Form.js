@@ -12,7 +12,7 @@ const {
 } = fixedData.routeName
 
 function Form(props) {
-    const { history, location: { item } = {} } = props
+    const { history, location: { actionInfo } = {} } = props
     const [uploadedFile, setUploadedFile] = useState(undefined)
     
     const [
@@ -61,18 +61,21 @@ function Form(props) {
         })
     }
 
-    const handleOnClickSubmit = formInfo => {
+    const handleOnClickSubmit = (formInfo, type) => {
         const properties = formInfo.properties && JSON.stringify(formInfo.properties)
         const body = { ...formInfo, properties }
 
-        console.log('body===============', body)
-
-        postSaveToken({
-            api: saveTokenAPI,
-            payload: {
-               body
-            }
-        })
+        // console.log('body===============', body)
+        if (type === 'submit') {
+            postSaveToken({
+                api: saveTokenAPI,
+                payload: {
+                   body
+                }
+            })
+        } else {
+            showToastMessage('Comming soon...', 'warn')
+        }
     }
 
     return (
@@ -82,7 +85,7 @@ function Form(props) {
             <FormComponent
                 isFileUploadLoading={isFileUploadLoading}
                 isLoading={isSaveTokenLoading}
-                selectedItem={item}
+                actionInfo={actionInfo}
                 uploadedFile={uploadedFile}
                 onSelectFile={handleOnSelectFile}
                 onClickFormSubmit={handleOnClickSubmit}

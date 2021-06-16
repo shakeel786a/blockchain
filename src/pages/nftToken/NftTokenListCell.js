@@ -24,7 +24,7 @@ function NftTokenListCell(props) {
                         <div class="py-2">
                             <a class="dropdown-item" role="button" onClick={() => onClickAction(item, 'view')}>View</a>
                             <a class="dropdown-item" role="button" onClick={() => onClickAction(item, 'edit')}>Edit</a>
-                            <a class="dropdown-item" role="button" onClick={() => onClickAction(item, 'checkBids')}>Check bids</a>
+                            {/* <a class="dropdown-item" role="button" onClick={() => onClickAction(item, 'checkBids')}>Check bids</a> */}
                         </div>
                     </div>
                 </div>
