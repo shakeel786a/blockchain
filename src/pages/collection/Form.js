@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 
 import { Header, Sidebar } from '../../commonPages'
 import FormComponent from './FormComponent'
-import { useFetchAPI } from '../../hooks'
+import { useFetchAPI, useGetTokenIdAPI } from '../../hooks'
 import { postUploadFileAPI, saveTokenAPI } from '../../http/common.http.service'
 import * as fixedData from '../../helper/settings'
 import { getFullRoute, showToastMessage } from '../../helper/utility'
+import { create } from '../web3Integration/global.service'
 
 const {
     nftTokenListRoute
@@ -14,6 +15,7 @@ const {
 function Form(props) {
     const { history, location: { actionInfo } = {} } = props
     const [uploadedFile, setUploadedFile] = useState(undefined)
+    const [tokenId, setTokenId] = useState()
     
     const [
         {
@@ -31,6 +33,18 @@ function Form(props) {
         postSaveToken
     ] = useFetchAPI()
 
+    const [
+        {
+          isLoading: isTokenIdLoading,
+          response: { isSuccess: isTokenIdSuccess, data: tokenIdData }
+        },
+        getTokenid
+    ] = useGetTokenIdAPI()
+
+    useEffect(() => {
+        getTokenid({})
+    }, [])
+
     useEffect(() => {
         if (isFileUploadLoading === false && isFileUploadSuccess && filePath) {
             setUploadedFile(filePath)
@@ -47,6 +61,14 @@ function Form(props) {
             }
         }
     }, [isSaveTokenLoading, isSaveTokenSuccess, saveTokenData])
+
+    useEffect(() => {
+        if (isTokenIdLoading === false) {
+            if (isTokenIdSuccess && tokenIdData) {
+                setTokenId(tokenIdData)
+            }
+        }
+    }, [isTokenIdLoading, isTokenIdSuccess, tokenIdData])
 
     const handleOnSelectFile = file => {
         getFileUpload({
@@ -66,13 +88,20 @@ function Form(props) {
         const body = { ...formInfo, properties }
 
         // console.log('body===============', body)
+
         if (type === 'submit') {
-            postSaveToken({
-                api: saveTokenAPI,
-                payload: {
-                   body
-                }
-            })
+            const { status, receipt } = tokenId && create(tokenId)
+            console.log('isCOnnect==============', status)
+            if (status) {
+                postSaveToken({
+                    api: saveTokenAPI,
+                    payload: {
+                       body
+                    }
+                })
+            } else if (status === false) {
+                showToastMessage('Please connect to wallet...')
+            }
         } else {
             showToastMessage('Comming soon...', 'warn')
         }

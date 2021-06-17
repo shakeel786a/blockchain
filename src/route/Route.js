@@ -10,6 +10,7 @@ import Form from '../pages/collection/Form'
 import Login from '../pages/auth/Login'
 import Register from '../pages/auth/Register'
 import NftTokenList from '../pages/nftToken/NftTokenList'
+import Test from '../pages/web3Integration/Test'
 
 // import Test from 'components/Test'
 // import Footer from 'components/Footer'
@@ -21,7 +22,8 @@ import NftTokenList from '../pages/nftToken/NftTokenList'
 const {
   auth: { loginRoute, registerRoute },
   formRoute,
-  nftTokenListRoute
+  nftTokenListRoute,
+  testRoute
 } = fixedData.routeName
 
 const Routes = () => {
@@ -37,6 +39,7 @@ const Routes = () => {
         <Route exact path={getFullRoute(loginRoute)} component={Login} />
         <Route exact path={getFullRoute(nftTokenListRoute)} component={NftTokenList} />
         <Route exact path={getFullRoute(registerRoute)} component={Register} />
+        <Route exact path={getFullRoute(testRoute)} component={Test} />
       </Switch>
       {/* <Footer /> */}
     </BrowserRouter>
