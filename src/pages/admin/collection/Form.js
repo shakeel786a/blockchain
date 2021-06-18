@@ -86,22 +86,23 @@ function Form(props) {
 
     const handleOnClickSubmit = (formInfo, type) => {
         const properties = formInfo.properties && JSON.stringify(formInfo.properties)
-        const body = { ...formInfo, properties }
+        const body = { ...formInfo, properties, nftID: tokenId }
+        setIsBlockchainLoading(true)
 
         // console.log('body===============', body)
-        setIsBlockchainLoading(true)
 
         if (type === 'submit') {
             (async () => {
-                const status = await create(tokenId)
-
+                const info = await create(tokenId)
+                const { status, transHash } = info || {}
                 if (status) {
-                    setIsBlockchainLoading(false)
-
                     postSaveToken({
                         api: saveTokenAPI,
                         payload: {
-                           body
+                           body: {
+                               ...body,
+                               transactionHash: transHash
+                           }
                         }
                     })
                 } else if (status === false) {

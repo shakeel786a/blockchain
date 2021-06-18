@@ -62,6 +62,7 @@ export async function getAccount() {
 export async function create(tokenId) {
     // function mint(address to, uint256 id, uint256 amount)
     let status
+    let transHash
     const params1 = await getAccount()
     const params2 = tokenId
     const params3 = 1
@@ -69,6 +70,10 @@ export async function create(tokenId) {
     try {
         await info._tokenContract.methods.mint(params1, params2, params3)
         .send({ from: info._account, value: 0, gas: 2100000 })
+        .on('transactionHash', function (transactionHash) {
+            status = false
+            transHash = transactionHash
+        })
         .on('receipt', function (receipt) {
             status = receipt.status
         })
@@ -76,7 +81,7 @@ export async function create(tokenId) {
         status = false
     }
     
-    return status
+    return { status, transHash }
 }
 
 // async function getUserBalance() {
