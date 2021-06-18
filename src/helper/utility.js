@@ -1,4 +1,9 @@
 import { toast } from 'react-toastify'
+import moment from 'moment'
+
+export function FormatDate(date, format = 'YYYY-MM-DD') {
+  return { formatedDate: moment(date).format(format), databaseFormatedDate: moment(date).format('YYYY-MM-DD') }
+}
 
 export const showToastMessage = (message, type) => {
   if (typeof message !== 'string') {

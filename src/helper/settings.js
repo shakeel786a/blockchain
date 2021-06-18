@@ -177,8 +177,14 @@ module.exports = {
     'postal_code'
   ],
   routeName: {
+    // Web start
+    web: {
+      webLandingRoute: { path: '/web-landing' },
+    },
+    // Web end
     formRoute: { path: '/form' },
     nftTokenListRoute: { path: '/nft-token-list' },
+    testRoute: { path: '/test' },
     homeRoute: { path: '/' },
     fourZeroFourRoute: { path: '/404' },
     ccavenueResponseRoute: { path: '/ccavenue-response' },

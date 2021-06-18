@@ -5,23 +5,24 @@ import * as fixedData from '../helper/settings'
 import { getFullRoute } from '../helper/utility'
 // import { useMetaInformation } from 'hooks/api'
 
-// #region Import Pages
-import Form from '../pages/Form'
-import Login from '../pages/auth/Login'
-import Register from '../pages/auth/Register'
-import NftTokenList from '../pages/NftTokenList'
+// #region Import Pages (Admin)
+import Form from '../pages/admin/collection/Form'
+import Login from '../pages/admin/auth/Login'
+import Register from '../pages/admin/auth/Register'
+import NftTokenList from '../pages/admin/nftToken/NftTokenList'
+import Test from '../pages/admin/web3Integration/Test'
+//#endregion
 
-// import Test from 'components/Test'
-// import Footer from 'components/Footer'
-// import Underdevelopment from 'commonUI/Underdevelopment'
-// import PrivateRoute from './PrivateRoute'
-// import RouteWithHeader from './RouteWithHeader'
-// import Demo from '../components/Demo'
+//#region Import pages (Web)
+import WebHome from '../pages/web/Home'
+//#endregion
 
 const {
+  web: { webLandingRoute },
   auth: { loginRoute, registerRoute },
   formRoute,
-  nftTokenListRoute
+  nftTokenListRoute,
+  testRoute
 } = fixedData.routeName
 
 const Routes = () => {
@@ -30,13 +31,15 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
-        {/* ======== Authentication ======== */}
-        {/* <RouteWithHeader exact path={getFullRoute(loginRoute)} component={Login} /> */}
+        {/* ======== Admin ======== */}
         <Route exact path='/' component={Form} />
         <Route exact path={getFullRoute(formRoute)} component={Form} />
         <Route exact path={getFullRoute(loginRoute)} component={Login} />
         <Route exact path={getFullRoute(nftTokenListRoute)} component={NftTokenList} />
         <Route exact path={getFullRoute(registerRoute)} component={Register} />
+        <Route exact path={getFullRoute(testRoute)} component={Test} />
+        {/* ======== Web ======== */}
+        <Route exact path={getFullRoute(webLandingRoute)} component={WebHome} />
       </Switch>
       {/* <Footer /> */}
     </BrowserRouter>
