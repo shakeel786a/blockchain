@@ -532,6 +532,14 @@ h5, .h5 {
 h6, .h6 {
   font-size: 0.938rem; }
 
+/* Start custom CSS */
+.title-container {
+  font-weight: bold;
+  color:var(--primary);
+  margin-bottom: 10;
+}
+/* End custom CSS */
+
 .lead {
   font-size: 1.09375rem;
   font-weight: 300; }

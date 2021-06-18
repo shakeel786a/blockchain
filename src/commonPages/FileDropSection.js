@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 
+import Button from './Button'
+
 function FileDropSection(props) {
   const {
     accept = 'image/*',
     name,
     formatText = '(* PDF, JPEG, PNG format)',
-    selectedFile
+    selectedFile,
+    isLoading,
+    isDisable
   } = props
 
   const [files, setFiles] = useState([])
@@ -26,13 +30,17 @@ function FileDropSection(props) {
 
   useEffect(() => () => files.forEach(file => URL.revokeObjectURL(file.preview)), [])
 
-  console.log('Files=============', files)
-
   return (
+    isDisable ? (
+      <>
+        <Button className="btn btn-info" label={name} isLoading={isLoading} isDisable={isDisable} />
+        <input type="text" readonly class="form-control-plaintext" value={formatText} />
+      </>
+    ) : 
       <div {...getRootProps({ className: 'dropzone cursor-pointer' })}>
         <input {...getInputProps()} />
 
-        <button type="submit" class="btn btn-info">{name}</button>
+        <Button className="btn btn-info" label={name} isLoading={isLoading} isDisable={isDisable} />
         <input type="text" readonly class="form-control-plaintext" value={formatText} />
 
       </div>
