@@ -89,21 +89,23 @@ function Form(props) {
         const body = { ...formInfo, properties }
 
         // console.log('body===============', body)
-        // setIsBlockchainLoading(true)
+        setIsBlockchainLoading(true)
 
         if (type === 'submit') {
             (async () => {
                 const status = await create(tokenId)
+
                 if (status) {
-                    showToastMessage('Done...', 'success')
-                    // postSaveToken({
-                    //     api: saveTokenAPI,
-                    //     payload: {
-                    //        body
-                    //     }
-                    // })
+                    setIsBlockchainLoading(false)
+
+                    postSaveToken({
+                        api: saveTokenAPI,
+                        payload: {
+                           body
+                        }
+                    })
                 } else if (status === false) {
-                    showToastMessage('Please connect to wallet...')
+                    setIsBlockchainLoading(false)
                 }
             })()
         } else {

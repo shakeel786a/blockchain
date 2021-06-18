@@ -61,16 +61,21 @@ export async function getAccount() {
 
 export async function create(tokenId) {
     // function mint(address to, uint256 id, uint256 amount)
-    let status = false
+    let status
     const params1 = await getAccount()
     const params2 = tokenId
     const params3 = 1
     
-    await info._tokenContract.methods.mint(params1, params2, params3).send({ from: info._account, value: 0, gas: 2100000 }).on('receipt', function (receipt) {
-        status = receipt.status
-        // console.log(receipt)
-    });
-
+    try {
+        await info._tokenContract.methods.mint(params1, params2, params3)
+        .send({ from: info._account, value: 0, gas: 2100000 })
+        .on('receipt', function (receipt) {
+            status = receipt.status
+        })
+    } catch(err) {
+        status = false
+    }
+    
     return status
 }
 
