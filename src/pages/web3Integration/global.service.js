@@ -61,20 +61,17 @@ export async function getAccount() {
 
 export async function create(tokenId) {
     // function mint(address to, uint256 id, uint256 amount)
-
-    console.log("tokenId================", tokenId);
-
-    const params1 = getAccount()
+    let status = false
+    const params1 = await getAccount()
     const params2 = tokenId
     const params3 = 1
-
-    const res = await info.contract.mint(params1, params2, params3)
-    res.send({ from: info._account, value: 0, gas: 2100000 }).on('receipt', function (receipt) {
-        console.log("receipt================", receipt)
-        return { status: true, receipt }
+    
+    await info._tokenContract.methods.mint(params1, params2, params3).send({ from: info._account, value: 0, gas: 2100000 }).on('receipt', function (receipt) {
+        status = receipt.status
+        // console.log(receipt)
     });
 
-    return { status: false, receipt: '' }
+    return status
 }
 
 // async function getUserBalance() {

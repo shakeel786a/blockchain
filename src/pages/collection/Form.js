@@ -16,6 +16,7 @@ function Form(props) {
     const { history, location: { actionInfo } = {} } = props
     const [uploadedFile, setUploadedFile] = useState(undefined)
     const [tokenId, setTokenId] = useState()
+    const [isBlockchainLoading, setIsBlockchainLoading] = useState(false)
     
     const [
         {
@@ -88,20 +89,23 @@ function Form(props) {
         const body = { ...formInfo, properties }
 
         // console.log('body===============', body)
+        // setIsBlockchainLoading(true)
 
         if (type === 'submit') {
-            const { status, receipt } = tokenId && create(tokenId)
-            console.log('isCOnnect==============', status)
-            if (status) {
-                postSaveToken({
-                    api: saveTokenAPI,
-                    payload: {
-                       body
-                    }
-                })
-            } else if (status === false) {
-                showToastMessage('Please connect to wallet...')
-            }
+            (async () => {
+                const status = await create(tokenId)
+                if (status) {
+                    showToastMessage('Done...', 'success')
+                    // postSaveToken({
+                    //     api: saveTokenAPI,
+                    //     payload: {
+                    //        body
+                    //     }
+                    // })
+                } else if (status === false) {
+                    showToastMessage('Please connect to wallet...')
+                }
+            })()
         } else {
             showToastMessage('Comming soon...', 'warn')
         }
@@ -113,7 +117,7 @@ function Form(props) {
             <Sidebar history={history} />
             <FormComponent
                 isFileUploadLoading={isFileUploadLoading}
-                isLoading={isSaveTokenLoading}
+                isLoading={isSaveTokenLoading || isBlockchainLoading}
                 actionInfo={actionInfo}
                 uploadedFile={uploadedFile}
                 onSelectFile={handleOnSelectFile}
