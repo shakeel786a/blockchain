@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { getAccount, create } from './global.service'
-import { useGetTokenIdAPI } from '../../hooks'
+import { useGetTokenIdAPI } from '../../../hooks'
 
 function Test() {
     const [tokenId, setTokenId] = useState()

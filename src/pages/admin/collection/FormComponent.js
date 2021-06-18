@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
-import { Avatar, Button, EditorComponent, FileDropSection, Text, ValidationTextComponent } from '../../commonPages'
+import { Avatar, Button, DateTimePicker, EditorComponent, FileDropSection, Text, ValidationTextComponent } from '../../../commonPages'
 import { validation } from './formUtility'
-import { DateTimePicker } from '../../commonPages'
 
 function FormComponent(props) {
     const { isLoading, isFileUploadLoading, uploadedFile, actionInfo, onSelectFile, onClickFormSubmit } = props

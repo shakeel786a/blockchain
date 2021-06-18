@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 
-import { Header, Sidebar } from '../../commonPages'
+import { Header, Sidebar } from '../../../commonPages'
 import FormComponent from './FormComponent'
-import { useFetchAPI, useGetTokenIdAPI } from '../../hooks'
-import { postUploadFileAPI, saveTokenAPI } from '../../http/common.http.service'
-import * as fixedData from '../../helper/settings'
-import { getFullRoute, showToastMessage } from '../../helper/utility'
+import { useFetchAPI, useGetTokenIdAPI } from '../../../hooks'
+import { postUploadFileAPI, saveTokenAPI } from '../../../http/common.http.service'
+import * as fixedData from '../../../helper/settings'
+import { getFullRoute, showToastMessage } from '../../../helper/utility'
 import { create } from '../web3Integration/global.service'
 
 const {

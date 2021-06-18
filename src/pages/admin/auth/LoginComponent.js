@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Button, ValidationTextComponent } from '../../commonPages'
+import { Button, ValidationTextComponent } from '../../../commonPages'
 
 function LoginComponent(props) {
     const { isLoading, onClickSignIn, onClickSignUp } = props

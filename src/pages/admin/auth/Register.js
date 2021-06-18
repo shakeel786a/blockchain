@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { getFullRoute, showToastMessage } from '../../helper/utility'
-import * as fixedData from '../../helper/settings'
+import { getFullRoute, showToastMessage } from '../../../helper/utility'
+import * as fixedData from '../../../helper/settings'
 import RegisterComponent from './RegisterComponent'
 
 const {

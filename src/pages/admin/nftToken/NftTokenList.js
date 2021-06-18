@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 
-import Header from '../../commonPages/Header'
-import Sidebar from '../../commonPages/Sidebar'
-import { getNftTokenListAPI } from '../../http/common.http.service'
+import Header from '../../../commonPages/Header'
+import Sidebar from '../../../commonPages/Sidebar'
+import { getNftTokenListAPI } from '../../../http/common.http.service'
 import NftTokenListComponent from './NftTokenListComponent'
-import { useFetchAPI } from '../../hooks'
-import { Loader } from '../../commonPages'
-import * as fixedData from '../../helper/settings'
-import { getFullRoute } from '../../helper/utility'
+import { useFetchAPI } from '../../../hooks'
+import { Loader } from '../../../commonPages'
+import * as fixedData from '../../../helper/settings'
+import { getFullRoute } from '../../../helper/utility'
 
 const {
     formRoute

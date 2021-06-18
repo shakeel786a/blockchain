@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Avatar } from '../../commonPages'
+import { Avatar } from '../../../commonPages'
 
 function NftTokenListCell(props) {
     const { item, onClickAction } = props

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 
-import { getFullRoute, showToastMessage } from '../../helper/utility'
-import * as fixedData from '../../helper/settings'
-import { useFetchAPI } from '../../hooks'
-import { LoginAPI } from '../../http/common.http.service'
+import { getFullRoute, showToastMessage } from '../../../helper/utility'
+import * as fixedData from '../../../helper/settings'
+import { useFetchAPI } from '../../../hooks'
+import { LoginAPI } from '../../../http/common.http.service'
 import LoginComponent from './LoginComponent'
 
 const {

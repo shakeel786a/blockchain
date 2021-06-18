@@ -6,11 +6,11 @@ import { getFullRoute } from '../helper/utility'
 // import { useMetaInformation } from 'hooks/api'
 
 // #region Import Pages
-import Form from '../pages/collection/Form'
-import Login from '../pages/auth/Login'
-import Register from '../pages/auth/Register'
-import NftTokenList from '../pages/nftToken/NftTokenList'
-import Test from '../pages/web3Integration/Test'
+import Form from '../pages/admin/collection/Form'
+import Login from '../pages/admin/auth/Login'
+import Register from '../pages/admin/auth/Register'
+import NftTokenList from '../pages/admin/nftToken/NftTokenList'
+import Test from '../pages/admin/web3Integration/Test'
 
 // import Test from 'components/Test'
 // import Footer from 'components/Footer'
