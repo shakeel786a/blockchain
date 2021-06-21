@@ -1,5 +1,5 @@
 export const validation = formInfo => {
-    const { imageOrVideo, nftName, startingPrice, reservePrice, startTime, protectionTime, endTime, step, additionalPrice, physcicalArtworkIsAvailable = undefined, status: formStatus } = formInfo || {}
+    const { imageOrVideo, nftName, startingPrice, reservePrice, startTime, protectionTime, endTime, step, additionalPrice, physcicalArtworkIsAvailable = undefined, status: formStatus, description, shortDescription } = formInfo || {}
 
     const formValidationMessage = {
         fileValidationMessage: undefined,
@@ -89,6 +89,20 @@ export const validation = formInfo => {
 
     if (!formStatus) {
         formValidationMessage.statusValidationMessage = 'Status requried'
+        status = false
+    } else {
+        formValidationMessage.statusValidationMessage = undefined
+    }
+
+    if (!shortDescription) {
+        formValidationMessage.statusValidationMessage = 'Short description requried'
+        status = false
+    } else {
+        formValidationMessage.statusValidationMessage = undefined
+    }
+
+    if (!description) {
+        formValidationMessage.statusValidationMessage = 'Description requried'
         status = false
     } else {
         formValidationMessage.statusValidationMessage = undefined

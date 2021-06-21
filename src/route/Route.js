@@ -32,7 +32,7 @@ const Routes = () => {
     <BrowserRouter>
       <Switch>
         {/* ======== Admin ======== */}
-        <Route exact path='/' component={Form} />
+        <Route exact path='/' component={Login} />
         <Route exact path={getFullRoute(formRoute)} component={Form} />
         <Route exact path={getFullRoute(loginRoute)} component={Login} />
         <Route exact path={getFullRoute(nftTokenListRoute)} component={NftTokenList} />

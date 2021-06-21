@@ -7,6 +7,9 @@ export function postUploadFileAPI(payload) {
 export function saveTokenAPI(payload){
     return POST('api/api/saveToken')(payload)
 }
+export function editNftTokenAPI(payload) {
+    return POST('api/api/editNftToken')(payload)
+}
 export function LoginAPI(payload) {
     return POST('api/api/Login')(payload)
 }

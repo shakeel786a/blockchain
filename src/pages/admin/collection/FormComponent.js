@@ -16,7 +16,7 @@ function FormComponent(props) {
     const isEditing = action === 'edit'
     const isView = action === 'view'
 
-    const { imageOrVideo, nftName, startingPrice, reservePrice, startTime, protectionTime, endTime, additionalPrice, physcicalArtworkIsAvailable, status, step } = formInfo || {}
+    const { imageOrVideo, nftName, startingPrice, reservePrice, startTime, protectionTime, endTime, additionalPrice, physcicalArtworkIsAvailable, status, step, shortDescription } = formInfo || {}
     const {
         fileValidationMessage,
         nameValidationMessage,
@@ -35,7 +35,7 @@ function FormComponent(props) {
 
     useEffect(() => {
         if (selectedItem && Object.keys(selectedItem) && Object.keys(selectedItem).length) {
-            setEditorValue(selectedItem.shortDescription || '')
+            setEditorValue(selectedItem.description || '')
         }
     }, [selectedItem])
 
@@ -68,7 +68,7 @@ function FormComponent(props) {
         const { status, formValidationMessage } = validation(formInfo)
         setValidationMessage(formValidationMessage)
         if (status) {
-            onClickFormSubmit({ ...formInfo, shortDescription: editorValue || '' }, type)
+            onClickFormSubmit({ ...formInfo, description: editorValue || '' }, type)
         }
     }
 
@@ -197,7 +197,11 @@ function FormComponent(props) {
                                 ) : null}
 
                                 <br />
-                                <label><b>Short Description</b> (Optional)</label>
+                                <label><b>Short Description</b></label>
+                                <textarea type="text" class="form-control" placeholder="Short description" value={shortDescription} onChange={e => handleOnChange({ shortDescription: e.target.value })} />
+
+                                <br />
+                                <label><b>Description</b></label>
                                 <EditorComponent onChange={info => setEditorValue(info)} value={editorValue || ''} />
 
                                 <br />
