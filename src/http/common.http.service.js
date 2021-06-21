@@ -20,3 +20,9 @@ export function getTokenidAPI(payload) {
 export function getNftTokenListAPI(payload) {
     return GET('api/api/getNftTokenList')(payload)
 }
+
+// For web
+// Get API
+export function getNftTokenListAllAPI(payload) {
+    return GET('api/api/getNftTokenListAll')(payload)
+}
