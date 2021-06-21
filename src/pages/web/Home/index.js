@@ -35,12 +35,12 @@ function Home() {
         }
     }, [isListLoading, isListSuccess, data])
 
-    console.log('data===========', data)
+    // console.log('data===========', data)
 
     return (
         <body>
             {/*  Page Preloder  */}
-            <Loader />
+            {isListLoading ? <Loader /> : null}
 
             {/*  Offcanvas Menu */}
             <OffCanvasMenu />

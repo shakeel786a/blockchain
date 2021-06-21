@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
+import { authAction } from '../../../actions'
 import { getFullRoute, showToastMessage } from '../../../helper/utility'
 import * as fixedData from '../../../helper/settings'
 import { useFetchAPI } from '../../../hooks'
@@ -13,6 +15,7 @@ const {
 
 function Login(props) {
     const { history } = props
+    const tokenDispatch = useDispatch()
 
     const [
         {
@@ -24,6 +27,7 @@ function Login(props) {
 
     useEffect(() => {
         if (isSignInLoading === false && isSignInSuccess) {
+            tokenDispatch({ type: authAction.SET_TOKEN, payload: { token: 'loggedIn' } })
             history.push({ pathname: getFullRoute(formRoute) })
         } else {
             data && showToastMessage(data)

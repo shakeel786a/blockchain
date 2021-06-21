@@ -17,6 +17,8 @@ import Test from '../pages/admin/web3Integration/Test'
 import WebHome from '../pages/web/Home'
 //#endregion
 
+import Landing from '../pages/Landing'
+
 const {
   web: { webLandingRoute },
   auth: { loginRoute, registerRoute },
@@ -32,7 +34,7 @@ const Routes = () => {
     <BrowserRouter>
       <Switch>
         {/* ======== Admin ======== */}
-        <Route exact path='/' component={Login} />
+        <Route exact path='/' component={Landing} />
         <Route exact path={getFullRoute(formRoute)} component={Form} />
         <Route exact path={getFullRoute(loginRoute)} component={Login} />
         <Route exact path={getFullRoute(nftTokenListRoute)} component={NftTokenList} />

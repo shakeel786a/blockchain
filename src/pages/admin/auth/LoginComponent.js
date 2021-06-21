@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import { Button, ValidationTextComponent } from '../../../commonPages'
+import { showToastMessage } from '../../../helper/utility'
 
 function LoginComponent(props) {
     const { isLoading, onClickSignIn, onClickSignUp } = props
@@ -32,6 +33,8 @@ function LoginComponent(props) {
         return status
     }
 
+    const onClickForgotPassword = () => showToastMessage('Comming Soon...', 'warn')
+
     const onClickSubmit = () => {
         const status = validation()
         if (status) {
@@ -41,7 +44,7 @@ function LoginComponent(props) {
 
     return (
         <body class="h-100">
-            <div class="authincation h-100">
+            <div class="authincation h-100" style={{ marginTop: 50 }}>
                 <div class="container h-100">
                     <div class="row justify-content-center h-100 align-items-center">
                         <div class="col-md-6">
@@ -50,7 +53,7 @@ function LoginComponent(props) {
                                     <div class="col-xl-12">
                                         <div class="auth-form">
                                             <div class="text-center mb-3">
-                                                <a href="index.html"><img src="images/logo-full.png" alt="" /></a>
+                                                <a><img src="./assets/images/logo-full.png" alt="" /></a>
                                             </div>
                                             <h4 class="text-center mb-4 text-white">Sign in your account</h4>
                                             <div class="form-group">
@@ -71,7 +74,7 @@ function LoginComponent(props) {
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <a class="text-white" href="page-forgot-password.html">Forgot Password?</a>
+                                                    <a class="text-white" role="button" onClick={onClickForgotPassword}>Forgot Password?</a>
                                                 </div>
                                             </div>
                                             <div class="text-center">

@@ -1,14 +1,16 @@
 import './App.css';
-
+import { Provider } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
+
 import Route from './route/Route'
+import store from './store'
 
 function App() {
   return (
-    <div>
+    <Provider store={store}>
       <Route />
       <ToastContainer />
-    </div>
+    </Provider>
   );
 }
 
