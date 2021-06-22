@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useFetchAPI } from '../../../hooks'
 import { getNftDetailsAPI } from '../../../http/common.http.service'
@@ -7,12 +7,13 @@ import { Loader } from '../commonUI'
 
 function ProductDetail(props) {
     const { match: { params: { nftId } } = {} } = props
+    const [nftDetail, setNftDetail] = useState(undefined)
 
     const [
         {
             isLoading: isNftDetailLoading,
-            response: { isSuccess: isNftDetailSuccess, data: nftDetail }
-        },
+            response: { isSuccess: isNftDetailSuccess, data: detailData }
+        }, 
         getNftDetail
     ] = useFetchAPI()
 
@@ -29,16 +30,42 @@ function ProductDetail(props) {
 
     useEffect(() => {
         if (isNftDetailLoading === false) {
-            if (isNftDetailSuccess && nftDetail) {
-                console.log('nftDetails===========', nftDetail)
+            if (isNftDetailSuccess && detailData) {
+                setNftDetail(detailData)
+            } else {
+                setNftDetail(undefined)
             }
         }
-    }, [isNftDetailLoading, isNftDetailSuccess, nftDetail])
+    }, [isNftDetailLoading, isNftDetailSuccess, detailData])
 
-    return (
-        <body>
-            {/* Pre loader */}
-            {isNftDetailLoading ? <Loader /> : null}
+    const propertiesSection = properties => {
+        const filteredProperties = properties && properties.length && properties.filter(item => (item.Key !== "" && item.Value !== ""))
+        let data = null
+        if (filteredProperties && filteredProperties.length) {
+            data = filteredProperties.map(item => {
+                return (
+                    <div class="col col-md-4 col-lg-4 mb-3">
+                        <div class=" bg-lighten p-3 border border-info rounded text-center">
+                            {/* <div class="small">
+                                <a href="" class="text-primary"
+                                    target="_blank"><span>F3B901</span></a>
+                            </div> */}
+                            <div class="small font-weight-bold">
+                                {item.Key}
+                            </div>
+                            <p class="mb-0 small">{item.Value}</p>
+                        </div>
+                    </div>
+                )
+            })
+        }
+        return data
+    }
+
+    let detailSection = null
+    if (nftDetail) {
+        const { imageOrVideo, description, properties, transactionHash, nftID } = nftDetail
+        detailSection = (
             <section class="product-details spad">
                 <div class="container">
                     <div class="row">
@@ -47,7 +74,7 @@ function ProductDetail(props) {
                                 {/* <img data-hash="product-1" class="product__big__img"
                                     src="https://lh3.googleusercontent.com/PWGK749fD_gpam9saNxNzYgrJI6KIxjsmJ6Qke6LKo2EnQrlbre0T9-9eLDj7mf4ZmJ6FKJaWtHeqKc68PI56FaZP1QeVkwe-fWBTA=w600"
                                     alt="" /> */}
-                                <Avatar uri="https://lh3.googleusercontent.com/PWGK749fD_gpam9saNxNzYgrJI6KIxjsmJ6Qke6LKo2EnQrlbre0T9-9eLDj7mf4ZmJ6FKJaWtHeqKc68PI56FaZP1QeVkwe-fWBTA=w600" />
+                                <Avatar uri={imageOrVideo} />
                             </div>
 
                             <div class="categories__accordion">
@@ -70,18 +97,7 @@ function ProductDetail(props) {
                                                         Created By
                                                         <a href="" class="ml-2" target="_blank"><span>F3B901</span></a>
                                                     </div>
-                                                    <p>This Stella Artois NFT art piece is inspired by Stella Artois' timeless
-                                                        brand. It also marks Stella Artois' first steps into the Metaverse with
-                                                        ZED RUN.</p>
-                                                    <p>This beautiful art piece comes with a Z2 Nakamoto Genesis racehorse as
-                                                        well as a Limited Edition Series One Stella Artois racehorse skin. The
-                                                        Z2 Nakamoto is one of the purest thoroughbreds to exist on ZED RUN.
-                                                        These racehorses are natural-born champions of the racetrack.</p>
-                                                    <p>Stella Artois and ZED RUN have come together to bring Stella Artois into
-                                                        the Metaverse. These NFT pieces commemorate these first steps as well as
-                                                        celebrating the best part of the UK's horse racing season.</p>
-                                                    <p>Must be holding this NFT at a future date to receive their NFT racehorse
-                                                        and skin.</p>
+                                                    {description}
                                                 </div>
 
                                             </div>
@@ -96,54 +112,7 @@ function ProductDetail(props) {
                                             <div class="card-body">
                                                 <div class="bg-light p-4">
                                                     <div class="row">
-                                                        <div class="col col-md-4 col-lg-4 mb-3">
-                                                            <div class=" bg-lighten p-3 border border-info rounded text-center">
-                                                                <div class="small">
-                                                                    <a href="" class="text-primary"
-                                                                        target="_blank"><span>F3B901</span></a>
-                                                                </div>
-                                                                <div class="small font-weight-bold">
-                                                                    Sawta Akhade
-                                                                </div>
-                                                                <p class="mb-0 small">80% have this trait.</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col col-md-4 col-lg-4 mb-3">
-                                                            <div class=" bg-lighten p-3 border border-info rounded text-center">
-                                                                <div class="small">
-                                                                    <a href="" class="text-primary"
-                                                                        target="_blank"><span>F3B901</span></a>
-                                                                </div>
-                                                                <div class="small font-weight-bold">
-                                                                    Sawta Akhade
-                                                                </div>
-                                                                <p class="mb-0 small">80% have this trait.</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col col-md-4 col-lg-4 mb-3">
-                                                            <div class=" bg-lighten p-3 border border-info rounded text-center">
-                                                                <div class="small">
-                                                                    <a href="" class="text-primary"
-                                                                        target="_blank"><span>F3B901</span></a>
-                                                                </div>
-                                                                <div class="small font-weight-bold">
-                                                                    Sawta Akhade
-                                                                </div>
-                                                                <p class="mb-0 small">80% have this trait.</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col col-md-4 col-lg-4 mb-3">
-                                                            <div class=" bg-lighten p-3 border border-info rounded text-center">
-                                                                <div class="small">
-                                                                    <a href="" class="text-primary"
-                                                                        target="_blank"><span>F3B901</span></a>
-                                                                </div>
-                                                                <div class="small font-weight-bold">
-                                                                    Sawta Akhade
-                                                                </div>
-                                                                <p class="mb-0 small">80% have this trait.</p>
-                                                            </div>
-                                                        </div>
+                                                        {propertiesSection(JSON.parse(properties))}
                                                     </div>
                                                 </div>
                                             </div>
@@ -161,12 +130,12 @@ function ProductDetail(props) {
                                                         <div class="ChainInfo--label-type">Contract Address</div>
                                                         <div class="ChainInfo--label-value"><a class="text-primary"
                                                                 href="https://etherscan.io/address/0x495f947276749ce646f68ac8c248420045cb7b5e"
-                                                                rel="" target="_blank">0x495f...7b5e</a></div>
+                                                                rel="" target="_blank">{transactionHash}</a></div>
                                                     </div>
                                                     <div class="ChainInfo--label">
                                                         <div class="ChainInfo--label-type">Token ID</div>
                                                         <div class="ChainInfo--label-value"><button class="token_id"
-                                                                type="button">1102388963123741...</button></div>
+                                                                type="button">{nftID}</button></div>
                                                     </div>
                                                     <div class="ChainInfo--label">
                                                         <div class="ChainInfo--label-type">Blockchain</div>
@@ -589,6 +558,14 @@ function ProductDetail(props) {
                     </div> */}
                 </div>
             </section>
+        )
+    }
+
+    return (
+        <body>
+            {/* Pre loader */}
+            {isNftDetailLoading ? <Loader /> : null}
+            {detailSection}
         </body>
     )
 }
