@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { useFetchAPI } from '../../../hooks'
 import { getNftTokenListAllAPI } from '../../../http/common.http.service'
-import { Avatar } from '../../../commonPages'
-import { FooterAndSearch, Header, Loader, OffCanvasMenu } from '../commonUI'
+import { Loader, OffCanvasMenu } from '../commonUI'
 import Category from './Category'
 import ProductSection from './ProductSection'
 import DiscountSection from './DiscountSection'
@@ -44,16 +43,11 @@ function Home() {
             {/*  Offcanvas Menu */}
             <OffCanvasMenu />
 
-            {/*  Header Section */}
-            {/* <Header /> */}
-
             {/*  Categories Section  */}
             <Category />
 
             {/*  Product Section */}
             <ProductSection titleLabel="New Listed" products={productList} />
-            {/* <ProductSection titleLabel="Series At Marcel Duchamp" products={["a", "b"]} />
-            <ProductSection titleLabel="Series At the Bottom" products={["a", "b"]} /> */}
 
             {/*  Discount Section */}
             <DiscountSection />
@@ -63,9 +57,6 @@ function Home() {
 
             {/*  Services Section */}
             <ServiceSection />
-
-            {/*  Footer and Search Section */}
-            {/* <FooterAndSearch /> */}
         </body>
     )
 }

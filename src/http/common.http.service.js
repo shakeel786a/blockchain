@@ -29,3 +29,6 @@ export function getNftTokenListAPI(payload) {
 export function getNftTokenListAllAPI(payload) {
     return GET('api/api/getNftTokenListAll')(payload)
 }
+export function getNftDetailsAPI(payload) {
+    return GET('api/api/getNftDetails')(payload)
+}

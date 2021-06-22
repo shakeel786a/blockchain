@@ -19,6 +19,7 @@ import ProductDetail from '../pages/web/Home/ProductDetail'
 //#endregion
 
 import Landing from '../pages/Landing'
+import FourZeroFour from '../pages/FourZeroFour'
 
 const {
   web: { webLandingRoute, webProductDetailRoute },
@@ -44,6 +45,8 @@ const Routes = () => {
         {/* ======== Web ======== */}
         <WebRoute exact path={getFullRoute(webLandingRoute)} component={WebHome} />
         <WebRoute exact path={getFullRoute(webProductDetailRoute)} component={ProductDetail} />
+
+        <Route exact path='*' component={FourZeroFour} />
       </Switch>
       {/* <Footer /> */}
     </BrowserRouter>

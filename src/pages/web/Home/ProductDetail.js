@@ -1,10 +1,44 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
+import { useFetchAPI } from '../../../hooks'
+import { getNftDetailsAPI } from '../../../http/common.http.service'
 import { Avatar } from '../../../commonPages'
+import { Loader } from '../commonUI'
 
 function ProductDetail(props) {
+    const { match: { params: { nftId } } = {} } = props
+
+    const [
+        {
+            isLoading: isNftDetailLoading,
+            response: { isSuccess: isNftDetailSuccess, data: nftDetail }
+        },
+        getNftDetail
+    ] = useFetchAPI()
+
+    useEffect(() => {
+        if (nftId) {
+            getNftDetail({
+                api: getNftDetailsAPI,
+                payload: {
+                    params: { nftId }
+                }
+            })
+        }
+    }, [nftId])
+
+    useEffect(() => {
+        if (isNftDetailLoading === false) {
+            if (isNftDetailSuccess && nftDetail) {
+                console.log('nftDetails===========', nftDetail)
+            }
+        }
+    }, [isNftDetailLoading, isNftDetailSuccess, nftDetail])
+
     return (
         <body>
+            {/* Pre loader */}
+            {isNftDetailLoading ? <Loader /> : null}
             <section class="product-details spad">
                 <div class="container">
                     <div class="row">
