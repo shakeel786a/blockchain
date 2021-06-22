@@ -12,6 +12,7 @@ import ServiceSection from './ServiceSection'
 
 function Home() {
     const [productList, setProductList] = useState([])
+    
     const [
         {
             isLoading: isListLoading,
@@ -35,8 +36,6 @@ function Home() {
         }
     }, [isListLoading, isListSuccess, data])
 
-    // console.log('data===========', data)
-
     return (
         <body>
             {/*  Page Preloder  */}
@@ -46,7 +45,7 @@ function Home() {
             <OffCanvasMenu />
 
             {/*  Header Section */}
-            <Header />
+            {/* <Header /> */}
 
             {/*  Categories Section  */}
             <Category />
@@ -66,7 +65,7 @@ function Home() {
             <ServiceSection />
 
             {/*  Footer and Search Section */}
-            <FooterAndSearch />
+            {/* <FooterAndSearch /> */}
         </body>
     )
 }

@@ -66,9 +66,9 @@ function Avatar({
   const role = cursorType === 'pointer' ? 'button' : 'layout'
 
   return (
-    <div role={role} tabIndex={uri} onKeyDown={onClickFile} onClick={onClickFile} className={className}>
-      <img src={getAvatar()} alt={alt} title={title} style={style} className={finalClassName} />
-    </div>
+    // <div role={role} tabIndex={uri} onKeyDown={onClickFile} onClick={onClickFile} className={className}>
+      <img src={getAvatar()} alt={alt} title={title} style={style} className={finalClassName} role={role} tabIndex={uri} onKeyDown={onClickFile} onClick={onClickFile} />
+    // </div>
   )
 }
 

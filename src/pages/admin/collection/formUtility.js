@@ -12,7 +12,9 @@ export const validation = formInfo => {
         additionalPriceValidationMessage: undefined,
         aucationEndTimeValidationMessage: undefined,
         statusValidationMessage: undefined,
-        stepValidationMessage: undefined
+        stepValidationMessage: undefined,
+        shortDescriptionValidationMessage: undefined,
+        descriptionValidationMessage: undefined
     }
 
     let status = true
@@ -95,17 +97,17 @@ export const validation = formInfo => {
     }
 
     if (!shortDescription) {
-        formValidationMessage.statusValidationMessage = 'Short description requried'
+        formValidationMessage.shortDescriptionValidationMessage = 'Short description requried'
         status = false
     } else {
-        formValidationMessage.statusValidationMessage = undefined
+        formValidationMessage.shortDescriptionValidationMessage = undefined
     }
 
     if (!description) {
-        formValidationMessage.statusValidationMessage = 'Description requried'
+        formValidationMessage.descriptionValidationMessage = 'Description requried'
         status = false
     } else {
-        formValidationMessage.statusValidationMessage = undefined
+        formValidationMessage.descriptionValidationMessage = undefined
     }
 
     return { status, formValidationMessage }

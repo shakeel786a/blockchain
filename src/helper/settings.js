@@ -180,6 +180,7 @@ module.exports = {
     // Web start
     web: {
       webLandingRoute: { path: '/web-landing' },
+      webProductDetailRoute: { path: '/web-product-detail' }
     },
     // Web end
     formRoute: { path: '/form' },

@@ -28,7 +28,9 @@ function FormComponent(props) {
         additionalPriceValidationMessage,
         aucationEndTimeValidationMessage,
         stepValidationMessage,
-        statusValidationMessage
+        statusValidationMessage,
+        shortDescriptionValidationMessage,
+        descriptionValidationMessage
     } = validationMessage || {}
 
     // console.log('formInfo==============', formInfo)
@@ -65,7 +67,7 @@ function FormComponent(props) {
     }
 
     const onClickSubmit = type => {
-        const { status, formValidationMessage } = validation(formInfo)
+        const { status, formValidationMessage } = validation({ ...formInfo, description: editorValue })
         setValidationMessage(formValidationMessage)
         if (status) {
             onClickFormSubmit({ ...formInfo, description: editorValue || '' }, type)
@@ -199,10 +201,12 @@ function FormComponent(props) {
                                 <br />
                                 <label><b>Short Description</b></label>
                                 <textarea type="text" class="form-control" placeholder="Short description" value={shortDescription} onChange={e => handleOnChange({ shortDescription: e.target.value })} />
+                                <ValidationTextComponent validationMessage={shortDescriptionValidationMessage} />
 
                                 <br />
                                 <label><b>Description</b></label>
                                 <EditorComponent onChange={info => setEditorValue(info)} value={editorValue || ''} />
+                                <ValidationTextComponent validationMessage={descriptionValidationMessage} />
 
                                 <br />
                                 <label><b>Aucation End Time</b></label>  

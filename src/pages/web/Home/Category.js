@@ -9,7 +9,7 @@ function Category() {
                         <div class="categories__item categories__large__item set-bg"
                             data-setbg="https://static.tildacdn.com/tild3064-3832-4166-a230-323764346462/IMG_20210519_165615.jpg">
                             <div class="categories__text">
-                                <h1>Women’s fashion</h1>
+                                <h1>Women’s fDemo</h1>
                                 <p>Sitamet, consectetur adipiscing elit, sed do eiusmod tempor incidid-unt labore
                                     edolore magna aliquapendisse ultrices gravida.</p>
                                 <a href="#">Shop now</a>
@@ -22,7 +22,7 @@ function Category() {
                                 <div class="categories__item set-bg"
                                     data-setbg="https://static.tildacdn.com/tild6133-6637-4139-b330-613430666566/IMG_2849.JPG">
                                     <div class="categories__text">
-                                        <h4>Men’s fashion</h4>
+                                        <h4>Men’s fDemo</h4>
                                         <p>358 items</p>
                                         <a href="#">Shop now</a>
                                     </div>
@@ -32,7 +32,7 @@ function Category() {
                                 <div class="categories__item set-bg"
                                     data-setbg="https://static.tildacdn.com/tild6530-6237-4136-b366-346233333939/IMG_2863.JPG">
                                     <div class="categories__text">
-                                        <h4>Kid’s fashion</h4>
+                                        <h4>Kid’s fDemo</h4>
                                         <p>273 items</p>
                                         <a href="#">Shop now</a>
                                     </div>

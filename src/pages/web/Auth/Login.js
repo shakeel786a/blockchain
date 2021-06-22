@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function Login(props) {
     const { isVisible, onClickClose } = props
+    // const [isVisible, setIsVisible] = useState(false)
 
-    if (!isVisible) {
-        return null
-    }
+    // const onClickLogin = () => setIsVisible(true)
+    // const onClickClose = () => setIsVisible(false)
 
-    return (
+    const modalSection = (
         <section class="at-login-form">
             <div class="modal fade" id="at-login" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -38,6 +38,19 @@ function Login(props) {
                 </div>
             </div>
         </section>
+    )
+
+    return (
+        <>
+            {/* <div class="col-lg-3">
+                <div class="header__right">
+                    <div class="header__right__auth">
+                        <a role="button" data-toggle="modal" data-target="#at-login" onClick={onClickLogin}>Login</a>
+                    </div>
+                </div>
+            </div> */}
+            {isVisible ? modalSection : null}  
+        </>
     )
 }
 
