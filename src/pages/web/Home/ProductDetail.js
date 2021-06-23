@@ -87,20 +87,19 @@ function ProductDetail(props) {
                                         <div id="collapseFour" class="collapse" data-parent="#accordionExample">
                                             <div class="card-body">
                                                 <div class="bg-light p-4 panel_container">
-                                                    <div class="d-flex align-items-center mb-3">
+                                                    {/* <div class="d-flex align-items-center mb-3">
                                                         <div class="icon_size">
-                                                            {/* <img class="Image--image"
+                                                            <img class="Image--image"
                                                                 src="https://storage.googleapis.com/opensea-static/opensea-profile/12.png"
                                                                 // style="object-fit: cover;"
-                                                                 /> */}
+                                                                 />
                                                             <Avatar uri="https://storage.googleapis.com/opensea-static/opensea-profile/12.png" />
                                                         </div>
                                                         Created By
                                                         <a href="" class="ml-2" target="_blank"><span>F3B901</span></a>
-                                                    </div>
+                                                    </div> */}
                                                     <HTMLParser htmlContent={description} />
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>

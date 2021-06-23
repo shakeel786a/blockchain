@@ -3,7 +3,10 @@ import parse from 'html-react-parser'
 
 function HTMLParser(props) {
     const { htmlContent } = props
-    return parse(htmlContent)
+    if (typeof htmlContent === "string"){
+        return parse(htmlContent)
+    }
+    return null
 }
 
 export default HTMLParser
