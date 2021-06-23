@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { useFetchAPI } from '../../../hooks'
 import { getNftDetailsAPI } from '../../../http/common.http.service'
-import { Avatar } from '../../../commonPages'
+import { Avatar, HTMLParser } from '../../../commonPages'
 import { Loader } from '../commonUI'
 
 function ProductDetail(props) {
@@ -64,7 +64,8 @@ function ProductDetail(props) {
 
     let detailSection = null
     if (nftDetail) {
-        const { imageOrVideo, description, properties, transactionHash, nftID } = nftDetail
+        console.log('nftDetail================', nftDetail)
+        const { imageOrVideo, nftName, description, properties, transactionHash, nftID, startingPrice } = nftDetail
         detailSection = (
             <section class="product-details spad">
                 <div class="container">
@@ -97,7 +98,7 @@ function ProductDetail(props) {
                                                         Created By
                                                         <a href="" class="ml-2" target="_blank"><span>F3B901</span></a>
                                                     </div>
-                                                    {description}
+                                                    <HTMLParser htmlContent={description} />
                                                 </div>
 
                                             </div>
@@ -154,7 +155,7 @@ function ProductDetail(props) {
                         </div>
                         <div class="col-lg-6">
                             <div class="product__details__text">
-                                <h3>Essential structured blazer <span>Brand: SKMEIMore Men Watches from SKMEI</span></h3>
+                                <h3>{nftName}</h3>
                                 {/* <div class="rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -176,7 +177,8 @@ function ProductDetail(props) {
                                         class="eth_big img-fluid" /> */}
                                     <li>
                                         <Avatar uri="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="eth_big img-fluid" />
-                                        75.0 <span>($ 83.0)</span>
+                                        {/* 75.0 <span>($ 83.0)</span> */}
+                                        {startingPrice}
                                     </li>
                                 </div>
                                 <div class="product__details__button mb-0"><a href="#" class="cart-btn"> Buy Now</a></div>
