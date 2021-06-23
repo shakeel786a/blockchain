@@ -1,11 +1,47 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+
+import { authAction } from '../../../actions'
+import { getAccount } from '../../admin/web3Integration/global.service'
+import { useFetchAPI } from '../../../hooks'
+import { getIsRegister } from '../../../http/common.http.service'
 
 function Login(props) {
     const { isVisible, onClickClose } = props
-    // const [isVisible, setIsVisible] = useState(false)
+    const dispatch = useDispatch()
 
-    // const onClickLogin = () => setIsVisible(true)
-    // const onClickClose = () => setIsVisible(false)
+    const [
+        {
+            isLoading: isCheckRegisterLoading,
+            response: { isSuccess: isCheckRegisterSuccess, data: checkRegisterData  }
+        },
+        checkRegistration
+    ] = useFetchAPI()
+
+    useEffect(() => {
+        if (isCheckRegisterLoading === false) {
+            if (isCheckRegisterSuccess && checkRegisterData) {
+                onClickClose()
+                dispatch({ type: authAction.SET_WEB_USER_INFO, payload: checkRegisterData.userInfo })
+                // console.log('data===============', checkRegisterData)
+            }
+        }
+    }, [isCheckRegisterLoading, isCheckRegisterSuccess, checkRegisterData])
+
+    const onClickMetamask = () => {
+        (async () => {
+            const address = await getAccount()
+            // console.log('address==========', address)
+            checkRegistration({
+                api: getIsRegister,
+                payload: {
+                    params: {
+                        address
+                    }
+                }
+            })
+        })()
+    }
 
     const modalSection = (
         <section class="at-login-form">
@@ -21,7 +57,7 @@ function Login(props) {
                         <div class="modal-body">
                             <form>
                                 <div class="form-group">
-                                    <button type="button" class="w-100 btn btn-outline-success">
+                                    <button type="button" class="w-100 btn btn-outline-success" onClick={onClickMetamask}>
                                         <img src_x="./webAssets/img/metamask.png" src="./webAssets/img/metamask.png" height="28" width="28" class="mr-1 v-align-middle" />
                                         MetaMask
                                     </button>

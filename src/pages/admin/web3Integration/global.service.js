@@ -84,6 +84,13 @@ export async function create(tokenId) {
     return { status, transHash }
 }
 
+export async function signMsg(address) {
+    var message=`Welcome to InArtGallery!\n\n Click \"Sign\" to sign in. No password needed!\n\n I accept the OpenSea Terms of Service: https://opensea.io/tos\n\n Wallet address:\n ${address}`
+    var signature = await info.signer.signMessage(message);
+
+    return signature
+}
+
 // async function getUserBalance() {
 //     let account = await getAccount();
 //     console.log('account===getUserBalance========', account);

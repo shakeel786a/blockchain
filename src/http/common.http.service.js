@@ -1,6 +1,7 @@
 import { GET, POST, FILE_UPLOAD } from './api.http.service'
 
-// Post API
+//#region Api for Admin
+// Post
 export function postUploadFileAPI(payload) {
     return FILE_UPLOAD('api/api/UploadFile')(payload)
 }
@@ -13,7 +14,7 @@ export function editNftTokenAPI(payload) {
 export function LoginAPI(payload) {
     return POST('api/api/Login')(payload)
 }
-// Get API
+// Get
 export function getUserAPI(payload) {
     return GET('api/api/GetUser')(payload)
 }
@@ -23,8 +24,9 @@ export function getTokenidAPI(payload) {
 export function getNftTokenListAPI(payload) {
     return GET('api/api/getNftTokenList')(payload)
 }
+//#endregion Api for Admin
 
-// For web
+//#region Api for Web
 // Get API
 export function getNftTokenListAllAPI(payload) {
     return GET('api/api/getNftTokenListAll')(payload)
@@ -32,3 +34,14 @@ export function getNftTokenListAllAPI(payload) {
 export function getNftDetailsAPI(payload) {
     return GET('api/api/getNftDetails')(payload)
 }
+export function getIsRegister(payload) {
+    return GET('api/api/isRegister')(payload)
+}
+// Post API
+export function postUploadProfilePicAPI(payload) {
+    return FILE_UPLOAD('api/api/UploadProfilePic')(payload)
+}
+export function postRegistrationAPI(payload) {
+    return POST('api/api/registration')(payload)
+}
+//#endregion Api for web

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import Register from '../Auth/Register'
 import Login from '../Auth/Login'
@@ -6,8 +7,10 @@ import Login from '../Auth/Login'
 function Header() {
     const [isVisibleInfo, setIsVisibleInfo] = useState({ isLoginVisible: false, isRegisterVisible: false })
 
-    const onClickCloseRegister = () => setIsVisibleInfo({ isLoginVisible: false, isRegisterVisible: false })
-    const onClickCloseLogin = () => setIsVisibleInfo({ isLoginVisible: false, isRegisterVisible: false })
+    const authData = useSelector(state => state.web.app.auth.authData)
+    const { walletAddress } = authData
+
+    const onClickClose = () => setIsVisibleInfo({ isLoginVisible: false, isRegisterVisible: false })
     const onClickLogin = () => setIsVisibleInfo({ isLoginVisible: true, isRegisterVisible: false })
     const onClickRegister = () => setIsVisibleInfo({ isLoginVisible: false, isRegisterVisible: true })
 
@@ -32,7 +35,11 @@ function Header() {
                         <div class="col-lg-3">
                             <div class="header__right">
                                 <div class="header__right__auth">
-                                    <a role="button" data-toggle="modal" data-target="#at-login" onClick={onClickLogin}>Login</a>
+                                    {walletAddress ? (
+                                        <a role="button">{walletAddress}</a>
+                                    ) : (
+                                        <a role="button" data-toggle="modal" data-target="#at-login" onClick={onClickLogin}>Connect Wallet</a>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -51,9 +58,9 @@ function Header() {
             </header>
 
             {/* Register */}
-            <Register isVisible={isVisibleInfo.isRegisterVisible} onClickClose={onClickCloseRegister} onClickLogin={onClickLogin} />
+            <Register isVisible={isVisibleInfo.isRegisterVisible} onClickClose={onClickClose} onClickLogin={onClickLogin} />
             {/* Login */}
-            <Login isVisible={isVisibleInfo.isLoginVisible} onClickClose={onClickCloseLogin} />
+            <Login isVisible={isVisibleInfo.isLoginVisible} onClickClose={onClickClose} />
         </>
     )
 }
