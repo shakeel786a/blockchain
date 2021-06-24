@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import { useFetchAPI } from '../../../hooks'
+import { checkAuth } from '../../../helper/utility'
 import { postPlaceBidAPI } from '../../../http/common.http.service'
 
 function BidForm(props) {
-    const { detailInfo, authData, bidFormSuccess } = props
+    const { detailInfo, authData, bidFormSuccess, onRequestLogin } = props
     const { nftID, lastBidPrice, step } = detailInfo
-    const { userId, walletAddress } = authData
+    const { userId, walletAddress } = authData || {}
     const transactionHash = "abcdefghijklm"
     const [formInfo, setFormInfo] = useState({ dateTime: new Date(), userId, walletAddress, nftID, transactionHash, price: lastBidPrice })
 
@@ -34,20 +35,30 @@ function BidForm(props) {
         }
     }
     const onClickPlus = () => {
-        const tempPrice = formInfo.price + step
-        setFormInfo({ ...formInfo, price: tempPrice })
+        const isLogin = checkAuth(authData)
+        if (isLogin) {
+            const tempPrice = formInfo.price + step
+            setFormInfo({ ...formInfo, price: tempPrice })
+        } else {
+            onRequestLogin()
+        }
     }
 
     const onClickPlaceBid = () => {
-        console.log('formInfo================', formInfo)
-        placeBid({
-            api: postPlaceBidAPI,
-            payload: {
-                body: {
-                    ...formInfo
+        const isLogin = checkAuth(authData)
+        if (isLogin) {
+            console.log('formInfo================', formInfo)
+            placeBid({
+                api: postPlaceBidAPI,
+                payload: {
+                    body: {
+                        ...formInfo
+                    }
                 }
-            }
-        })
+            })
+        } else {
+            onRequestLogin()
+        }
     }
 
     return (
@@ -58,12 +69,11 @@ function BidForm(props) {
                 </div>
                 <div style={priceContainer}>{formInfo.price}</div>
                 <div class="footer__social">
-                    <a role="button" onClick={onClickPlus}><i class="fa fa-plus"></i></a>
+                    <a data-toggle="modal" data-target="#at-login" role="button" onClick={onClickPlus}><i class="fa fa-plus"></i></a>
                 </div>
             </div>
-            <div class="product__details__button mb-0" role="button" onClick={onClickPlaceBid}><span class="cart-btn">Place a bid</span></div>
+            <div class="product__details__button mb-0" role="button" onClick={onClickPlaceBid}><a data-toggle="modal" data-target="#at-login" class="cart-btn">Place a bid</a></div>
         </div>
-
     )
 }
 

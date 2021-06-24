@@ -56,3 +56,14 @@ export const showToastMessage = (message, type) => {
 
   return `${path}${formattedSubPath}`
 }
+
+export const checkAuth = authData => {
+  let status = true
+  const { userId } = authData
+
+  if (!userId) {
+      status = false
+  }
+
+  return status
+}

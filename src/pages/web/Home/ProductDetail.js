@@ -3,12 +3,16 @@ import React, { useEffect, useState } from 'react'
 import { useFetchAPI } from '../../../hooks'
 import { getNftDetailsAPI } from '../../../http/common.http.service'
 import { Avatar, HTMLParser } from '../../../commonPages'
+import Login from '../Auth/Login'
+import Register from '../Auth/Register'
 import { Loader } from '../commonUI'
 import BidForm from './BidForm'
 
 function ProductDetail(props) {
     const { match: { params: { nftId } } = {} } = props
     const [nftDetail, setNftDetail] = useState(undefined)
+    // const [isVisibleLogin, setIsVisibleLogin] = useState(false)
+    const [isVisibleInfo, setIsVisibleInfo] = useState({ isLoginVisible: false, isRegisterVisible: false })
 
     const [
         {
@@ -40,6 +44,10 @@ function ProductDetail(props) {
     }, [isNftDetailLoading, isNftDetailSuccess, detailData])
 
     const handleBidFormSuccess = price => setNftDetail({ ...nftDetail, lastBidPrice: price })
+    
+    const onClickClose = () => setIsVisibleInfo({ isLoginVisible: false, isRegisterVisible: false })
+    const onClickLogin = () => setIsVisibleInfo({ isLoginVisible: true, isRegisterVisible: false })
+    const onClickRegister = () => setIsVisibleInfo({ isLoginVisible: false, isRegisterVisible: true })
 
     const propertiesSection = properties => {
         const filteredProperties = properties && properties.length && properties.filter(item => (item.Key !== "" && item.Value !== ""))
@@ -152,7 +160,7 @@ function ProductDetail(props) {
                                         {lastBidPrice}
                                     </li>
                                 </div>
-                                <BidForm detailInfo={nftDetail} bidFormSuccess={handleBidFormSuccess} />
+                                <BidForm detailInfo={nftDetail} bidFormSuccess={handleBidFormSuccess} onRequestLogin={onClickLogin} />
                                 <p>Nemo enim ipsam voluptatem quia aspernatur aut odit aut loret fugit, sed quia consequuntur
                                     magni lores eos qui ratione voluptatem sequi nesciunt.</p>
 
@@ -392,6 +400,10 @@ function ProductDetail(props) {
             {/* Pre loader */}
             {isNftDetailLoading ? <Loader /> : null}
             {detailSection}
+            {/* Register */}
+            <Register isVisible={isVisibleInfo.isRegisterVisible} onClickClose={onClickClose} onClickLogin={onClickLogin} />
+            {/* Login */}
+            <Login isVisible={isVisibleInfo.isLoginVisible} onClickClose={onClickClose} onClickRegister={onClickRegister} />
         </body>
     )
 }
