@@ -39,6 +39,8 @@ function ProductDetail(props) {
         }
     }, [isNftDetailLoading, isNftDetailSuccess, detailData])
 
+    const handleBidFormSuccess = price => setNftDetail({ ...nftDetail, lastBidPrice: price })
+
     const propertiesSection = properties => {
         const filteredProperties = properties && properties.length && properties.filter(item => (item.Key !== "" && item.Value !== ""))
         let data = null
@@ -47,10 +49,6 @@ function ProductDetail(props) {
                 return (
                     <div class="col col-md-4 col-lg-4 mb-3">
                         <div class=" bg-lighten p-3 border border-info rounded text-center">
-                            {/* <div class="small">
-                                <a href="" class="text-primary"
-                                    target="_blank"><span>F3B901</span></a>
-                            </div> */}
                             <div class="small font-weight-bold">
                                 {item.Key}
                             </div>
@@ -65,17 +63,14 @@ function ProductDetail(props) {
 
     let detailSection = null
     if (nftDetail) {
-        console.log('nftDetail================', nftDetail)
-        const { imageOrVideo, nftName, description, properties, transactionHash, nftID, startingPrice } = nftDetail
+        // console.log('nftDetail================', nftDetail)
+        const { imageOrVideo, nftName, description, properties, transactionHash, nftID, lastBidPrice } = nftDetail
         detailSection = (
             <section class="product-details spad">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="product__details__pic mb-4 main_box">
-                                {/* <img data-hash="product-1" class="product__big__img"
-                                    src="https://lh3.googleusercontent.com/PWGK749fD_gpam9saNxNzYgrJI6KIxjsmJ6Qke6LKo2EnQrlbre0T9-9eLDj7mf4ZmJ6FKJaWtHeqKc68PI56FaZP1QeVkwe-fWBTA=w600"
-                                    alt="" /> */}
                                 <Avatar uri={imageOrVideo} />
                             </div>
 
@@ -88,17 +83,6 @@ function ProductDetail(props) {
                                         <div id="collapseFour" class="collapse" data-parent="#accordionExample">
                                             <div class="card-body">
                                                 <div class="bg-light p-4 panel_container">
-                                                    {/* <div class="d-flex align-items-center mb-3">
-                                                        <div class="icon_size">
-                                                            <img class="Image--image"
-                                                                src="https://storage.googleapis.com/opensea-static/opensea-profile/12.png"
-                                                                // style="object-fit: cover;"
-                                                                 />
-                                                            <Avatar uri="https://storage.googleapis.com/opensea-static/opensea-profile/12.png" />
-                                                        </div>
-                                                        Created By
-                                                        <a href="" class="ml-2" target="_blank"><span>F3B901</span></a>
-                                                    </div> */}
                                                     <HTMLParser htmlContent={description} />
                                                 </div>
                                             </div>
@@ -156,15 +140,6 @@ function ProductDetail(props) {
                         <div class="col-lg-6">
                             <div class="product__details__text">
                                 <h3>{nftName}</h3>
-                                {/* <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <span>( 138 reviews )</span>
-                                </div> */}
-
                                 <div class="product__details__button">
                                     <ul>
                                         <li><a class="mr-2" href="#"><span class="icon_heart_alt"></span></a>14</li>
@@ -172,17 +147,12 @@ function ProductDetail(props) {
                                 </div>
 
                                 <div class="product__details__price mb-2">
-                                    {/* <img
-                                        src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" size="20"
-                                        class="eth_big img-fluid" /> */}
                                     <li>
                                         <Avatar uri="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="eth_big img-fluid" />
-                                        {/* 75.0 <span>($ 83.0)</span> */}
-                                        {startingPrice}
+                                        {lastBidPrice}
                                     </li>
                                 </div>
-                                <BidForm />
-                                <div class="product__details__button mb-0"><a href="#" class="cart-btn">Place a bid</a></div>
+                                <BidForm detailInfo={nftDetail} bidFormSuccess={handleBidFormSuccess} />
                                 <p>Nemo enim ipsam voluptatem quia aspernatur aut odit aut loret fugit, sed quia consequuntur
                                     magni lores eos qui ratione voluptatem sequi nesciunt.</p>
 
@@ -369,9 +339,6 @@ function ProductDetail(props) {
                                                                 <tbody>
                                                                     <tr>
                                                                         <td> 
-                                                                            {/* <img
-                                                                                src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg"
-                                                                                size="16" class="eth_small img-fluid" /> */}
                                                                             <Avatar uri="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" />
                                                                             <strong>16.69 </strong>ETH
                                                                         </td>
@@ -384,9 +351,6 @@ function ProductDetail(props) {
                                                                     </tr>
                                                                     <tr>
                                                                         <td> 
-                                                                            {/* <img
-                                                                                src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg"
-                                                                                size="16" class="eth_small img-fluid" /> */}
                                                                             <Avatar uri="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" />
                                                                             <strong>16.69 </strong>ETH</td>
                                                                         <td>$ 35,766.67</td>
@@ -412,153 +376,12 @@ function ProductDetail(props) {
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
-                        {/* <div class="col-lg-12">
-                            <div class="product__details__tab">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Description</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Specification</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Reviews ( 2 )</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                                        <h6>Description</h6>
-                                        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
-                                            quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
-                                            Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
-                                            voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
-                                            consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
-                                            consequat massa quis enim.</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                                            dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-                                            nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
-                                            quis, sem.</p>
-                                    </div>
-                                    <div class="tab-pane" id="tabs-2" role="tabpanel">
-                                        <h6>Specification</h6>
-                                        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
-                                            quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
-                                            Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
-                                            voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
-                                            consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
-                                            consequat massa quis enim.</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                                            dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-                                            nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
-                                            quis, sem.</p>
-                                    </div>
-                                    <div class="tab-pane" id="tabs-3" role="tabpanel">
-                                        <h6>Reviews ( 2 )</h6>
-                                        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
-                                            quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
-                                            Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
-                                            voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
-                                            consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
-                                            consequat massa quis enim.</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                                            dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-                                            nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
-                                            quis, sem.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
                     </div>
-                    {/* <div class="row">
-                        <div class="col-lg-12 text-center">
-                            <div class="related__title">
-                                <h5>RELATED PRODUCTS</h5>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/related/rp-1.jpg">
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Buttons tweed blazer</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">$ 59.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/related/rp-2.jpg">
-                                
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Flowy striped skirt</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">$ 49.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/related/rp-3.jpg">
-                                
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Cotton T-Shirt</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">$ 59.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/related/rp-4.jpg">
-                                    <ul class="product__hover">
-                                        <li><a href="img/product/related/rp-4.jpg" class="image-popup"><span
-                                                    class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Slim striped pocket shirt</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">$ 59.0</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> */}
                 </div>
             </section>
         )

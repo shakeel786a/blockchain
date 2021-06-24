@@ -23,7 +23,6 @@ function Login(props) {
             if (isCheckRegisterSuccess && checkRegisterData) {
                 onClickClose()
                 dispatch({ type: authAction.SET_WEB_USER_INFO, payload: checkRegisterData.userInfo })
-                // console.log('data===============', checkRegisterData)
             }
         }
     }, [isCheckRegisterLoading, isCheckRegisterSuccess, checkRegisterData])
@@ -31,7 +30,6 @@ function Login(props) {
     const onClickMetamask = () => {
         (async () => {
             const address = await getAccount()
-            // console.log('address==========', address)
             checkRegistration({
                 api: getIsRegister,
                 payload: {
@@ -78,13 +76,6 @@ function Login(props) {
 
     return (
         <>
-            {/* <div class="col-lg-3">
-                <div class="header__right">
-                    <div class="header__right__auth">
-                        <a role="button" data-toggle="modal" data-target="#at-login" onClick={onClickLogin}>Login</a>
-                    </div>
-                </div>
-            </div> */}
             {isVisible ? modalSection : null}  
         </>
     )

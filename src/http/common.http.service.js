@@ -44,4 +44,7 @@ export function postUploadProfilePicAPI(payload) {
 export function postRegistrationAPI(payload) {
     return POST('api/api/registration')(payload)
 }
+export function postPlaceBidAPI(payload) {
+    return POST('api/api/placeBid')(payload)
+}
 //#endregion Api for web
