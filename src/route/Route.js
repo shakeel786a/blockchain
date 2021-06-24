@@ -4,6 +4,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import * as fixedData from '../helper/settings'
 import { getFullRoute } from '../helper/utility'
 import WebRoute from './WebRoute'
+import AdminPrivateRoute from './AdminPrivateRoute'
 
 // #region Import Pages (Admin)
 import Form from '../pages/admin/collection/Form'
@@ -36,17 +37,18 @@ const Routes = () => {
     <BrowserRouter>
       <Switch>
         {/* ======== Admin ======== */}
-        <Route exact path='/' component={Landing} />
-        <Route exact path={getFullRoute(formRoute)} component={Form} />
+        <AdminPrivateRoute exact path={getFullRoute(formRoute)} component={Form} />
+        <AdminPrivateRoute exact path={getFullRoute(nftTokenListRoute)} component={NftTokenList} />
         <Route exact path={getFullRoute(loginRoute)} component={Login} />
-        <Route exact path={getFullRoute(nftTokenListRoute)} component={NftTokenList} />
         <Route exact path={getFullRoute(registerRoute)} component={Register} />
-        <Route exact path={getFullRoute(testRoute)} component={Test} />
         {/* ======== Web ======== */}
         <WebRoute exact path={getFullRoute(webLandingRoute)} component={WebHome} />
         <WebRoute exact path={getFullRoute(webProductDetailRoute)} component={ProductDetail} />
 
+        {/* ======= Common ============= */}
+        <Route exact path='/' component={Landing} />
         <Route exact path='*' component={FourZeroFour} />
+        <Route exact path={getFullRoute(testRoute)} component={Test} />
       </Switch>
       {/* <Footer /> */}
     </BrowserRouter>

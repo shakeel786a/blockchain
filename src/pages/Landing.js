@@ -3,14 +3,14 @@ import * as fixedData from '../helper/settings'
 import { getFullRoute } from '../helper/utility'
 
 const {
-    auth: { loginRoute },
+    formRoute,
     web: { webLandingRoute }
 } = fixedData.routeName
 
 function Landing(props) {
     const { history } = props
 
-    const onClickAdmin = () => history.push({ pathname: getFullRoute(loginRoute) })
+    const onClickAdmin = () => history.push({ pathname: getFullRoute(formRoute) })
     const onClickWeb = () => history.push({ pathname: getFullRoute(webLandingRoute) })
 
     return (

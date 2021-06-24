@@ -7,7 +7,8 @@ const initialState = {
 export default function authAppReducer(state = initialState, action) {
     switch(action.type) {
         case authAction.SET_TOKEN:
-            return { token: action.payload.token }
+            console.log('action============', action)
+            return { token: action.payload }
         default:
             return state
     }
