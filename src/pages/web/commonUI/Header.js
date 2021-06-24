@@ -8,6 +8,7 @@ function Header() {
     const [isVisibleInfo, setIsVisibleInfo] = useState({ isLoginVisible: false, isRegisterVisible: false })
 
     const authData = useSelector(state => state.web.app.auth.authData)
+    console.log('authData==============', authData)
     const { walletAddress } = authData
 
     const onClickClose = () => setIsVisibleInfo({ isLoginVisible: false, isRegisterVisible: false })

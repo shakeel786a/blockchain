@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 
 import Route from './route/Route'
-import store from './store'
+import { store } from './store/configureStore'
 
 function App() {
   return (
