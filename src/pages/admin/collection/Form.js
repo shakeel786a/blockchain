@@ -6,7 +6,7 @@ import { useFetchAPI, useGetTokenIdAPI } from '../../../hooks'
 import { postUploadFileAPI, saveTokenAPI, editNftTokenAPI } from '../../../http/common.http.service'
 import * as fixedData from '../../../helper/settings'
 import { getFullRoute, showToastMessage } from '../../../helper/utility'
-import { create } from '../web3Integration/global.service'
+import { create } from '../../../web3Integration/global.service'
 
 const {
     nftTokenListRoute

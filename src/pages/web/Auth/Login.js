@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { authAction } from '../../../actions'
-import { getAccount } from '../../admin/web3Integration/global.service'
+import { getAccount } from '../../../web3Integration/global.service'
 import { useFetchAPI } from '../../../hooks'
 import { getIsRegister } from '../../../http/common.http.service'
 

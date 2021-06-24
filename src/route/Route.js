@@ -10,7 +10,7 @@ import Form from '../pages/admin/collection/Form'
 import Login from '../pages/admin/auth/Login'
 import Register from '../pages/admin/auth/Register'
 import NftTokenList from '../pages/admin/nftToken/NftTokenList'
-import Test from '../pages/admin/web3Integration/Test'
+import Test from '../web3Integration/Test'
 //#endregion
 
 //#region Import pages (Web)

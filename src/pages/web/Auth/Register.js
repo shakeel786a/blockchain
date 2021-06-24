@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import { useFetchAPI } from '../../../hooks'
 import { postUploadProfilePicAPI, postRegistrationAPI } from '../../../http/common.http.service'
-import { getAccount, signMsg } from '../../admin/web3Integration/global.service'
+import { getAccount, signMsg } from '../../../web3Integration/global.service'
 import { Avatar, Button, FileDropSection, ValidationTextComponent } from '../../../commonPages'
 
 function Register(props) {
