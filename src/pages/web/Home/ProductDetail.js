@@ -4,6 +4,7 @@ import { useFetchAPI } from '../../../hooks'
 import { getNftDetailsAPI } from '../../../http/common.http.service'
 import { Avatar, HTMLParser } from '../../../commonPages'
 import { Loader } from '../commonUI'
+import BidForm from './BidForm'
 
 function ProductDetail(props) {
     const { match: { params: { nftId } } = {} } = props
@@ -180,7 +181,8 @@ function ProductDetail(props) {
                                         {startingPrice}
                                     </li>
                                 </div>
-                                <div class="product__details__button mb-0"><a href="#" class="cart-btn"> Buy Now</a></div>
+                                <BidForm />
+                                <div class="product__details__button mb-0"><a href="#" class="cart-btn">Place a bid</a></div>
                                 <p>Nemo enim ipsam voluptatem quia aspernatur aut odit aut loret fugit, sed quia consequuntur
                                     magni lores eos qui ratione voluptatem sequi nesciunt.</p>
 
