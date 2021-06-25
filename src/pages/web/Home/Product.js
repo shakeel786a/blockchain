@@ -10,7 +10,7 @@ const {
 
 function Product(props) {
     const { item } = props
-    const { nftID, nftName, imageOrVideo, shortDescription, startingPrice } = item || {}
+    const { nftID, nftName, imageOrVideo, shortDescription, startingPrice, lastBidPrice } = item || {}
 
     const history = useHistory()
 
@@ -27,8 +27,8 @@ function Product(props) {
 
                     {/* <p> <small> Ales the Nomad; mixed media on canvas; 140x180 cm;2021</small></p> */}
                     {shortDescription}
-                    <div class="product__price">{startingPrice}</div>
-                    <button type="submit" class="mt-3 site-btn">Buy</button>
+                    <div class="product__price">{lastBidPrice || startingPrice}</div>
+                    <button type="submit" class="mt-3 site-btn" onClick={onClickProduct}>Buy</button>
                 </div>
             </div>
         </div>

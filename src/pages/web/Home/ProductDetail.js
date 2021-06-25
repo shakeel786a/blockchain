@@ -72,7 +72,7 @@ function ProductDetail(props) {
     let detailSection = null
     if (nftDetail) {
         console.log('nftDetail================', nftDetail)
-        const { imageOrVideo, nftName, description, properties, transactionHash, nftID, lastBidPrice, bids, shortDescription } = nftDetail
+        const { imageOrVideo, nftName, description, properties, transactionHash, nftID, lastBidPrice, startingPrice, bids, shortDescription } = nftDetail
 
         let bidsSection = null
         if (bids && bids.length) {
@@ -179,7 +179,7 @@ function ProductDetail(props) {
                                 <div class="product__details__price mb-2">
                                     <li>
                                         <Avatar uri="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="eth_big img-fluid" />
-                                        {lastBidPrice}
+                                        {lastBidPrice || startingPrice}
                                     </li>
                                 </div>
                                 <BidForm detailInfo={nftDetail} bidFormSuccess={handleBidFormSuccess} onRequestLogin={onClickLogin} />
