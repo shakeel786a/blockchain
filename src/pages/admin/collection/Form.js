@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { Header, Sidebar } from '../../../commonPages'
 import FormComponent from './FormComponent'
 import { useFetchAPI, useGetTokenIdAPI } from '../../../hooks'
-import { postUploadFileAPI, saveTokenAPI } from '../../../http/common.http.service'
+import { postUploadFileAPI, saveTokenAPI, editNftTokenAPI } from '../../../http/common.http.service'
 import * as fixedData from '../../../helper/settings'
 import { getFullRoute, showToastMessage } from '../../../helper/utility'
-import { create } from '../web3Integration/global.service'
+import { create } from '../../../web3Integration/global.service'
 
 const {
     nftTokenListRoute
@@ -86,7 +86,7 @@ function Form(props) {
 
     const handleOnClickSubmit = (formInfo, type) => {
         const properties = formInfo.properties && JSON.stringify(formInfo.properties)
-        const body = { ...formInfo, properties, nftID: tokenId }
+        const body = { ...formInfo, properties }
         setIsBlockchainLoading(true)
 
         // console.log('body===============', body)
@@ -101,7 +101,8 @@ function Form(props) {
                         payload: {
                            body: {
                                ...body,
-                               transactionHash: transHash
+                               transactionHash: transHash,
+                               nftID: tokenId
                            }
                         }
                     })
@@ -109,8 +110,13 @@ function Form(props) {
                     setIsBlockchainLoading(false)
                 }
             })()
-        } else {
-            showToastMessage('Comming soon...', 'warn')
+        } else if (type === 'update') {
+            postSaveToken({
+                api: editNftTokenAPI,
+                payload: {
+                    body
+                }
+            })
         }
     }
 

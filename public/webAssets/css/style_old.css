@@ -1030,7 +1030,7 @@ ol {
 
 .categories {
 	overflow: hidden;
-	margin-top: 0px;
+	margin-top: 10px;
 }
 
 .categories .container-fluid {
@@ -1051,11 +1051,8 @@ ol {
 }
 
 .categories__item.categories__large__item {
-	height: 100vh;
-	background-attachment: fixed;
-	justify-content: space-around !important;
+	height: 638px;
 	padding-left: 70px;
-	background-image: url(https://thumb.tildacdn.com/tild3262-3633-4164-b733-346564323534/-/format/webp/IMG_20210519_165615.jpg);
 }
 
 .categories__item.categories__large__item .categories__text {
@@ -1071,7 +1068,6 @@ ol {
 	font-family: "Cookie", cursive;
 	color: #ffffff;
 	margin-bottom: 5px;
-	font-size: 85px;
 }
 
 .categories__text h4 {
@@ -1748,7 +1744,7 @@ ol {
 .product__details__price span {
 	font-size: 18px;
 	color: #b1b0b0;
-	text-decoration: line-through;
+	/* text-decoration: line-through; */
 	margin-left: 10px;
 	display: inline-block;
 }
@@ -3163,69 +3159,79 @@ ol {
 	width: 100%;
 }
 
+/*--------------------------------- Sawta Custom Code -----------------------------*/
 
-.tile_left {
-    width: 60%;
-    padding-right: 10px;
+.eth_small {
+	object-fit: contain;
+	width: 22px;
+	height: 22px;
+	overflow: hidden;
+    border: 1px solid rgb(229, 232, 235);
+    border-radius: 50%;
+    padding: 2px;
 }
-.tile_right {
-    width: 40%;
-    padding-left: 10px;
+.eth_big {
+    object-fit: contain;
+    width: 35px;
+    height: 35px;
+    overflow: hidden;
+    border: 1px solid rgb(229, 232, 235);
+    border-radius: 50%;
+    padding: 5px;
 }
-.first_msg {
-    display: inline-block;
-    box-sizing: border-box;
-    vertical-align: top;
-}
-.first_msg {
-padding-bottom: 135%;
-}
-.first_msg {
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
-}
-.bottom_image {
-	position: relative;
-    width: 160%;
-    margin-top: 20px;
-    padding-bottom: 100%;
-}
-.third_img {
-	position: absolute;
-    /* padding-bottom: 100%; */
-    width: 100%;
-    right: 50%;
-}
-.dd {
-    display: inline-block;
-    box-sizing: border-box;
-    vertical-align: top;
+.table th {
+	font-weight: normal;
+	font-size: 90%;
 }
 
-@media only screen and (max-width: 767px) {
-	.tile_left, .tile_right, .bottom_image {
-		width: 100%;
-		/* padding-bottom: 135%; */
-	}
-	.third_img {
-		right: 0;
-	}
-	.tile_right {
-		padding-left: 0;
-	}
-	.tile_left {
-		padding-right: 0;
-	}
-	.categories__item {
-		display: grid;
-	}
+.icon_size {
+	height: 32px;
+    width: 32px;
+    -webkit-box-align: center;
+	margin-right: 10px;
+    align-items: center;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    max-height: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
+    border-radius: 50%;
+}
+.panel_container {
+	height: initial;
+    max-height: 200px;
+    overflow: auto;
+}
+.ChainInfo--label {
+display: flex;
+-webkit-box-pack: justify;
+justify-content: space-between;
+padding: 5px 0px;
+}
+.ChainInfo--label .ChainInfo--label-value {
+    color: rgb(112, 122, 131);
+    max-width: 365px;
+}
+.token_id {
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 100%;
+    font-family: inherit;
+    border: 0px;
+    padding: 0px;
+    background: inherit;
+}
+.main_box {
+	border-radius: 5px;
+    border: 1px solid rgb(229, 232, 235);
+    overflow: hidden;
 }
 
-@media (max-width: 479px) {
-	.categories__item.categories__large__item {
-		padding-left: 0;
-	}
+.bg-lighten {
+    background: #17a2b814;
 }
 
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
@@ -3764,4 +3770,3 @@ background-repeat: no-repeat;
 		font-size: 24px;
 	}
 }
-
