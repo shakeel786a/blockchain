@@ -22,29 +22,25 @@ function Header() {
                     <div class="row">
                         <div class="col-lg-2">
                             <div class="header__logo">
-                                {/* <a href="./index.html"> */}
-                                    {/*  <img src="img/logo.png" alt=""> */}
-                                    <h2>Demo</h2>
-                                {/* </a> */}
+                                <h2>Demo</h2>
                                 <a href="#" class="d-block d-md-none" data-toggle="modal" data-target="#at-signup-form">Register</a>
-
                             </div>
                         </div>
                         
                         <div class="col-lg-10 d-flex justify-content-end">
                             <div class="header__right">
                                 <div class="header__right__auth">
-                                    {walletAddress ? (
-                                        <a role="button">{walletAddress}</a>
-                                    ) : (
-                                        <a role="button" class="site-btn text-white" data-toggle="modal" data-target="#at-login" onClick={onClickLogin}>Connect Wallet</a>
-                                    )}
+                                    <a role="button" class="site-btn bg-primary text-white" data-toggle="modal" data-target="#at-signup-form" onClick={onClickRegister}>Register</a>
                                     <img src="https://upload.wikimedia.org/wikipedia/commons/7/70/User_icon_BLACK-01.png" class="img-fluid avatar"></img>
                                 </div>
                             </div>
                             <div class="header__right">
                                 <div class="header__right__auth">
-                                    <a role="button" class="site-btn bg-primary text-white" data-toggle="modal" data-target="#at-signup-form" onClick={onClickRegister}>Register</a>
+                                    {walletAddress ? (
+                                        <a role="button" class="site-btn text-white">{walletAddress}</a>
+                                    ) : (
+                                        <a role="button" class="site-btn text-white" data-toggle="modal" data-target="#at-login" onClick={onClickLogin}>Connect Wallet</a>
+                                    )}
                                 </div>
                             </div>
                         </div>
