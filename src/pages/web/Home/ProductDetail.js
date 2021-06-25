@@ -18,7 +18,7 @@ function ProductDetail(props) {
         {
             isLoading: isNftDetailLoading,
             response: { isSuccess: isNftDetailSuccess, data: detailData }
-        }, 
+        },
         getNftDetail
     ] = useFetchAPI()
 
@@ -44,7 +44,7 @@ function ProductDetail(props) {
     }, [isNftDetailLoading, isNftDetailSuccess, detailData])
 
     const handleBidFormSuccess = price => setNftDetail({ ...nftDetail, lastBidPrice: price })
-    
+
     const onClickClose = () => setIsVisibleInfo({ isLoginVisible: false, isRegisterVisible: false })
     const onClickLogin = () => setIsVisibleInfo({ isLoginVisible: true, isRegisterVisible: false })
     const onClickRegister = () => setIsVisibleInfo({ isLoginVisible: false, isRegisterVisible: true })
@@ -82,7 +82,7 @@ function ProductDetail(props) {
                                 <Avatar uri={imageOrVideo} />
                             </div>
 
-                            <div class="categories__accordion">
+                            <div class="d-none d-md-block categories__accordion">
                                 <div class="accordion" id="accordionExample">
                                     <div class="card">
                                         <div class="card-heading">
@@ -122,13 +122,13 @@ function ProductDetail(props) {
                                                     <div class="ChainInfo--label">
                                                         <div class="ChainInfo--label-type">Contract Address</div>
                                                         <div class="ChainInfo--label-value"><a class="text-primary"
-                                                                href="https://etherscan.io/address/0x495f947276749ce646f68ac8c248420045cb7b5e"
-                                                                rel="" target="_blank">{transactionHash}</a></div>
+                                                            href="https://etherscan.io/address/0x495f947276749ce646f68ac8c248420045cb7b5e"
+                                                            rel="" target="_blank">{transactionHash}</a></div>
                                                     </div>
                                                     <div class="ChainInfo--label">
                                                         <div class="ChainInfo--label-type">Token ID</div>
                                                         <div class="ChainInfo--label-value"><button class="token_id"
-                                                                type="button">{nftID}</button></div>
+                                                            type="button">{nftID}</button></div>
                                                     </div>
                                                     <div class="ChainInfo--label">
                                                         <div class="ChainInfo--label-type">Blockchain</div>
@@ -156,7 +156,9 @@ function ProductDetail(props) {
 
                                 <div class="product__details__price mb-2">
                                     <li>
-                                        <Avatar uri="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" className="eth_big img-fluid" />
+                                        <span class="circle_img">
+                                            <Avatar uri="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" className="eth_big img-fluid" />
+                                        </span>
                                         {lastBidPrice}
                                     </li>
                                 </div>
@@ -165,6 +167,69 @@ function ProductDetail(props) {
                                     magni lores eos qui ratione voluptatem sequi nesciunt.</p>
 
                                 <div class="product__details__widget">
+
+                                <div class="categories__accordion d-block d-md-none">
+                                <div class="accordion" id="accordionExample">
+                                    <div class="card">
+                                        <div class="card-heading">
+                                            <a data-toggle="collapse" data-target="#collapseFour">Description</a>
+                                        </div>
+                                        <div id="collapseFour" class="collapse" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="bg-light p-4 panel_container">
+                                                    <HTMLParser htmlContent={description} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-heading">
+                                            <a data-toggle="collapse" data-target="#collapseSix">Properties</a>
+                                        </div>
+                                        <div id="collapseSix" class="collapse" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="bg-light p-4">
+                                                    <div class="row">
+                                                        {propertiesSection(JSON.parse(properties))}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-heading">
+                                            <a data-toggle="collapse" data-target="#collapseFive">Details</a>
+                                        </div>
+                                        <div id="collapseFive" class="collapse" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="bg-light p-4">
+                                                    <div class="ChainInfo--label">
+                                                        <div class="ChainInfo--label-type">Contract Address</div>
+                                                        <div class="ChainInfo--label-value"><a class="text-primary"
+                                                            href="https://etherscan.io/address/0x495f947276749ce646f68ac8c248420045cb7b5e"
+                                                            rel="" target="_blank">{transactionHash}</a></div>
+                                                    </div>
+                                                    <div class="ChainInfo--label">
+                                                        <div class="ChainInfo--label-type">Token ID</div>
+                                                        <div class="ChainInfo--label-value"><button class="token_id"
+                                                            type="button">{nftID}</button></div>
+                                                    </div>
+                                                    <div class="ChainInfo--label">
+                                                        <div class="ChainInfo--label-type">Blockchain</div>
+                                                        <div class="ChainInfo--label-value">Ethereum</div>
+                                                    </div>
+                                                    <div class="ChainInfo--label">
+                                                        <div class="ChainInfo--label-type">Metadata</div>
+                                                        <div class="ChainInfo--label-value">Centralized</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                                     <div class="categories__accordion">
                                         <div class="accordion" id="accordionExample">
@@ -224,10 +289,10 @@ function ProductDetail(props) {
                                                                                     stroke="#E5E8EB" width="600" height="30"
                                                                                     x="53" y="100" fill="none" x1="353" y1="110"
                                                                                     x2="353" y2="100"></line><text stroke="none"
-                                                                                    width="600" height="30" x="353" y="116"
-                                                                                    fill="#353840" fill-opacity="0.6"
-                                                                                    class="recharts-text recharts-cartesian-axis-tick-value"
-                                                                                    text-anchor="middle">
+                                                                                        width="600" height="30" x="353" y="116"
+                                                                                        fill="#353840" fill-opacity="0.6"
+                                                                                        class="recharts-text recharts-cartesian-axis-tick-value"
+                                                                                        text-anchor="middle">
                                                                                     <tspan x="353" dy="0.71em">6/20</tspan>
                                                                                 </text>
                                                                             </g>
@@ -245,10 +310,10 @@ function ProductDetail(props) {
                                                                                     stroke="#E5E8EB" width="53" height="95"
                                                                                     x="0" y="5" fill="none" x1="43" y1="100"
                                                                                     x2="53" y2="100"></line><text stroke="none"
-                                                                                    width="53" height="95" x="25" y="100"
-                                                                                    fill="#353840" fill-opacity="0.6"
-                                                                                    class="recharts-text recharts-cartesian-axis-tick-value"
-                                                                                    text-anchor="end">
+                                                                                        width="53" height="95" x="25" y="100"
+                                                                                        fill="#353840" fill-opacity="0.6"
+                                                                                        class="recharts-text recharts-cartesian-axis-tick-value"
+                                                                                        text-anchor="end">
                                                                                     <tspan x="25" dy="0.355em">0</tspan>
                                                                                 </text>
                                                                             </g>
@@ -259,11 +324,11 @@ function ProductDetail(props) {
                                                                                     x="0" y="5" fill="none" x1="43"
                                                                                     y1="71.66666666666667" x2="53"
                                                                                     y2="71.66666666666667"></line><text
-                                                                                    stroke="none" width="53" height="95" x="25"
-                                                                                    y="71.66666666666667" fill="#353840"
-                                                                                    fill-opacity="0.6"
-                                                                                    class="recharts-text recharts-cartesian-axis-tick-value"
-                                                                                    text-anchor="end">
+                                                                                        stroke="none" width="53" height="95" x="25"
+                                                                                        y="71.66666666666667" fill="#353840"
+                                                                                        fill-opacity="0.6"
+                                                                                        class="recharts-text recharts-cartesian-axis-tick-value"
+                                                                                        text-anchor="end">
                                                                                     <tspan x="25" dy="0.355em">10</tspan>
                                                                                 </text>
                                                                             </g>
@@ -274,11 +339,11 @@ function ProductDetail(props) {
                                                                                     x="0" y="5" fill="none" x1="43"
                                                                                     y1="43.333333333333336" x2="53"
                                                                                     y2="43.333333333333336"></line><text
-                                                                                    stroke="none" width="53" height="95" x="25"
-                                                                                    y="43.333333333333336" fill="#353840"
-                                                                                    fill-opacity="0.6"
-                                                                                    class="recharts-text recharts-cartesian-axis-tick-value"
-                                                                                    text-anchor="end">
+                                                                                        stroke="none" width="53" height="95" x="25"
+                                                                                        y="43.333333333333336" fill="#353840"
+                                                                                        fill-opacity="0.6"
+                                                                                        class="recharts-text recharts-cartesian-axis-tick-value"
+                                                                                        text-anchor="end">
                                                                                     <tspan x="25" dy="0.355em">20</tspan>
                                                                                 </text>
                                                                             </g>
@@ -288,10 +353,10 @@ function ProductDetail(props) {
                                                                                     stroke="#E5E8EB" width="53" height="95"
                                                                                     x="0" y="5" fill="none" x1="43" y1="15"
                                                                                     x2="53" y2="15"></line><text stroke="none"
-                                                                                    width="53" height="95" x="25" y="15"
-                                                                                    fill="#353840" fill-opacity="0.6"
-                                                                                    class="recharts-text recharts-cartesian-axis-tick-value"
-                                                                                    text-anchor="end">
+                                                                                        width="53" height="95" x="25" y="15"
+                                                                                        fill="#353840" fill-opacity="0.6"
+                                                                                        class="recharts-text recharts-cartesian-axis-tick-value"
+                                                                                        text-anchor="end">
                                                                                     <tspan x="25" dy="0.355em">30</tspan>
                                                                                 </text>
                                                                             </g>
@@ -346,8 +411,10 @@ function ProductDetail(props) {
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td> 
-                                                                            <Avatar uri="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" />
+                                                                        <td>
+                                                                            <span class="circle_img">
+                                                                                <Avatar uri="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" />
+                                                                            </span>
                                                                             <strong>16.69 </strong>ETH
                                                                         </td>
                                                                         <td>$ 35,766.67</td>
@@ -358,8 +425,10 @@ function ProductDetail(props) {
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td> 
-                                                                            <Avatar uri="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg" />
+                                                                        <td>
+                                                                            <span class="circle_img">
+                                                                                <Avatar uri="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" />
+                                                                            </span>
                                                                             <strong>16.69 </strong>ETH</td>
                                                                         <td>$ 35,766.67</td>
                                                                         <td>
