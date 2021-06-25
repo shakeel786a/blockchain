@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 
+import { Avatar } from '../../../commonPages'
 import Register from '../Auth/Register'
 import Login from '../Auth/Login'
 
@@ -9,7 +10,7 @@ function Header() {
 
     const authData = useSelector(state => state.web.app.auth.authData)
     console.log('authData==============', authData)
-    const { walletAddress } = authData
+    const { walletAddress, avatar } = authData
 
     const onClickClose = () => setIsVisibleInfo({ isLoginVisible: false, isRegisterVisible: false })
     const onClickLogin = () => setIsVisibleInfo({ isLoginVisible: true, isRegisterVisible: false })
@@ -30,8 +31,13 @@ function Header() {
                         <div class="col-lg-10 d-flex justify-content-end">
                             <div class="header__right">
                                 <div class="header__right__auth">
-                                    <a role="button" class="site-btn bg-primary text-white" data-toggle="modal" data-target="#at-signup-form" onClick={onClickRegister}>Register</a>
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/70/User_icon_BLACK-01.png" class="img-fluid avatar"></img>
+                                    {walletAddress ? (
+                                        <span class="circle_img">
+                                            <Avatar uri={avatar || "https://upload.wikimedia.org/wikipedia/commons/7/70/User_icon_BLACK-01.png"} class="img-fluid avatar" />
+                                        </span>
+                                    ) : (
+                                        <a role="button" class="site-btn bg-primary text-white" data-toggle="modal" data-target="#at-signup-form" onClick={onClickRegister}>Register</a>
+                                    )}
                                 </div>
                             </div>
                             <div class="header__right">

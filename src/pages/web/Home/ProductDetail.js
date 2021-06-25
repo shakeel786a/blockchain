@@ -72,7 +72,19 @@ function ProductDetail(props) {
     let detailSection = null
     if (nftDetail) {
         console.log('nftDetail================', nftDetail)
-        const { imageOrVideo, nftName, description, properties, transactionHash, nftID, lastBidPrice, startingPrice, bids, shortDescription } = nftDetail
+        const { imageOrVideo,
+            nftName,
+            description,
+            properties,
+            transactionHash,
+            nftID,
+            lastBidPrice,
+            startingPrice,
+            bids,
+            shortDescription,
+            physcicalArtworkIsAvailable,
+            additionalPrice
+        } = nftDetail
 
         let bidsSection = null
         if (bids && bids.length) {
@@ -149,10 +161,15 @@ function ProductDetail(props) {
                                                             href="https://etherscan.io/address/0x495f947276749ce646f68ac8c248420045cb7b5e"
                                                             rel="" target="_blank">{transactionHash}</a></div>
                                                     </div>
+                                                    {physcicalArtworkIsAvailable ? (
+                                                        <div class="ChainInfo--label">
+                                                            <div class="ChainInfo--label-type">Additional Price</div>
+                                                            <div class="ChainInfo--label-value">{additionalPrice}</div>
+                                                        </div>
+                                                    ) : null}
                                                     <div class="ChainInfo--label">
                                                         <div class="ChainInfo--label-type">Token ID</div>
-                                                        <div class="ChainInfo--label-value"><button class="token_id"
-                                                            type="button">{nftID}</button></div>
+                                                        <div class="ChainInfo--label-value">{nftID}</div>
                                                     </div>
                                                     <div class="ChainInfo--label">
                                                         <div class="ChainInfo--label-type">Blockchain</div>

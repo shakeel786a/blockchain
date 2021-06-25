@@ -24,15 +24,10 @@ function Login(props) {
         if (isCheckRegisterLoading === false) {
             if (isCheckRegisterSuccess && checkRegisterData) {
                 const { userInfo, isNewUser } = checkRegisterData
-                if (isNewUser) {
-                    console.log('New user===============')
-                    onClickClose()
-                    // onClickRegister()
-                }
                 if (isNewUser === false) {
                     dispatch({ type: authAction.SET_WEB_USER_INFO, payload: userInfo })
-                    onClickClose()
                 }
+                onClickClose()
             }
         }
     }, [isCheckRegisterLoading, isCheckRegisterSuccess, checkRegisterData])
