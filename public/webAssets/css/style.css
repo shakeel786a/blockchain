@@ -37,7 +37,9 @@ body {
 	font-family: "Montserrat", sans-serif;
 	-webkit-font-smoothing: antialiased;
 }
-
+html body {
+	background-color: white;
+}
 h1,
 h2,
 h3,
@@ -320,6 +322,11 @@ ol {
 	background: #ffffff;
 	-webkit-box-shadow: 0px 5px 10px rgba(91, 91, 91, 0.1);
 	box-shadow: 0px 5px 10px rgba(91, 91, 91, 0.1);
+	height: 90px !important;
+    position: fixed;
+}
+.header {
+	padding-left: 0 !important;
 }
 
 .header__logo {
@@ -1161,7 +1168,7 @@ ol {
 }
 
 .product__item {
-	margin-bottom: 35px;
+	margin-bottom: 75px;
 }
 
 .product__item:hover .product__hover li {
@@ -1290,8 +1297,11 @@ ol {
 .product__item__text {
 	text-align: center;
 	padding-top: 22px;
+	min-height: 160px;
 }
-
+.text-black {
+	color: #101010 !important;
+}
 .product__item__text h6 a {
 	font-size: 14px;
 	color: #111111;
@@ -1348,15 +1358,16 @@ ol {
 .categories__accordion .card {
 	border: none;
 	border-radius: 0;
-	padding-bottom: 12px;
-	border-bottom: 1px solid #f2f2f2 !important;
+	/* padding-bottom: 12px; */
+	border: 1px solid #f2f2f2 !important;
 	margin-bottom: 12px;
+	padding: 16px 0;
 }
 
 .categories__accordion .card:last-child {
-	padding-bottom: 0;
-	margin-bottom: 0;
-	border-bottom: none !important;
+	/* padding-bottom: 0; */
+	/* margin-bottom: 0; */
+	/* border-bottom: none !important; */
 }
 
 .categories__accordion .card-heading {
@@ -1368,12 +1379,16 @@ ol {
 	font-weight: 500;
 	color: #111111;
 	display: block;
+	padding: 0 16px;
 }
 
 .categories__accordion .card-body {
 	padding-left: 0;
 	padding-top: 6px;
 	padding-bottom: 0;
+	padding: 0;
+    top: 16px;
+    position: relative;
 }
 
 .categories__accordion .card-body li {
@@ -1406,7 +1421,7 @@ ol {
 	color: #666666;
 	position: absolute;
 	right: 30px;
-	top: 0px;
+	top: 16px;
 }
 
 .categories__accordion .card-heading.active a:after {
@@ -1416,7 +1431,7 @@ ol {
 	color: #666666;
 	position: absolute;
 	right: 30px;
-	top: -1px;
+	top: 16px;
 }
 
 .categories__accordion .card-heading a[aria-expanded=true]:after,
@@ -1427,7 +1442,7 @@ ol {
 	color: #666666;
 	position: absolute;
 	right: 30px;
-	top: -1px;
+	top: 16px;
 }
 
 .sidebar__filter {
@@ -1630,9 +1645,13 @@ ol {
 	padding-top: 70px;
 	padding-bottom: 50px;
 }
+.bg-light h2 {
+	background-color: transparent;
+}
 
 .product__details__pic {
 	overflow: hidden;
+	text-align: center;
 }
 
 .product__details__pic__left {
@@ -1749,7 +1768,7 @@ ol {
 	font-size: 18px;
 	color: #b1b0b0;
 	text-decoration: line-through;
-	margin-left: 10px;
+	/* margin-left: 10px; */
 	display: inline-block;
 }
 
@@ -1812,7 +1831,6 @@ ol {
 	text-transform: uppercase;
 	padding: 14px 30px 15px;
 	border-radius: 50px;
-	float: left;
 	margin-right: 10px;
 	margin-bottom: 10px;
 }
@@ -1867,7 +1885,6 @@ ol {
 	font-weight: 600;
 	color: #111111;
 	width: 150px;
-	float: left;
 }
 
 .product__details__widget ul li .stock__checkbox {
@@ -3228,6 +3245,72 @@ background-repeat: no-repeat;
 	}
 }
 
+.product__item__pic.set-bg img {
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    -webkit-transition: opacity .1s linear;
+    transition: opacity .1s linear;
+}
+
+.text-ellispis {
+	overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 3; /* number of lines to show */
+   -webkit-box-orient: vertical;
+}
+
+.footer {
+    padding-left: 0 !important;
+}
+div .bg-light {
+    background-color: #fbfdffc4 !important;
+}
+.card-body p {
+	font-size: 13px;
+}
+div .rounded{
+	border-radius:0.5rem !important;
+}
+div .btn-outline-danger {
+    color: #ca1515;
+    border-color: #ca1515;
+}
+div .btn-outline-danger:hover {
+    color: #fff;
+    background-color: #ca1515;
+    border-color: #ca1515;
+}
+.circle_img {
+	display: inline-block;
+    height: 50px;
+    width: 50px;
+    border: 1px solid #ebebeb;
+    border-radius: 50%;
+    line-height: 50px;
+    text-align: center;
+    margin-right: 8px;
+}
+.circle_img img {
+	width: 25px;
+    margin-top: -5px;
+}
+.avatar {
+	width: 45px;
+    background: #f3f7ff;
+    border-radius: 50%;
+    height: 45px;
+    padding: 8px;
+    text-align: center;
+    padding-left: 5px;
+}
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
 
 @media only screen and (min-width: 1600px) and (max-width: 1900px) {
