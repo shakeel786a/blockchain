@@ -3,9 +3,9 @@
 /////////////////
 .header {
     // width: 100%;
-    height: 7.5rem;
+    height: 90px;
     z-index: 1;
-    position: relative;
+    position: fixed;
     padding: 0rem;
     background-color: $white;
     z-index: 4;
@@ -13,7 +13,7 @@
     padding-left: 21.563rem;
     transition: all .2s ease;
 	@include respond('laptop'){
-		padding-left: 17rem;
+		padding-left: 0rem;
 	}
     // &::before {
     //     content: "";
