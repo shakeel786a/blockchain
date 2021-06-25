@@ -5,7 +5,7 @@ import { Avatar } from '../../../commonPages'
 function NftTokenListCell(props) {
     const { item, onClickAction } = props
     // console.log('item--------------------', item)
-    const { NFTtokenid, imageOrVideo, thumbnail, nftName, startTime, status, startingPrice, reservePrice } = item
+    const { nftID, imageOrVideo, thumbnail, nftName, startTime, status, startingPrice, reservePrice } = item
     
     return (
         <tr class="btn-reveal-trigger">
@@ -13,7 +13,7 @@ function NftTokenListCell(props) {
                 <Avatar uri={thumbnail || imageOrVideo} isViewFile title="View file" style={{ width: 40, height: 40 }} />
             </td>
             <td class="py-2"> <a href="#">{nftName}</a></td>
-            <td class="py-2">{NFTtokenid}</td>
+            <td class="py-2">{nftID}</td>
             <td class="py-2">{startTime}</td>
             <td class="py-2">{status}</td>
             <td class="py-2">{startingPrice}</td>

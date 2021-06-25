@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import Header from '../../../commonPages/Header'
 import Sidebar from '../../../commonPages/Sidebar'
@@ -17,6 +18,9 @@ function NftTokenList(props) {
     const { history, location: { type = 'sold' } = {} } = props
 
     const [nftTokenList, setNftTokenList] = useState(undefined)
+    const auth = useSelector(state => state.admin.app.auth)
+
+    console.log('auth-===================', auth)
 
     const [
         {

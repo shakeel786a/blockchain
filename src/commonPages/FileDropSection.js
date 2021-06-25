@@ -10,10 +10,12 @@ function FileDropSection(props) {
     formatText = '(* PDF, JPEG, PNG format)',
     selectedFile,
     isLoading,
-    isDisable
+    isDisable,
+    children
   } = props
 
   const [files, setFiles] = useState([])
+
   const { getRootProps, getInputProps } = useDropzone({
     accept,
     onDrop: acceptedFiles => {
@@ -30,6 +32,7 @@ function FileDropSection(props) {
 
   useEffect(() => () => files.forEach(file => URL.revokeObjectURL(file.preview)), [])
 
+
   return (
     isDisable ? (
       <>
@@ -39,9 +42,12 @@ function FileDropSection(props) {
     ) : 
       <div {...getRootProps({ className: 'dropzone cursor-pointer' })}>
         <input {...getInputProps()} />
-
-        <Button className="btn btn-info" label={name} isLoading={isLoading} isDisable={isDisable} />
-        <input type="text" readonly class="form-control-plaintext" value={formatText} />
+        {children || (
+          <>
+            <Button className="btn btn-info" label={name} isLoading={isLoading} />
+            <input type="text" readonly class="form-control-plaintext" value={formatText} />
+          </>
+        )}
 
       </div>
   )

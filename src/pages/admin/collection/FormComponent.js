@@ -16,7 +16,7 @@ function FormComponent(props) {
     const isEditing = action === 'edit'
     const isView = action === 'view'
 
-    const { imageOrVideo, nftName, startingPrice, reservePrice, startTime, protectionTime, endTime, additionalPrice, physcicalArtworkIsAvailable, status, step } = formInfo || {}
+    const { imageOrVideo, nftName, startingPrice, reservePrice, startTime, protectionTime, endTime, additionalPrice, physcicalArtworkIsAvailable, status, step, shortDescription } = formInfo || {}
     const {
         fileValidationMessage,
         nameValidationMessage,
@@ -28,14 +28,16 @@ function FormComponent(props) {
         additionalPriceValidationMessage,
         aucationEndTimeValidationMessage,
         stepValidationMessage,
-        statusValidationMessage
+        statusValidationMessage,
+        shortDescriptionValidationMessage,
+        descriptionValidationMessage
     } = validationMessage || {}
 
     // console.log('formInfo==============', formInfo)
 
     useEffect(() => {
         if (selectedItem && Object.keys(selectedItem) && Object.keys(selectedItem).length) {
-            setEditorValue(selectedItem.shortDescription || '')
+            setEditorValue(selectedItem.description || '')
         }
     }, [selectedItem])
 
@@ -65,10 +67,10 @@ function FormComponent(props) {
     }
 
     const onClickSubmit = type => {
-        const { status, formValidationMessage } = validation(formInfo)
+        const { status, formValidationMessage } = validation({ ...formInfo, description: editorValue })
         setValidationMessage(formValidationMessage)
         if (status) {
-            onClickFormSubmit({ ...formInfo, shortDescription: editorValue || '' }, type)
+            onClickFormSubmit({ ...formInfo, description: editorValue || '' }, type)
         }
     }
 
@@ -197,8 +199,14 @@ function FormComponent(props) {
                                 ) : null}
 
                                 <br />
-                                <label><b>Short Description</b> (Optional)</label>
+                                <label><b>Short Description</b></label>
+                                <textarea type="text" class="form-control" placeholder="Short description" value={shortDescription} onChange={e => handleOnChange({ shortDescription: e.target.value })} />
+                                <ValidationTextComponent validationMessage={shortDescriptionValidationMessage} />
+
+                                <br />
+                                <label><b>Description</b></label>
                                 <EditorComponent onChange={info => setEditorValue(info)} value={editorValue || ''} />
+                                <ValidationTextComponent validationMessage={descriptionValidationMessage} />
 
                                 <br />
                                 <label><b>Aucation End Time</b></label>  
