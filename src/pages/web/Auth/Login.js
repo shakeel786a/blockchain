@@ -9,7 +9,7 @@ import { getIsRegister } from '../../../http/common.http.service'
 function Login(props) {
     const { isVisible, onClickClose } = props
 
-    console.log('isVisible----------', isVisible)
+    // console.log('isVisible----------', isVisible)
     const dispatch = useDispatch()
 
     const [

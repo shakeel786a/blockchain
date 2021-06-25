@@ -38,9 +38,9 @@ function Register(props) {
         if(isVisible) {
             (async () => {
                 const walletAddress = await getAccount()
-                const signature = await signMsg(walletAddress)
+                // const signature = await signMsg(walletAddress)
     
-                handleOnChange({ signature, walletAddress })
+                handleOnChange({ walletAddress })
             })()
         }
     }, [isVisible])
@@ -111,15 +111,23 @@ function Register(props) {
 
     const onClickRegister = () => {
         if (validation()) {
-            console.log('registerInfo===========', registerInfo)
-            postRegister({
-                api: postRegistrationAPI,
-                payload: {
-                    body: {
-                        ...registerInfo
-                    }
+            // console.log('registerInfo===========', registerInfo)
+
+            (async () => {
+                const signature = await signMsg(walletAddress)
+                
+                if (signature) {
+                    postRegister({
+                        api: postRegistrationAPI,
+                        payload: {
+                            body: {
+                                ...registerInfo,
+                                signature
+                            }
+                        }
+                    })
                 }
-            })
+            })()
         }
     }
 

@@ -7,10 +7,10 @@ import { postPlaceBidAPI } from '../../../http/common.http.service'
 
 function BidForm(props) {
     const { detailInfo, authData, bidFormSuccess, onRequestLogin } = props
-    const { nftID, lastBidPrice, step } = detailInfo
+    const { nftID, lastBidPrice, startingPrice, step } = detailInfo
     const { userId, walletAddress } = authData || {}
     const transactionHash = "abcdefghijklm"
-    const [formInfo, setFormInfo] = useState({ dateTime: new Date(), userId, walletAddress, nftID, transactionHash, price: lastBidPrice })
+    const [formInfo, setFormInfo] = useState({ dateTime: new Date(), userId, walletAddress, nftID, transactionHash, price: (lastBidPrice || startingPrice) })
 
     const [
         {

@@ -71,8 +71,32 @@ function ProductDetail(props) {
 
     let detailSection = null
     if (nftDetail) {
-        // console.log('nftDetail================', nftDetail)
-        const { imageOrVideo, nftName, description, properties, transactionHash, nftID, lastBidPrice } = nftDetail
+        console.log('nftDetail================', nftDetail)
+        const { imageOrVideo, nftName, description, properties, transactionHash, nftID, lastBidPrice, startingPrice, bids, shortDescription } = nftDetail
+
+        let bidsSection = null
+        if (bids && bids.length) {
+            bidsSection = bids.map(item => {
+                const { price, walletAddress, userId } = item
+                return (
+                    <tr>
+                        <td>
+                            <span class="circle_img">
+                                <Avatar uri="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" />
+                            </span>
+                            <strong>{price}</strong>
+                        </td>
+                        <td>$ 35,766.67</td>
+                        <td>
+                            in 3 Days </td>
+                        <td>
+                            {userId}
+                        </td>
+                    </tr>
+                )
+            })
+        }
+
         detailSection = (
             <section class="product-details spad">
                 <div class="container">
@@ -159,12 +183,11 @@ function ProductDetail(props) {
                                         <span class="circle_img">
                                             <Avatar uri="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" className="eth_big img-fluid" />
                                         </span>
-                                        {lastBidPrice}
+                                        {lastBidPrice || startingPrice}
                                     </li>
                                 </div>
                                 <BidForm detailInfo={nftDetail} bidFormSuccess={handleBidFormSuccess} onRequestLogin={onClickLogin} />
-                                <p>Nemo enim ipsam voluptatem quia aspernatur aut odit aut loret fugit, sed quia consequuntur
-                                    magni lores eos qui ratione voluptatem sequi nesciunt.</p>
+                                <p>{shortDescription}</p>
 
                                 <div class="product__details__widget">
 
@@ -410,34 +433,7 @@ function ProductDetail(props) {
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <span class="circle_img">
-                                                                                <Avatar uri="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" />
-                                                                            </span>
-                                                                            <strong>16.69 </strong>ETH
-                                                                        </td>
-                                                                        <td>$ 35,766.67</td>
-                                                                        <td>
-                                                                            in 3 Days </td>
-                                                                        <td>
-                                                                            Cubsfan333
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <span class="circle_img">
-                                                                                <Avatar uri="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" />
-                                                                            </span>
-                                                                            <strong>16.69 </strong>ETH</td>
-                                                                        <td>$ 35,766.67</td>
-                                                                        <td>
-                                                                            in 2 Days
-                                                                        </td>
-                                                                        <td>
-                                                                            Cubsfan333
-                                                                        </td>
-                                                                    </tr>
+                                                                    {bidsSection}
                                                                 </tbody>
                                                                 <tfoot>
                                                                     <tr>

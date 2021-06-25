@@ -7,6 +7,7 @@
 		  "type": "address"
 		}
 	  ],
+	  "payable": false,
 	  "stateMutability": "nonpayable",
 	  "type": "constructor"
 	},
@@ -67,6 +68,7 @@
 	  "type": "event"
 	},
 	{
+	  "constant": true,
 	  "inputs": [],
 	  "name": "authAddress",
 	  "outputs": [
@@ -76,10 +78,12 @@
 		  "type": "address"
 		}
 	  ],
+	  "payable": false,
 	  "stateMutability": "view",
 	  "type": "function"
 	},
 	{
+	  "constant": true,
 	  "inputs": [
 		{
 		  "internalType": "uint256",
@@ -95,10 +99,12 @@
 		  "type": "address"
 		}
 	  ],
+	  "payable": false,
 	  "stateMutability": "view",
 	  "type": "function"
 	},
 	{
+	  "constant": true,
 	  "inputs": [
 		{
 		  "internalType": "uint256",
@@ -114,10 +120,27 @@
 		  "type": "uint256"
 		}
 	  ],
+	  "payable": false,
 	  "stateMutability": "view",
 	  "type": "function"
 	},
 	{
+	  "constant": true,
+	  "inputs": [],
+	  "name": "isOwner",
+	  "outputs": [
+		{
+		  "internalType": "bool",
+		  "name": "",
+		  "type": "bool"
+		}
+	  ],
+	  "payable": false,
+	  "stateMutability": "view",
+	  "type": "function"
+	},
+	{
+	  "constant": true,
 	  "inputs": [],
 	  "name": "owner",
 	  "outputs": [
@@ -127,10 +150,12 @@
 		  "type": "address"
 		}
 	  ],
+	  "payable": false,
 	  "stateMutability": "view",
 	  "type": "function"
 	},
 	{
+	  "constant": false,
 	  "inputs": [
 		{
 		  "internalType": "address",
@@ -148,14 +173,14 @@
 		  "type": "address"
 		},
 		{
-		  "internalType": "uint256[]",
+		  "internalType": "uint256",
 		  "name": "id",
-		  "type": "uint256[]"
+		  "type": "uint256"
 		},
 		{
-		  "internalType": "uint256[]",
+		  "internalType": "uint256",
 		  "name": "nftAmount",
-		  "type": "uint256[]"
+		  "type": "uint256"
 		},
 		{
 		  "internalType": "uint256",
@@ -178,19 +203,23 @@
 		  "type": "bytes32"
 		}
 	  ],
-	  "name": "redeemBulk",
+	  "name": "redeem",
 	  "outputs": [],
+	  "payable": false,
 	  "stateMutability": "nonpayable",
 	  "type": "function"
 	},
 	{
+	  "constant": false,
 	  "inputs": [],
 	  "name": "renounceOwnership",
 	  "outputs": [],
+	  "payable": false,
 	  "stateMutability": "nonpayable",
 	  "type": "function"
 	},
 	{
+	  "constant": false,
 	  "inputs": [
 		{
 		  "internalType": "address",
@@ -200,10 +229,12 @@
 	  ],
 	  "name": "setAuthAddress",
 	  "outputs": [],
+	  "payable": false,
 	  "stateMutability": "nonpayable",
 	  "type": "function"
 	},
 	{
+	  "constant": false,
 	  "inputs": [
 		{
 		  "internalType": "address",
@@ -213,10 +244,12 @@
 	  ],
 	  "name": "setTransferAddress",
 	  "outputs": [],
+	  "payable": false,
 	  "stateMutability": "nonpayable",
 	  "type": "function"
 	},
 	{
+	  "constant": false,
 	  "inputs": [
 		{
 		  "internalType": "uint256",
@@ -251,10 +284,12 @@
 	  ],
 	  "name": "submitBet",
 	  "outputs": [],
+	  "payable": true,
 	  "stateMutability": "payable",
 	  "type": "function"
 	},
 	{
+	  "constant": true,
 	  "inputs": [],
 	  "name": "totalBets",
 	  "outputs": [
@@ -264,10 +299,12 @@
 		  "type": "uint256"
 		}
 	  ],
+	  "payable": false,
 	  "stateMutability": "view",
 	  "type": "function"
 	},
 	{
+	  "constant": true,
 	  "inputs": [],
 	  "name": "transferAddress",
 	  "outputs": [
@@ -277,10 +314,12 @@
 		  "type": "address"
 		}
 	  ],
+	  "payable": false,
 	  "stateMutability": "view",
 	  "type": "function"
 	},
 	{
+	  "constant": false,
 	  "inputs": [
 		{
 		  "internalType": "address",
@@ -290,6 +329,7 @@
 	  ],
 	  "name": "transferOwnership",
 	  "outputs": [],
+	  "payable": false,
 	  "stateMutability": "nonpayable",
 	  "type": "function"
 	}

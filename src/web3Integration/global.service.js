@@ -3,8 +3,8 @@ var ethers = require('ethers')
 
 const tokenAbi = require('./ERC721.json');
 const exchangeAbi=require('./exchangAbi.json')
-const address = "0xC2B2848b3cfBa7628Fd40D039d7dE2358e9F705a";
-const exchangecontract = "0x6b3149bFf5F7be908e4083Da84e1E27806BbD01A";
+const address = "0x790a4B738FdFD8F980Ea04aABDf3833f52af2829";
+const exchangecontract = "0xa2eE23C1EeE8c7aB0f167Fa8472df1461bb18865";
 
 const info = {
     _web3: undefined,
