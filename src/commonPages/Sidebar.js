@@ -15,13 +15,13 @@ function Sidebar(props) {
     const onClickCreateCollection = () => history.push({ pathname: getFullRoute(formRoute) })
 
     return (
-        <div class="deznav">
-            <div class="deznav-scroll">
-				<ul class="metismenu" id="menu">
+        <div className="deznav">
+            <div className="deznav-scroll">
+				<ul className="metismenu" id="menu">
                     <li>
-                        <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-networking"></i>
-							<span class="nav-text"> NFT Token List</span>
+                        <a className="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i className="flaticon-381-networking"></i>
+							<span className="nav-text"> NFT Token List</span>
 						</a>
                         <ul aria-expanded="false">
 							<li><a role='button' onClick={() => onClickNftToken('sold')}>Sold</a></li>
@@ -30,13 +30,13 @@ function Sidebar(props) {
 						</ul>
                     </li>
                     <li><a role='button' onClick={onClickCreateCollection}>Create Collection</a></li>
-                    {/* <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-television"></i>
-							<span class="nav-text">Apps</span>
+                    {/* <li><a className="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i className="flaticon-381-television"></i>
+							<span className="nav-text">Apps</span>
 						</a>
                         <ul aria-expanded="false">
                             <li><a href="./app-profile.html">Profile</a></li>
-                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
+                            <li><a className="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
                                 <ul aria-expanded="false">
                                     <li><a href="./email-compose.html">Compose</a></li>
                                     <li><a href="./email-inbox.html">Inbox</a></li>
@@ -44,7 +44,7 @@ function Sidebar(props) {
                                 </ul>
                             </li>
                             <li><a href="./app-calender.html">Calendar</a></li>
-							<li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Shop</a>
+							<li><a className="has-arrow" href="javascript:void()" aria-expanded="false">Shop</a>
                                 <ul aria-expanded="false">
                                     <li><a href="./ecom-product-grid.html">Product Grid</a></li>
 									<li><a href="./ecom-product-list.html">Product List</a></li>
@@ -57,9 +57,9 @@ function Sidebar(props) {
                             </li>
                         </ul>
                     </li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-controls-3"></i>
-							<span class="nav-text">Charts</span>
+                    <li><a className="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i className="flaticon-381-controls-3"></i>
+							<span className="nav-text">Charts</span>
 						</a>
                         <ul aria-expanded="false">
                             <li><a href="./chart-flot.html">Flot</a></li>
@@ -70,9 +70,9 @@ function Sidebar(props) {
                             <li><a href="./chart-peity.html">Peity</a></li>
                         </ul>
                     </li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-internet"></i>
-							<span class="nav-text">Bootstrap</span>
+                    <li><a className="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i className="flaticon-381-internet"></i>
+							<span className="nav-text">Bootstrap</span>
 						</a>
                         <ul aria-expanded="false">
                             <li><a href="./ui-accordion.html">Accordion</a></li>
@@ -95,9 +95,9 @@ function Sidebar(props) {
 
                         </ul>
                     </li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-heart"></i>
-							<span class="nav-text">Plugins</span>
+                    <li><a className="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i className="flaticon-381-heart"></i>
+							<span className="nav-text">Plugins</span>
 						</a>
                         <ul aria-expanded="false">
                             <li><a href="./uc-select2.html">Select 2</a></li>
@@ -109,14 +109,14 @@ function Sidebar(props) {
                             <li><a href="./uc-lightgallery.html">Lightgallery</a></li>
                         </ul>
                     </li>
-                    <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
-							<i class="flaticon-381-settings-2"></i>
-							<span class="nav-text">Widget</span>
+                    <li><a href="widget-basic.html" className="ai-icon" aria-expanded="false">
+							<i className="flaticon-381-settings-2"></i>
+							<span className="nav-text">Widget</span>
 						</a>
 					</li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-notepad"></i>
-							<span class="nav-text">Forms</span>
+                    <li><a className="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i className="flaticon-381-notepad"></i>
+							<span className="nav-text">Forms</span>
 						</a>
                         <ul aria-expanded="false">
                             <li><a href="./form-element.html">Form Elements</a></li>
@@ -126,23 +126,23 @@ function Sidebar(props) {
                             <li><a href="form-validation-jquery.html">Jquery Validate</a></li>
                         </ul>
                     </li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-network"></i>
-							<span class="nav-text">Table</span>
+                    <li><a className="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i className="flaticon-381-network"></i>
+							<span className="nav-text">Table</span>
 						</a>
                         <ul aria-expanded="false">
                             <li><a href="table-bootstrap-basic.html">Bootstrap</a></li>
                             <li><a href="table-datatable-basic.html">Datatable</a></li>
                         </ul>
                     </li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-layer-1"></i>
-							<span class="nav-text">Pages</span>
+                    <li><a className="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i className="flaticon-381-layer-1"></i>
+							<span className="nav-text">Pages</span>
 						</a>
                         <ul aria-expanded="false">
                             <li><a href="./page-register.html">Register</a></li>
                             <li><a href="./page-login.html">Login</a></li>
-                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
+                            <li><a className="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
                                 <ul aria-expanded="false">
                                     <li><a href="./page-error-400.html">Error 400</a></li>
                                     <li><a href="./page-error-403.html">Error 403</a></li>
@@ -155,13 +155,13 @@ function Sidebar(props) {
                         </ul>
                     </li> */}
                 </ul>
-				{/* <div class="add-menu-sidebar">
-					<img src="images/calendar.png" alt="" class="mr-3" />
-					<p class="	font-w500 mb-0">Create Workout Plan Now</p>
+				{/* <div className="add-menu-sidebar">
+					<img src="images/calendar.png" alt="" className="mr-3" />
+					<p className="	font-w500 mb-0">Create Workout Plan Now</p>
 				</div>
-				<div class="copyright">
+				<div className="copyright">
 					<p><strong>Gymove Fitness Admin Dashboard</strong> © 2020 All Rights Reserved</p>
-					<p>Made with <span class="heart"></span> by DexignZone</p>
+					<p>Made with <span className="heart"></span> by DexignZone</p>
 				</div> */}
 			</div>
         </div>

@@ -203,61 +203,61 @@
                   var yearPicker = "";
                   var y =this.currentDate.year();
                   for (var i = y-3; i < y + 4; i++) {
-                      yearPicker += '<div class="year-picker-item" data-year="' + i + '">' + i + '</div>';
+                      yearPicker += '<div className="year-picker-item" data-year="' + i + '">' + i + '</div>';
                   }
                   this.midYear=y;
                   var yearHtml =
-                      '<div class="dtp-picker-year hidden" >' +
-                      '<div><a href="javascript:void(0);" class="btn btn-default dtp-select-year-range before" style="margin: 0;"><i class="material-icons">keyboard_arrow_up</i></a></div>' +
+                      '<div className="dtp-picker-year hidden" >' +
+                      '<div><a href="javascript:void(0);" className="btn btn-default dtp-select-year-range before" style="margin: 0;"><i className="material-icons">keyboard_arrow_up</i></a></div>' +
                       yearPicker +
-                      '<div><a href="javascript:void(0);" class="btn btn-default dtp-select-year-range after" style="margin: 0;"><i class="material-icons">keyboard_arrow_down</i></a></div>' +
+                      '<div><a href="javascript:void(0);" className="btn btn-default dtp-select-year-range after" style="margin: 0;"><i className="material-icons">keyboard_arrow_down</i></a></div>' +
                       '</div>';
 
-                 this.template = '<div class="dtp hidden" id="' + this.name + '">' +
-                         '<div class="dtp-content">' +
-                         '<div class="dtp-date-view">' +
-                         '<header class="dtp-header">' +
-                         '<div class="dtp-actual-day">Lundi</div>' +
-                         '<div class="dtp-close"><a href="javascript:void(0);"><i class="material-icons">clear</i></a></div>' +
+                 this.template = '<div className="dtp hidden" id="' + this.name + '">' +
+                         '<div className="dtp-content">' +
+                         '<div className="dtp-date-view">' +
+                         '<header className="dtp-header">' +
+                         '<div className="dtp-actual-day">Lundi</div>' +
+                         '<div className="dtp-close"><a href="javascript:void(0);"><i className="material-icons">clear</i></a></div>' +
                          '</header>' +
-                         '<div class="dtp-date hidden">' +
+                         '<div className="dtp-date hidden">' +
                          '<div>' +
-                         '<div class="left center p10">' +
-                         '<a href="javascript:void(0);" class="dtp-select-month-before"><i class="material-icons">chevron_left</i></a>' +
+                         '<div className="left center p10">' +
+                         '<a href="javascript:void(0);" className="dtp-select-month-before"><i className="material-icons">chevron_left</i></a>' +
                          '</div>' +
-                         '<div class="dtp-actual-month p80">MAR</div>' +
-                         '<div class="right center p10">' +
-                         '<a href="javascript:void(0);" class="dtp-select-month-after"><i class="material-icons">chevron_right</i></a>' +
+                         '<div className="dtp-actual-month p80">MAR</div>' +
+                         '<div className="right center p10">' +
+                         '<a href="javascript:void(0);" className="dtp-select-month-after"><i className="material-icons">chevron_right</i></a>' +
                          '</div>' +
-                         '<div class="clearfix"></div>' +
+                         '<div className="clearfix"></div>' +
                          '</div>' +
-                         '<div class="dtp-actual-num">13</div>' +
+                         '<div className="dtp-actual-num">13</div>' +
                          '<div>' +
-                         '<div class="left center p10">' +
-                         '<a href="javascript:void(0);" class="dtp-select-year-before"><i class="material-icons">chevron_left</i></a>' +
+                         '<div className="left center p10">' +
+                         '<a href="javascript:void(0);" className="dtp-select-year-before"><i className="material-icons">chevron_left</i></a>' +
                          '</div>' +
-                         '<div class="dtp-actual-year p80'+(this.params.year?"":" disabled")+'">2014</div>' +
-                         '<div class="right center p10">' +
-                         '<a href="javascript:void(0);" class="dtp-select-year-after"><i class="material-icons">chevron_right</i></a>' +
+                         '<div className="dtp-actual-year p80'+(this.params.year?"":" disabled")+'">2014</div>' +
+                         '<div className="right center p10">' +
+                         '<a href="javascript:void(0);" className="dtp-select-year-after"><i className="material-icons">chevron_right</i></a>' +
                          '</div>' +
-                         '<div class="clearfix"></div>' +
+                         '<div className="clearfix"></div>' +
                          '</div>' +
                          '</div>' +
-                         '<div class="dtp-time hidden">' +
-                         '<div class="dtp-actual-maxtime">23:55</div>' +
+                         '<div className="dtp-time hidden">' +
+                         '<div className="dtp-actual-maxtime">23:55</div>' +
                          '</div>' +
-                         '<div class="dtp-picker">' +
-                         '<div class="dtp-picker-calendar"></div>' +
-                         '<div class="dtp-picker-datetime hidden">' +
-                         '<div class="dtp-actual-meridien">' +
-                         '<div class="left p20">' +
-                         '<a class="dtp-meridien-am" href="javascript:void(0);">AM</a>' +
+                         '<div className="dtp-picker">' +
+                         '<div className="dtp-picker-calendar"></div>' +
+                         '<div className="dtp-picker-datetime hidden">' +
+                         '<div className="dtp-actual-meridien">' +
+                         '<div className="left p20">' +
+                         '<a className="dtp-meridien-am" href="javascript:void(0);">AM</a>' +
                          '</div>' +
-                         '<div class="dtp-actual-time p60"></div>' +
-                         '<div class="right p20">' +
-                         '<a class="dtp-meridien-pm" href="javascript:void(0);">PM</a>' +
+                         '<div className="dtp-actual-time p60"></div>' +
+                         '<div className="right p20">' +
+                         '<a className="dtp-meridien-pm" href="javascript:void(0);">PM</a>' +
                          '</div>' +
-                         '<div class="clearfix"></div>' +
+                         '<div className="clearfix"></div>' +
                          '</div>' +
                          '<div id="dtp-svg-clock">' +
                          '</div>' +
@@ -265,12 +265,12 @@
                          yearHtml+
                          '</div>' +
                          '</div>' +
-                         '<div class="dtp-buttons">' +
-                         '<button class="dtp-btn-now btn btn-flat hidden">' + this.params.nowText + '</button>' +
-                         '<button class="dtp-btn-clear btn btn-flat hidden">' + this.params.clearText + '</button>' +
-                         '<button class="dtp-btn-cancel btn btn-flat">' + this.params.cancelText + '</button>' +
-                         '<button class="dtp-btn-ok btn btn-flat">' + this.params.okText + '</button>' +
-                         '<div class="clearfix"></div>' +
+                         '<div className="dtp-buttons">' +
+                         '<button className="dtp-btn-now btn btn-flat hidden">' + this.params.nowText + '</button>' +
+                         '<button className="dtp-btn-clear btn btn-flat hidden">' + this.params.clearText + '</button>' +
+                         '<button className="dtp-btn-cancel btn btn-flat">' + this.params.cancelText + '</button>' +
+                         '<button className="dtp-btn-ok btn btn-flat">' + this.params.okText + '</button>' +
+                         '<div className="clearfix"></div>' +
                          '</div>' +
                          '</div>' +
                          '</div>';
@@ -727,8 +727,8 @@
               {
                  var _template = "";
 
-                 _template += '<div class="dtp-picker-month">' + date.locale(this.params.lang).format('MMMM YYYY') + '</div>';
-                 _template += '<table class="table dtp-picker-days"><thead>';
+                 _template += '<div className="dtp-picker-month">' + date.locale(this.params.lang).format('MMMM YYYY') + '</div>';
+                 _template += '<table className="table dtp-picker-days"><thead>';
                  for (var i = 0; i < calendar.week.length; i++)
                  {
                     _template += '<th>' + moment(parseInt(calendar.week[i]), "d").locale(this.params.lang).format("dd").substring(0, 1) + '</th>';
@@ -748,15 +748,15 @@
                             || this.isAfterMinDate(moment(calendar.days[i]), false, false) === false
                             || this.params.disabledDays.indexOf(calendar.days[i].isoWeekday()) !== -1)
                         {
-                            _template += '<span class="dtp-select-day">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</span>';
+                            _template += '<span className="dtp-select-day">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</span>';
                         } else
                         {
                             if (moment(calendar.days[i]).locale(this.params.lang).format("DD") === moment(this.currentDate).locale(this.params.lang).format("DD"))
                             {
-                                _template += '<a href="javascript:void(0);" class="dtp-select-day selected">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
+                                _template += '<a href="javascript:void(0);" className="dtp-select-day selected">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
                             } else
                             {
-                                _template += '<a href="javascript:void(0);" class="dtp-select-day">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
+                                _template += '<a href="javascript:void(0);" className="dtp-select-day">' + moment(calendar.days[i]).locale(this.params.lang).format("DD") + '</a>';
                             }
                         }
 
