@@ -246,7 +246,7 @@
 		  var $chart = $('#line-chart-tooltips');
 		  
 		  var $toolTip = $chart
-			.append('<div class="tooltip"></div>')
+			.append('<div className="tooltip"></div>')
 			.find('.tooltip')
 			.hide();
 		  

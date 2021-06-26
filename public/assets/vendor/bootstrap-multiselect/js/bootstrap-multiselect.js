@@ -305,7 +305,7 @@
             buttonClass: 'btn btn-default',
             inheritClass: false,
             buttonWidth: 'auto',
-            buttonContainer: '<div class="btn-group" />',
+            buttonContainer: '<div className="btn-group" />',
             dropRight: false,
             selectedClass: 'active',
             // Maximum height of the dropdown menu.
@@ -333,13 +333,13 @@
             disableIfEmpty: false,
             delimiterText: ', ',
             templates: {
-                button: '<button type="button" class="multiselect dropdown-toggle" data-toggle="dropdown"><span class="multiselect-selected-text"></span> <b class="caret"></b></button>',
-                ul: '<ul class="multiselect-container dropdown-menu"></ul>',
-                filter: '<li class="multiselect-item filter"><div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input class="form-control multiselect-search" type="text"></div></li>',
-                filterClearBtn: '<span class="input-group-btn"><button class="btn btn-default multiselect-clear-filter" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button></span>',
+                button: '<button type="button" className="multiselect dropdown-toggle" data-toggle="dropdown"><span className="multiselect-selected-text"></span> <b className="caret"></b></button>',
+                ul: '<ul className="multiselect-container dropdown-menu"></ul>',
+                filter: '<li className="multiselect-item filter"><div className="input-group"><span className="input-group-addon"><i className="glyphicon glyphicon-search"></i></span><input className="form-control multiselect-search" type="text"></div></li>',
+                filterClearBtn: '<span className="input-group-btn"><button className="btn btn-default multiselect-clear-filter" type="button"><i className="glyphicon glyphicon-remove-circle"></i></button></span>',
                 li: '<li><a tabindex="0"><label></label></a></li>',
-                divider: '<li class="multiselect-item divider"></li>',
-                liGroup: '<li class="multiselect-item multiselect-group"><label></label></li>'
+                divider: '<li className="multiselect-item divider"></li>',
+                liGroup: '<li className="multiselect-item multiselect-group"><label></label></li>'
             }
         },
 

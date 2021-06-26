@@ -136,54 +136,54 @@ function Register(props) {
     }
 
     return (
-        <section class="at-login-form">
-            <div class="modal fade" id="at-signup-form" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
+        <section className="at-login-form">
+            <div className="modal fade" id="at-signup-form" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
                             <h3>Welcome</h3>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={onClickClose}>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={onClickClose}>
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
-                        <div class="modal-body">
-                            <div class="form-group text-center">
+                        <div className="modal-body">
+                            <div className="form-group text-center">
                                 <FileDropSection selectedFile={handleOnSelectFile}>
-                                    <label class="label-with-input-file-hidden">
-                                        <span class="ui-avatar size-80 cp">
+                                    <label className="label-with-input-file-hidden">
+                                        <span className="ui-avatar size-80 cp">
                                             <Avatar uri={avatar} />
                                         </span>
-                                        <div class="tac mt-1">
-                                            <span class="cp small">Choose Profile Picture</span>
+                                        <div className="tac mt-1">
+                                            <span className="cp small">Choose Profile Picture</span>
                                         </div>
                                     </label>
                                 </FileDropSection>
                                 <ValidationTextComponent validationMessage={avatarValidationMessage} />
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label for="Nickname">Nickname</label>
-                                <input type="text" class="form-control-form " placeholder="Nickname" value={nickName} onChange={e => handleOnChange({ nickName: e.target.value })} />
+                                <input type="text" className="form-control-form " placeholder="Nickname" value={nickName} onChange={e => handleOnChange({ nickName: e.target.value })} />
                                 <ValidationTextComponent validationMessage={nickNameValidationMessage} />
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label for="Email">Email</label>
-                                <input type="email" class="form-control-form " placeholder="Email" value={email} onChange={e => handleOnChange({ email: e.target.value })} />
+                                <input type="email" className="form-control-form " placeholder="Email" value={email} onChange={e => handleOnChange({ email: e.target.value })} />
                                 <ValidationTextComponent validationMessage={emailValidationMessage} />
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label for="wallet_address">Wallet Address</label>
-                                <input type="text" class="form-control-form " placeholder="Wallet Address" value={walletAddress} disabled />
+                                <input type="text" className="form-control-form " placeholder="Wallet Address" value={walletAddress} disabled />
                                 <ValidationTextComponent validationMessage={walletAddressValidationMessage} />
                             </div>
-                            <Button class="btn-lgin" isLoading={isRegisterLoading} label="Register" onClick={onClickRegister} />
+                            <Button className="btn-lgin" isLoading={isRegisterLoading} label="Register" onClick={onClickRegister} />
                         </div>
-                        <div class="p-4 border-top">
-                            <div class="row align-items-center">
-                                <div class="col-md-6">
-                                    <p class="ta-l mb-0">Already have an account ? </p>
+                        <div className="p-4 border-top">
+                            <div className="row align-items-center">
+                                <div className="col-md-6">
+                                    <p className="ta-l mb-0">Already have an account ? </p>
                                 </div>
-                                <div class="col-md-6">
-                                    <button class="site-btn" data-toggle="modal" data-dismiss="modal"
+                                <div className="col-md-6">
+                                    <button className="site-btn" data-toggle="modal" data-dismiss="modal"
                                         data-target="#at-login" onClick={onClickLogin}>Login </button>
                                 </div>
                             </div>

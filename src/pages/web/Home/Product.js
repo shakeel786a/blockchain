@@ -17,18 +17,18 @@ function Product(props) {
     const onClickProduct = () => history.push({ pathname: `${webProductDetailRoute.path}/${nftID}` })
 
     return (
-        <div class="col-lg-5 col-md-5 col-sm-6 mx-auto">
-            <div class="product__item text-center">
-                <div class="product__item__pic set-bg" role="button" onClick={onClickProduct}>
+        <div className="col-lg-5 col-md-5 col-sm-6 mx-auto">
+            <div className="product__item text-center">
+                <div className="product__item__pic set-bg" role="button" onClick={onClickProduct}>
                     <Avatar uri={imageOrVideo} />
                 </div>
-                <div class="product__item__text">
-                    <h4 class="font-weight-bold"><a role="button" class="text-black" onClick={onClickProduct}>{nftName}</a></h4>
+                <div className="product__item__text">
+                    <h4 className="font-weight-bold"><a role="button" className="text-black" onClick={onClickProduct}>{nftName}</a></h4>
 
-                    <p class="text-ellispis"> {shortDescription}</p>
-                    <div class="product__price">{lastBidPrice || startingPrice}</div>
+                    <p className="text-ellispis"> {shortDescription}</p>
+                    <div className="product__price">{lastBidPrice || startingPrice}</div>
                 </div>
-                <button type="submit" class="mt-3 site-btn" onClick={onClickProduct}>Buy</button>
+                <button type="submit" className="mt-3 site-btn" onClick={onClickProduct}>Buy</button>
             </div>
         </div>
     )

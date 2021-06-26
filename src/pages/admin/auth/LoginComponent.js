@@ -43,45 +43,45 @@ function LoginComponent(props) {
     }
 
     return (
-        <body class="h-100">
-            <div class="authincation h-100" style={{ marginTop: 50 }}>
-                <div class="container h-100">
-                    <div class="row justify-content-center h-100 align-items-center">
-                        <div class="col-md-6">
-                            <div class="authincation-content">
-                                <div class="row no-gutters">
-                                    <div class="col-xl-12">
-                                        <div class="auth-form">
-                                            <div class="text-center mb-3">
+        <body className="h-100">
+            <div className="authincation h-100" style={{ marginTop: 50 }}>
+                <div className="container h-100">
+                    <div className="row justify-content-center h-100 align-items-center">
+                        <div className="col-md-6">
+                            <div className="authincation-content">
+                                <div className="row no-gutters">
+                                    <div className="col-xl-12">
+                                        <div className="auth-form">
+                                            <div className="text-center mb-3">
                                                 <a><img src="./assets/images/logo-full.png" alt="" /></a>
                                             </div>
-                                            <h4 class="text-center mb-4 text-white">Sign in your account</h4>
-                                            <div class="form-group">
-                                                <label class="mb-1 text-white"><strong>Username</strong></label>
-                                                <input type="text" class="form-control" placeholder="username" value={username} onChange={e => setUsername(e.target.value)} />
+                                            <h4 className="text-center mb-4 text-white">Sign in your account</h4>
+                                            <div className="form-group">
+                                                <label className="mb-1 text-white"><strong>Username</strong></label>
+                                                <input type="text" className="form-control" placeholder="username" value={username} onChange={e => setUsername(e.target.value)} />
                                                 <ValidationTextComponent validationMessage={userNameWarningMessage} />
                                             </div>
-                                            <div class="form-group">
-                                                <label class="mb-1 text-white"><strong>Password</strong></label>
-                                                <input type="password" class="form-control" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} />
+                                            <div className="form-group">
+                                                <label className="mb-1 text-white"><strong>Password</strong></label>
+                                                <input type="password" className="form-control" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} />
                                                 <ValidationTextComponent validationMessage={passwordWarningMessage} />
                                             </div>
-                                            <div class="form-row d-flex justify-content-between mt-4 mb-2">
-                                                <div class="form-group">
-                                                <div class="custom-control custom-checkbox ml-1 text-white">
-                                                        <input type="checkbox" class="custom-control-input" id="basic_checkbox_1" />
-                                                        <label class="custom-control-label" for="basic_checkbox_1">Remember my preference</label>
+                                            <div className="form-row d-flex justify-content-between mt-4 mb-2">
+                                                <div className="form-group">
+                                                <div className="custom-control custom-checkbox ml-1 text-white">
+                                                        <input type="checkbox" className="custom-control-input" id="basic_checkbox_1" />
+                                                        <label className="custom-control-label" for="basic_checkbox_1">Remember my preference</label>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <a class="text-white" role="button" onClick={onClickForgotPassword}>Forgot Password?</a>
+                                                <div className="form-group">
+                                                    <a className="text-white" role="button" onClick={onClickForgotPassword}>Forgot Password?</a>
                                                 </div>
                                             </div>
-                                            <div class="text-center">
+                                            <div className="text-center">
                                                 <Button className="btn bg-white text-primary btn-block" label="Sign In" isLoading={isLoading} onClick={onClickSubmit} />
                                             </div>
-                                            {/* <div class="new-account mt-3">
-                                                <p class="text-white">Don't have an account? <a class="text-white" role="button" onClick={onClickSignUp}>Sign Up</a></p>
+                                            {/* <div className="new-account mt-3">
+                                                <p className="text-white">Don't have an account? <a className="text-white" role="button" onClick={onClickSignUp}>Sign Up</a></p>
                                             </div> */}
                                         </div>
                                     </div>
