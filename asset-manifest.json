@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/shakeel786a/blockchain/static/css/main.1635e87c.chunk.css",
+    "main.js": "/shakeel786a/blockchain/static/js/main.69688dd1.chunk.js",
+    "main.js.map": "/shakeel786a/blockchain/static/js/main.69688dd1.chunk.js.map",
+    "runtime-main.js": "/shakeel786a/blockchain/static/js/runtime-main.77369416.js",
+    "runtime-main.js.map": "/shakeel786a/blockchain/static/js/runtime-main.77369416.js.map",
+    "static/css/2.b958a5ad.chunk.css": "/shakeel786a/blockchain/static/css/2.b958a5ad.chunk.css",
+    "static/js/2.64fc9dd9.chunk.js": "/shakeel786a/blockchain/static/js/2.64fc9dd9.chunk.js",
+    "static/js/2.64fc9dd9.chunk.js.map": "/shakeel786a/blockchain/static/js/2.64fc9dd9.chunk.js.map",
+    "static/js/3.983e72f8.chunk.js": "/shakeel786a/blockchain/static/js/3.983e72f8.chunk.js",
+    "static/js/3.983e72f8.chunk.js.map": "/shakeel786a/blockchain/static/js/3.983e72f8.chunk.js.map",
+    "index.html": "/shakeel786a/blockchain/index.html",
+    "static/css/2.b958a5ad.chunk.css.map": "/shakeel786a/blockchain/static/css/2.b958a5ad.chunk.css.map",
+    "static/css/main.1635e87c.chunk.css.map": "/shakeel786a/blockchain/static/css/main.1635e87c.chunk.css.map",
+    "static/js/2.64fc9dd9.chunk.js.LICENSE.txt": "/shakeel786a/blockchain/static/js/2.64fc9dd9.chunk.js.LICENSE.txt",
+    "static/media/pdf_icon.3dfcb5cd.png": "/shakeel786a/blockchain/static/media/pdf_icon.3dfcb5cd.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.77369416.js",
+    "static/css/2.b958a5ad.chunk.css",
+    "static/js/2.64fc9dd9.chunk.js",
+    "static/css/main.1635e87c.chunk.css",
+    "static/js/main.69688dd1.chunk.js"
+  ]
+}
