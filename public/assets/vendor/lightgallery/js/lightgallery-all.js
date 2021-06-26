@@ -288,31 +288,31 @@
         var template;
         var _this = this;
 
-        $('body').append('<div class="lg-backdrop"></div>');
+        $('body').append('<div className="lg-backdrop"></div>');
         $('.lg-backdrop').css('transition-duration', this.s.backdropDuration + 'ms');
 
         // Create gallery items
         for (i = 0; i < this.$items.length; i++) {
-            list += '<div class="lg-item"></div>';
+            list += '<div className="lg-item"></div>';
         }
 
         // Create controlls
         if (this.s.controls && this.$items.length > 1) {
-            controls = '<div class="lg-actions">' +
-                '<button class="lg-prev lg-icon">' + this.s.prevHtml + '</button>' +
-                '<button class="lg-next lg-icon">' + this.s.nextHtml + '</button>' +
+            controls = '<div className="lg-actions">' +
+                '<button className="lg-prev lg-icon">' + this.s.prevHtml + '</button>' +
+                '<button className="lg-next lg-icon">' + this.s.nextHtml + '</button>' +
                 '</div>';
         }
 
         if (this.s.appendSubHtmlTo === '.lg-sub-html') {
-            subHtmlCont = '<div class="lg-sub-html"></div>';
+            subHtmlCont = '<div className="lg-sub-html"></div>';
         }
 
-        template = '<div class="lg-outer ' + this.s.addClass + ' ' + this.s.startClass + '">' +
-            '<div class="lg" style="width:' + this.s.width + '; height:' + this.s.height + '">' +
-            '<div class="lg-inner">' + list + '</div>' +
-            '<div class="lg-toolbar lg-group">' +
-            '<span class="lg-close lg-icon"></span>' +
+        template = '<div className="lg-outer ' + this.s.addClass + ' ' + this.s.startClass + '">' +
+            '<div className="lg" style="width:' + this.s.width + '; height:' + this.s.height + '">' +
+            '<div className="lg-inner">' + list + '</div>' +
+            '<div className="lg-toolbar lg-group">' +
+            '<span className="lg-close lg-icon"></span>' +
             '</div>' +
             controls +
             subHtmlCont +
@@ -378,7 +378,7 @@
         }, this.s.backdropDuration);
 
         if (this.s.download) {
-            this.$outer.find('.lg-toolbar').append('<a id="lg-download" target="_blank" download class="lg-download lg-icon"></a>');
+            this.$outer.find('.lg-toolbar').append('<a id="lg-download" target="_blank" download className="lg-download lg-icon"></a>');
         }
 
         // Store the current scroll top value to scroll back after closing the gallery..
@@ -672,7 +672,7 @@
         var _isVideo = _this.isVideo(_src, index);
         if (!_this.$slide.eq(index).hasClass('lg-loaded')) {
             if (iframe) {
-                _this.$slide.eq(index).prepend('<div class="lg-video-cont lg-has-iframe" style="max-width:' + _this.s.iframeMaxWidth + '"><div class="lg-video"><iframe class="lg-object" frameborder="0" src="' + _src + '"  allowfullscreen="true"></iframe></div></div>');
+                _this.$slide.eq(index).prepend('<div className="lg-video-cont lg-has-iframe" style="max-width:' + _this.s.iframeMaxWidth + '"><div className="lg-video"><iframe className="lg-object" frameborder="0" src="' + _src + '"  allowfullscreen="true"></iframe></div></div>');
             } else if (_hasPoster) {
                 var videoClass = '';
                 if (_isVideo && _isVideo.youtube) {
@@ -683,13 +683,13 @@
                     videoClass = 'lg-has-html5';
                 }
 
-                _this.$slide.eq(index).prepend('<div class="lg-video-cont ' + videoClass + ' "><div class="lg-video"><span class="lg-video-play"></span><img class="lg-object lg-has-poster" src="' + _poster + '" /></div></div>');
+                _this.$slide.eq(index).prepend('<div className="lg-video-cont ' + videoClass + ' "><div className="lg-video"><span className="lg-video-play"></span><img className="lg-object lg-has-poster" src="' + _poster + '" /></div></div>');
 
             } else if (_isVideo) {
-                _this.$slide.eq(index).prepend('<div class="lg-video-cont "><div class="lg-video"></div></div>');
+                _this.$slide.eq(index).prepend('<div className="lg-video-cont "><div className="lg-video"></div></div>');
                 _this.$el.trigger('hasVideo.lg', [index, _src, _html]);
             } else {
-                _this.$slide.eq(index).prepend('<div class="lg-img-wrap"><img class="lg-object lg-image" src="' + _src + '" /></div>');
+                _this.$slide.eq(index).prepend('<div className="lg-img-wrap"><img className="lg-object lg-image" src="' + _src + '" /></div>');
             }
 
             _this.$el.trigger('onAferAppendSlide.lg', [index]);
@@ -1444,7 +1444,7 @@
 
         // Create progress bar
         if (_this.core.s.progressBar) {
-            _this.core.$outer.find('.lg').append('<div class="lg-progress-bar"><div class="lg-progress"></div></div>');
+            _this.core.$outer.find('.lg').append('<div className="lg-progress-bar"><div className="lg-progress"></div></div>');
         }
 
         // set progress
@@ -1510,7 +1510,7 @@
     // Manage autoplay via play/stop buttons
     Autoplay.prototype.controls = function() {
         var _this = this;
-        var _html = '<span class="lg-autoplay-button lg-icon"></span>';
+        var _html = '<span className="lg-autoplay-button lg-icon"></span>';
 
         // Append autoplay controls
         $(this.core.s.appendAutoplayControlsTo).append(_html);
@@ -1631,7 +1631,7 @@
                 !document.mozFullScreenEnabled && !document.msFullscreenEnabled) {
                 return;
             } else {
-                fullScreen = '<span class="lg-fullscreen lg-icon"></span>';
+                fullScreen = '<span className="lg-fullscreen lg-icon"></span>';
                 this.core.$outer.find('.lg-toolbar').append(fullScreen);
                 this.fullScreen();
             }
@@ -1745,19 +1745,19 @@
         var $pagerOuter;
         var timeout;
 
-        _this.core.$outer.find('.lg').append('<div class="lg-pager-outer"></div>');
+        _this.core.$outer.find('.lg').append('<div className="lg-pager-outer"></div>');
 
         if (_this.core.s.dynamic) {
             for (var i = 0; i < _this.core.s.dynamicEl.length; i++) {
-                pagerList += '<span class="lg-pager-cont"> <span class="lg-pager"></span><div class="lg-pager-thumb-cont"><span class="lg-caret"></span> <img src="' + _this.core.s.dynamicEl[i].thumb + '" /></div></span>';
+                pagerList += '<span className="lg-pager-cont"> <span className="lg-pager"></span><div className="lg-pager-thumb-cont"><span className="lg-caret"></span> <img src="' + _this.core.s.dynamicEl[i].thumb + '" /></div></span>';
             }
         } else {
             _this.core.$items.each(function() {
 
                 if (!_this.core.s.exThumbImage) {
-                    pagerList += '<span class="lg-pager-cont"> <span class="lg-pager"></span><div class="lg-pager-thumb-cont"><span class="lg-caret"></span> <img src="' + $(this).find('img').attr('src') + '" /></div></span>';
+                    pagerList += '<span className="lg-pager-cont"> <span className="lg-pager"></span><div className="lg-pager-thumb-cont"><span className="lg-caret"></span> <img src="' + $(this).find('img').attr('src') + '" /></div></span>';
                 } else {
-                    pagerList += '<span class="lg-pager-cont"> <span class="lg-pager"></span><div class="lg-pager-thumb-cont"><span class="lg-caret"></span> <img src="' + $(this).attr(_this.core.s.exThumbImage) + '" /></div></span>';
+                    pagerList += '<span className="lg-pager-cont"> <span className="lg-pager"></span><div className="lg-pager-thumb-cont"><span className="lg-caret"></span> <img src="' + $(this).attr(_this.core.s.exThumbImage) + '" /></div></span>';
                 }
 
             });
@@ -1920,8 +1920,8 @@
         var thumbList = '';
         var vimeoErrorThumbSize = '';
         var $thumb;
-        var html = '<div class="lg-thumb-outer">' +
-            '<div class="lg-thumb lg-group">' +
+        var html = '<div className="lg-thumb-outer">' +
+            '<div className="lg-thumb lg-group">' +
             '</div>' +
             '</div>';
 
@@ -1984,7 +1984,7 @@
                 thumbImg = thumb;
             }
 
-            thumbList += '<div data-vimeo-id="' + vimeoId + '" class="lg-thumb-item" style="width:' + _this.core.s.thumbWidth + 'px; height: ' + _this.core.s.thumbHeight + '; margin-right: ' + _this.core.s.thumbMargin + 'px"><img src="' + thumbImg + '" /></div>';
+            thumbList += '<div data-vimeo-id="' + vimeoId + '" className="lg-thumb-item" style="width:' + _this.core.s.thumbWidth + 'px; height: ' + _this.core.s.thumbHeight + '; margin-right: ' + _this.core.s.thumbMargin + 'px"><img src="' + thumbImg + '" /></div>';
             vimeoId = '';
         }
 
@@ -2248,7 +2248,7 @@
         var _this = this;
         if (_this.core.s.toogleThumb) {
             _this.core.$outer.addClass('lg-can-toggle');
-            _this.$thumbOuter.append('<span class="lg-toogle-thumb lg-icon"></span>');
+            _this.$thumbOuter.append('<span className="lg-toogle-thumb lg-icon"></span>');
             _this.core.$outer.find('.lg-toogle-thumb').on('click.lg', function() {
                 _this.core.$outer.toggleClass('lg-thumb-open');
             });
@@ -2395,7 +2395,7 @@
                     a = a + '&' + $.param(this.core.s.youtubePlayerParams);
                 }
     
-                video = '<iframe class="lg-video-object lg-youtube ' + addClass + '" width="560" height="315" src="//www.youtube.com/embed/' + isVideo.youtube[1] + a + '" frameborder="0" allowfullscreen></iframe>';
+                video = '<iframe className="lg-video-object lg-youtube ' + addClass + '" width="560" height="315" src="//www.youtube.com/embed/' + isVideo.youtube[1] + a + '" frameborder="0" allowfullscreen></iframe>';
     
             } else if (isVideo.vimeo) {
     
@@ -2404,7 +2404,7 @@
                     a = a + '&' + $.param(this.core.s.vimeoPlayerParams);
                 }
     
-                video = '<iframe class="lg-video-object lg-vimeo ' + addClass + '" width="560" height="315"  src="//player.vimeo.com/video/' + isVideo.vimeo[1] + a + '" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+                video = '<iframe className="lg-video-object lg-vimeo ' + addClass + '" width="560" height="315"  src="//player.vimeo.com/video/' + isVideo.vimeo[1] + a + '" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
     
             } else if (isVideo.dailymotion) {
     
@@ -2413,7 +2413,7 @@
                     a = a + '&' + $.param(this.core.s.dailymotionPlayerParams);
                 }
     
-                video = '<iframe class="lg-video-object lg-dailymotion ' + addClass + '" width="560" height="315" src="//www.dailymotion.com/embed/video/' + isVideo.dailymotion[1] + a + '" frameborder="0" allowfullscreen></iframe>';
+                video = '<iframe className="lg-video-object lg-dailymotion ' + addClass + '" width="560" height="315" src="//www.dailymotion.com/embed/video/' + isVideo.dailymotion[1] + a + '" frameborder="0" allowfullscreen></iframe>';
     
             } else if (isVideo.html5) {
                 var fL = html.substring(0, 1);
@@ -2430,7 +2430,7 @@
                     a = a + '&' + $.param(this.core.s.vkPlayerParams);
                 }
     
-                video = '<iframe class="lg-video-object lg-vk ' + addClass + '" width="560" height="315" src="//vk.com/video_ext.php?' + isVideo.vk[1] + a + '" frameborder="0" allowfullscreen></iframe>';
+                video = '<iframe className="lg-video-object lg-vk ' + addClass + '" width="560" height="315" src="//vk.com/video_ext.php?' + isVideo.vk[1] + a + '" frameborder="0" allowfullscreen></iframe>';
     
             }
     
@@ -2690,10 +2690,10 @@
     Zoom.prototype.init = function() {
 
         var _this = this;
-        var zoomIcons = '<span id="lg-zoom-in" class="lg-icon"></span><span id="lg-zoom-out" class="lg-icon"></span>';
+        var zoomIcons = '<span id="lg-zoom-in" className="lg-icon"></span><span id="lg-zoom-out" className="lg-icon"></span>';
 
         if (_this.core.s.actualSize) {
-            zoomIcons += '<span id="lg-actual-size" class="lg-icon"></span>';
+            zoomIcons += '<span id="lg-actual-size" className="lg-icon"></span>';
         }
 
         if (_this.core.s.useLeftForZoom) {
@@ -3305,12 +3305,12 @@
 
     Share.prototype.init = function() {
         var _this = this;
-        var shareHtml = '<span id="lg-share" class="lg-icon">' +
-            '<ul class="lg-dropdown" style="position: absolute;">';
-        shareHtml += _this.core.s.facebook ? '<li><a id="lg-share-facebook" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' + this.core.s.facebookDropdownText + '</span></a></li>' : '';
-        shareHtml += _this.core.s.twitter ? '<li><a id="lg-share-twitter" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' + this.core.s.twitterDropdownText + '</span></a></li>' : '';
-        shareHtml += _this.core.s.googlePlus ? '<li><a id="lg-share-googleplus" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' + this.core.s.googlePlusDropdownText + '</span></a></li>' : '';
-        shareHtml += _this.core.s.pinterest ? '<li><a id="lg-share-pinterest" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' + this.core.s.pinterestDropdownText + '</span></a></li>' : '';
+        var shareHtml = '<span id="lg-share" className="lg-icon">' +
+            '<ul className="lg-dropdown" style="position: absolute;">';
+        shareHtml += _this.core.s.facebook ? '<li><a id="lg-share-facebook" target="_blank"><span className="lg-icon"></span><span className="lg-dropdown-text">' + this.core.s.facebookDropdownText + '</span></a></li>' : '';
+        shareHtml += _this.core.s.twitter ? '<li><a id="lg-share-twitter" target="_blank"><span className="lg-icon"></span><span className="lg-dropdown-text">' + this.core.s.twitterDropdownText + '</span></a></li>' : '';
+        shareHtml += _this.core.s.googlePlus ? '<li><a id="lg-share-googleplus" target="_blank"><span className="lg-icon"></span><span className="lg-dropdown-text">' + this.core.s.googlePlusDropdownText + '</span></a></li>' : '';
+        shareHtml += _this.core.s.pinterest ? '<li><a id="lg-share-pinterest" target="_blank"><span className="lg-icon"></span><span className="lg-dropdown-text">' + this.core.s.pinterestDropdownText + '</span></a></li>' : '';
         shareHtml += '</ul></span>';
 
         this.core.$outer.find('.lg-toolbar').append(shareHtml);

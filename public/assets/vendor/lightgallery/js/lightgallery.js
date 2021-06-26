@@ -285,31 +285,31 @@
         var template;
         var _this = this;
 
-        $('body').append('<div class="lg-backdrop"></div>');
+        $('body').append('<div className="lg-backdrop"></div>');
         $('.lg-backdrop').css('transition-duration', this.s.backdropDuration + 'ms');
 
         // Create gallery items
         for (i = 0; i < this.$items.length; i++) {
-            list += '<div class="lg-item"></div>';
+            list += '<div className="lg-item"></div>';
         }
 
         // Create controlls
         if (this.s.controls && this.$items.length > 1) {
-            controls = '<div class="lg-actions">' +
-                '<button class="lg-prev lg-icon">' + this.s.prevHtml + '</button>' +
-                '<button class="lg-next lg-icon">' + this.s.nextHtml + '</button>' +
+            controls = '<div className="lg-actions">' +
+                '<button className="lg-prev lg-icon">' + this.s.prevHtml + '</button>' +
+                '<button className="lg-next lg-icon">' + this.s.nextHtml + '</button>' +
                 '</div>';
         }
 
         if (this.s.appendSubHtmlTo === '.lg-sub-html') {
-            subHtmlCont = '<div class="lg-sub-html"></div>';
+            subHtmlCont = '<div className="lg-sub-html"></div>';
         }
 
-        template = '<div class="lg-outer ' + this.s.addClass + ' ' + this.s.startClass + '">' +
-            '<div class="lg" style="width:' + this.s.width + '; height:' + this.s.height + '">' +
-            '<div class="lg-inner">' + list + '</div>' +
-            '<div class="lg-toolbar lg-group">' +
-            '<span class="lg-close lg-icon"></span>' +
+        template = '<div className="lg-outer ' + this.s.addClass + ' ' + this.s.startClass + '">' +
+            '<div className="lg" style="width:' + this.s.width + '; height:' + this.s.height + '">' +
+            '<div className="lg-inner">' + list + '</div>' +
+            '<div className="lg-toolbar lg-group">' +
+            '<span className="lg-close lg-icon"></span>' +
             '</div>' +
             controls +
             subHtmlCont +
@@ -375,7 +375,7 @@
         }, this.s.backdropDuration);
 
         if (this.s.download) {
-            this.$outer.find('.lg-toolbar').append('<a id="lg-download" target="_blank" download class="lg-download lg-icon"></a>');
+            this.$outer.find('.lg-toolbar').append('<a id="lg-download" target="_blank" download className="lg-download lg-icon"></a>');
         }
 
         // Store the current scroll top value to scroll back after closing the gallery..
@@ -669,7 +669,7 @@
         var _isVideo = _this.isVideo(_src, index);
         if (!_this.$slide.eq(index).hasClass('lg-loaded')) {
             if (iframe) {
-                _this.$slide.eq(index).prepend('<div class="lg-video-cont lg-has-iframe" style="max-width:' + _this.s.iframeMaxWidth + '"><div class="lg-video"><iframe class="lg-object" frameborder="0" src="' + _src + '"  allowfullscreen="true"></iframe></div></div>');
+                _this.$slide.eq(index).prepend('<div className="lg-video-cont lg-has-iframe" style="max-width:' + _this.s.iframeMaxWidth + '"><div className="lg-video"><iframe className="lg-object" frameborder="0" src="' + _src + '"  allowfullscreen="true"></iframe></div></div>');
             } else if (_hasPoster) {
                 var videoClass = '';
                 if (_isVideo && _isVideo.youtube) {
@@ -680,13 +680,13 @@
                     videoClass = 'lg-has-html5';
                 }
 
-                _this.$slide.eq(index).prepend('<div class="lg-video-cont ' + videoClass + ' "><div class="lg-video"><span class="lg-video-play"></span><img class="lg-object lg-has-poster" src="' + _poster + '" /></div></div>');
+                _this.$slide.eq(index).prepend('<div className="lg-video-cont ' + videoClass + ' "><div className="lg-video"><span className="lg-video-play"></span><img className="lg-object lg-has-poster" src="' + _poster + '" /></div></div>');
 
             } else if (_isVideo) {
-                _this.$slide.eq(index).prepend('<div class="lg-video-cont "><div class="lg-video"></div></div>');
+                _this.$slide.eq(index).prepend('<div className="lg-video-cont "><div className="lg-video"></div></div>');
                 _this.$el.trigger('hasVideo.lg', [index, _src, _html]);
             } else {
-                _this.$slide.eq(index).prepend('<div class="lg-img-wrap"><img class="lg-object lg-image" src="' + _src + '" /></div>');
+                _this.$slide.eq(index).prepend('<div className="lg-img-wrap"><img className="lg-object lg-image" src="' + _src + '" /></div>');
             }
 
             _this.$el.trigger('onAferAppendSlide.lg', [index]);

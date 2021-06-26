@@ -63,16 +63,16 @@ function BidForm(props) {
 
     return (
         <div style={{ marginBottom: 15, marginTop: 20 }}>
-            <div class="row" style={{ marginLeft: 3, marginBottom: 15 }}>
-                <div class="footer__social">
-                    <a role="button" onClick={onClickMinus}><i class="fa fa-minus"></i></a>
+            <div className="row" style={{ marginLeft: 3, marginBottom: 15 }}>
+                <div className="footer__social">
+                    <a role="button" onClick={onClickMinus}><i className="fa fa-minus"></i></a>
                 </div>
                 <div style={priceContainer}>{formInfo.price}</div>
-                <div class="footer__social">
-                    <a data-toggle="modal" data-target="#at-login" role="button" onClick={onClickPlus}><i class="fa fa-plus"></i></a>
+                <div className="footer__social">
+                    <a data-toggle="modal" data-target="#at-login" role="button" onClick={onClickPlus}><i className="fa fa-plus"></i></a>
                 </div>
             </div>
-            <div class="product__details__button mb-0" role="button" onClick={onClickPlaceBid}><a data-toggle="modal" data-target="#at-login" class="cart-btn">Place a bid</a></div>
+            <div className="product__details__button mb-0" role="button" onClick={onClickPlaceBid}><a data-toggle="modal" data-target="#at-login" className="cart-btn">Place a bid</a></div>
         </div>
     )
 }

@@ -15,7 +15,7 @@ function ProductList(props) {
     }
     
     return (
-        <div class="row property__gallery">
+        <div className="row property__gallery">
             {productListSection}
         </div>
     )
