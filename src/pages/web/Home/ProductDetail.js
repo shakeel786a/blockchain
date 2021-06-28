@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { useFetchAPI } from '../../../hooks'
 import { getNftDetailsAPI } from '../../../http/common.http.service'
-import { Avatar, HTMLParser } from '../../../commonPages'
+import { Avatar, HTMLParser, ValidationTextComponent } from '../../../commonPages'
 import Login from '../Auth/Login'
 import Register from '../Auth/Register'
 import { Loader } from '../commonUI'
@@ -107,6 +107,14 @@ function ProductDetail(props) {
                     </tr>
                 )
             })
+        } else {
+            bidsSection = (
+                <tr>
+                    <td colSpan="4">
+                        <ValidationTextComponent validationMessage="No bids placed yet..." />
+                    </td>
+                </tr>
+            )
         }
 
         detailSection = (
@@ -160,6 +168,10 @@ function ProductDetail(props) {
                                                         <div className="ChainInfo--label-value"><a className="text-primary"
                                                             href="https://etherscan.io/address/0x495f947276749ce646f68ac8c248420045cb7b5e"
                                                             rel="" target="_blank">{transactionHash}</a></div>
+                                                    </div>
+                                                    <div className="ChainInfo--label">
+                                                        <div className="ChainInfo--label-type">Physical art work</div>
+                                                        <div className="ChainInfo--label-value">{physcicalArtworkIsAvailable ? "Yes" : "No"}</div>
                                                     </div>
                                                     {physcicalArtworkIsAvailable ? (
                                                         <div className="ChainInfo--label">
@@ -251,6 +263,16 @@ function ProductDetail(props) {
                                                             href="https://etherscan.io/address/0x495f947276749ce646f68ac8c248420045cb7b5e"
                                                             rel="" target="_blank">{transactionHash}</a></div>
                                                     </div>
+                                                    <div className="ChainInfo--label">
+                                                        <div className="ChainInfo--label-type">Physical art work</div>
+                                                        <div className="ChainInfo--label-value">{physcicalArtworkIsAvailable ? "Yes" : "No"}</div>
+                                                    </div>
+                                                    {physcicalArtworkIsAvailable ? (
+                                                        <div className="ChainInfo--label">
+                                                            <div className="ChainInfo--label-type">Additional Price</div>
+                                                            <div className="ChainInfo--label-value">{additionalPrice}</div>
+                                                        </div>
+                                                    ) : null}
                                                     <div className="ChainInfo--label">
                                                         <div className="ChainInfo--label-type">Token ID</div>
                                                         <div className="ChainInfo--label-value"><button className="token_id"
@@ -452,7 +474,7 @@ function ProductDetail(props) {
                                                                 <tbody>
                                                                     {bidsSection}
                                                                 </tbody>
-                                                                <tfoot>
+                                                                {/* <tfoot>
                                                                     <tr>
                                                                         <td colspan="4">
                                                                             <button type="button"
@@ -460,7 +482,7 @@ function ProductDetail(props) {
                                                                                 Offer</button>
                                                                         </td>
                                                                     </tr>
-                                                                </tfoot>
+                                                                </tfoot> */}
                                                             </table>
                                                         </div>
                                                     </div>
