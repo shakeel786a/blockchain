@@ -35,13 +35,8 @@ function BidForm(props) {
         }
     }
     const onClickPlus = () => {
-        const isLogin = checkAuth(authData)
-        if (isLogin) {
-            const tempPrice = formInfo.price + step
-            setFormInfo({ ...formInfo, price: tempPrice })
-        } else {
-            onRequestLogin()
-        }
+        const tempPrice = formInfo.price + step
+        setFormInfo({ ...formInfo, price: tempPrice })
     }
 
     const onClickPlaceBid = () => {

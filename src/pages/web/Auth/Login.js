@@ -27,8 +27,9 @@ function Login(props) {
                 const { userInfo, isNewUser } = checkRegisterData
                 if (isNewUser === false) {
                     dispatch({ type: authAction.SET_WEB_USER_INFO, payload: userInfo })
+                } else {
+                    dispatch({ type: authAction.SET_WEB_USER_INFO, payload: {} })
                 }
-                document.querySelector('body').classList.remove('modal-backdrop')
                 onClickClose()
             }
         }
