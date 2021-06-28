@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Modal from 'react-modal'
 
 import 'react-toastify/dist/ReactToastify.css'
 import 'react-toastify/dist/ReactToastify.min.css'
@@ -8,11 +9,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const rootElement = document.getElementById('root')
+const modalElement = Modal.setAppElement(document.getElementById('root'))
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('root')
+  rootElement,
+  modalElement
 );
 
 // If you want to start measuring performance in your app, pass a function
