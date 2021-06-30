@@ -11,8 +11,6 @@ function Header(props) {
     const { authData, setAuthData } = props
     const [isVisibleInfo, setIsVisibleInfo] = useState({ isLoginVisible: false, isRegisterVisible: false })
 
-    console.log('authData============', authData)
-    
     const { walletAddress, avatar, isNewUser } = authData
     const [isChangedAccount, setIsChangedAccount] = useState(false)
 
@@ -53,11 +51,7 @@ function Header(props) {
     const onClickClose = () => setIsVisibleInfo({ isLoginVisible: false, isRegisterVisible: false })
     const onClickLogin = () => setIsVisibleInfo({ isLoginVisible: true, isRegisterVisible: false })
     const onClickRegister = () => setIsVisibleInfo({ isLoginVisible: false, isRegisterVisible: true })
-    const onClickAvatar = () => {
-        console.log('Hello...', authData)
-
-        setIsVisibleInfo({ isLoginVisible: true, isRegisterVisible: false })
-    }
+    const onClickAvatar = () => setIsVisibleInfo({ isLoginVisible: false, isRegisterVisible: true })
 
     let registerButttonSection = null
     let avatarSection = null
@@ -109,7 +103,7 @@ function Header(props) {
             </header>
 
             {/* Register */}
-            <Register isVisible={isVisibleInfo.isRegisterVisible} onClickClose={onClickClose} onClickLogin={onClickLogin} />
+            <Register isVisible={isVisibleInfo.isRegisterVisible} editModalInfo={authData} onClickClose={onClickClose} onClickLogin={onClickLogin} />
             {/* Login */}
             <Login isVisible={isVisibleInfo.isLoginVisible} onClickClose={onClickClose} />
         </>
