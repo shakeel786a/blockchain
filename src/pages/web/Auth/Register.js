@@ -211,20 +211,22 @@ function Register(props) {
                                 </>
                             ) : null}
                             <div class="text-center">
-                            <Button className="bg-primary site-btn" isLoading={isRegisterLoading} label={isEditing ? "Update" : "Register"} onClick={onClickRegister} />
+                                <Button className="bg-primary site-btn" isLoading={isRegisterLoading} label={isEditing ? "Update" : "Register"} onClick={onClickRegister} />
+                            </div>  
                         </div>  
-                        </div>  
-                        <div className="p-4 border-top">
-                            <div className="row align-items-center">
-                                <div className="col-md-6 mb-3">
-                                    <p className="ta-l mb-0">Already have an account ? </p>
-                                </div>
-                                <div className="col-md-6 text-md-right">
-                                    <button className="site-btn" data-toggle="modal" data-dismiss="modal"
-                                        data-target="#at-login" onClick={onClickLogin}>Login </button>
+                        {!isEditing ? (
+                            <div className="p-4 border-top">
+                                <div className="row align-items-center">
+                                    <div className="col-md-6 mb-3">
+                                        <p className="ta-l mb-0">Already have an account ? </p>
+                                    </div>
+                                    <div className="col-md-6 text-md-right">
+                                        <button className="site-btn" data-toggle="modal" data-dismiss="modal"
+                                            data-target="#at-login" onClick={onClickLogin}>Login </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        ) : null}
                     </div>
                 </div>
             </Modal>
