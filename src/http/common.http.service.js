@@ -47,4 +47,7 @@ export function postRegistrationAPI(payload) {
 export function postPlaceBidAPI(payload) {
     return POST('api/api/placeBid')(payload)
 }
+export function postUpdateProfileAPI(payload) {
+    return POST('api/api/updateProfile')(payload)
+}
 //#endregion Api for web

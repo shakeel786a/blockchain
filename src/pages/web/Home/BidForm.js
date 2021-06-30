@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import { useFetchAPI } from '../../../hooks'
-import { checkAuth } from '../../../helper/utility'
+import { checkAuth, showToastMessage } from '../../../helper/utility'
 import { postPlaceBidAPI } from '../../../http/common.http.service'
 
 function BidForm(props) {
@@ -15,7 +15,7 @@ function BidForm(props) {
     const [
         {
             isLoading: isPlaceBidLoading,
-            response: { isSuccess: isPlaceBidSuccess, data: placeBidData }
+            response: { isSuccess: isPlaceBidSuccess, data: placeBidData, message }
         },
         placeBid
     ] = useFetchAPI()
@@ -24,6 +24,9 @@ function BidForm(props) {
         if (isPlaceBidLoading === false) {
             if (isPlaceBidSuccess && placeBidData) {
                 bidFormSuccess(formInfo.price)
+                showToastMessage(message, 'success')
+            } else {
+                showToastMessage(message)
             }
         }
     }, [isPlaceBidLoading, isPlaceBidSuccess, placeBidData])

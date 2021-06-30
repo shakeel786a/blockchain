@@ -40,10 +40,6 @@ function Login(props) {
         })()
     }
 
-    if (!isVisible) {
-        return null
-    }
-
     return (
         <div className='rmodal'>
             <Modal isOpen={isVisible} contentLabel='Example Modal'>
