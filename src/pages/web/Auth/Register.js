@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
+import { authAction } from '../../../actions'
 import { useFetchAPI } from '../../../hooks'
 import { postUploadProfilePicAPI, postRegistrationAPI } from '../../../http/common.http.service'
 import { getAccount, signMsg } from '../../../web3Integration/global.service'
@@ -17,6 +19,8 @@ function Register(props) {
         avatarValidationMessage,
         walletAddressValidationMessage
     } = validationMessage
+
+    const dispatch = useDispatch()
 
     const [
         {
@@ -56,7 +60,8 @@ function Register(props) {
     useEffect(() => {
         if (isRegisterLoading === false) {
             if (isRegisterSuccess && registerData) {
-                console.log('registerData===============', registerData)
+                // console.log('registerData===============', registerData)
+                dispatch({ type: authAction.SET_WEB_USER_INFO, payload: registerData })
                 onClickClose()
             }
         }

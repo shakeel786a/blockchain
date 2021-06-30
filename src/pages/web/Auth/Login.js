@@ -4,13 +4,11 @@ import Modal from 'react-modal'
 
 import { authAction } from '../../../actions'
 import { getAccount } from '../../../web3Integration/global.service'
-import { useFetchAPI } from '../../../hooks'
-import { getIsRegister } from '../../../http/common.http.service'
+import { useGetIsRegisterAPI } from '../../../hooks'
 
 function Login(props) {
     const { isVisible, onClickClose } = props
 
-    // console.log('isVisible----------', isVisible)
     const dispatch = useDispatch()
 
     const [
@@ -19,16 +17,16 @@ function Login(props) {
             response: { isSuccess: isCheckRegisterSuccess, data: checkRegisterData  }
         },
         checkRegistration
-    ] = useFetchAPI()
+    ] = useGetIsRegisterAPI()
 
     useEffect(() => {
         if (isCheckRegisterLoading === false) {
             if (isCheckRegisterSuccess && checkRegisterData) {
                 const { userInfo, isNewUser } = checkRegisterData
                 if (isNewUser === false) {
-                    dispatch({ type: authAction.SET_WEB_USER_INFO, payload: userInfo })
+                    dispatch({ type: authAction.SET_WEB_USER_INFO, payload: { ...userInfo, isNewUser } })
                 } else {
-                    dispatch({ type: authAction.SET_WEB_USER_INFO, payload: {} })
+                    dispatch({ type: authAction.SET_WEB_USER_INFO, payload: { isNewUser } })
                 }
                 onClickClose()
             }
@@ -38,14 +36,7 @@ function Login(props) {
     const onClickMetamask = () => {
         (async () => {
             const address = await getAccount()
-            checkRegistration({
-                api: getIsRegister,
-                payload: {
-                    params: {
-                        address
-                    }
-                }
-            })
+            checkRegistration({ address })
         })()
     }
 

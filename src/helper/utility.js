@@ -65,5 +65,7 @@ export const checkAuth = authData => {
       status = false
   }
 
+  console.log('status===========', status)
+
   return status
 }
