@@ -10,6 +10,9 @@ import { useGetIsRegisterAPI } from '../../../hooks'
 function Header(props) {
     const { authData, setAuthData } = props
     const [isVisibleInfo, setIsVisibleInfo] = useState({ isLoginVisible: false, isRegisterVisible: false })
+
+    console.log('authData============', authData)
+    
     const { walletAddress, avatar, isNewUser } = authData
     const [isChangedAccount, setIsChangedAccount] = useState(false)
 
@@ -35,7 +38,7 @@ function Header(props) {
         if (isCheckRegisterLoading === false && isChangedAccount) {
             if (isCheckRegisterSuccess && checkRegisterData) {
                 setIsChangedAccount(false)
-                console.log('checkRegisterData===========', checkRegisterData)
+                // console.log('checkRegisterData===========', checkRegisterData)
                 const { userInfo, isNewUser } = checkRegisterData
                 if (isNewUser === false) {
                     setAuthData({ ...userInfo, isNewUser })
@@ -50,6 +53,11 @@ function Header(props) {
     const onClickClose = () => setIsVisibleInfo({ isLoginVisible: false, isRegisterVisible: false })
     const onClickLogin = () => setIsVisibleInfo({ isLoginVisible: true, isRegisterVisible: false })
     const onClickRegister = () => setIsVisibleInfo({ isLoginVisible: false, isRegisterVisible: true })
+    const onClickAvatar = () => {
+        console.log('Hello...', authData)
+
+        setIsVisibleInfo({ isLoginVisible: true, isRegisterVisible: false })
+    }
 
     let registerButttonSection = null
     let avatarSection = null
@@ -60,9 +68,9 @@ function Header(props) {
         connectWalletSection = <a role="button" className="site-btn text-white">Wrong Network</a>
     } else if (walletAddress) {
         avatarSection = (
-            <span className="circle_img">
+            <button className="circle_img" onClick={onClickAvatar}>
                 <Avatar uri={avatar || "https://upload.wikimedia.org/wikipedia/commons/7/70/User_icon_BLACK-01.png"} className="img-fluid avatar" />
-            </span>
+            </button>
         )
         connectWalletSection =  <a role="button" className="site-btn text-white">{walletAddress}</a>
     }
