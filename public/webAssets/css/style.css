@@ -3221,7 +3221,65 @@ background-repeat: no-repeat;
     box-sizing: border-box;
     vertical-align: top;
 }
-
+.wallet_image {
+	width: 30px;
+    height: 30px;
+    background: white;
+    padding: 5px;
+    border-radius: 50%;
+}
+.ReactModal__Content.ReactModal__Content--after-open {
+	padding-top: 5rem !important;
+	border: none !important;
+	background: transparent !important;
+}
+span.ui-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -3px;
+    background-color: #eeeeee;
+    border: 1px solid #eeeeee;
+}
+.card-body p {
+	background-color: transparent !important;
+}
+li::marker {
+    content: '';
+}
+.ChainInfo--label-type {
+    font-size: 14px;
+	font-family: "Montserrat", sans-serif;
+}
+.ChainInfo--label {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 5px 0px;
+}
+.ChainInfo--label-value {
+	color: rgb(112, 122, 131);
+    max-width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+p font {
+	font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+}
+.form-control-form {
+	height: 52px;
+    width: 100%;
+    border: 1px solid #e1e1e1;
+    border-radius: 50px;
+    padding-left: 30px;
+    font-size: 14px;
+    color: #666666;
+}
 @media only screen and (max-width: 767px) {
 	.tile_left, .tile_right, .bottom_image {
 		width: 100%;

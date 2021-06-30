@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import Modal from 'react-modal'
 
 import { authAction } from '../../../actions'
 import { useFetchAPI } from '../../../hooks'
-import { postUploadProfilePicAPI, postRegistrationAPI } from '../../../http/common.http.service'
+import { postUploadProfilePicAPI, postRegistrationAPI, postUpdateProfileAPI } from '../../../http/common.http.service'
 import { getAccount, signMsg } from '../../../web3Integration/global.service'
 import { Avatar, Button, FileDropSection, ValidationTextComponent } from '../../../commonPages'
 
 function Register(props) {
-    const { isVisible, onClickClose, onClickLogin } = props
-    const [registerInfo, setRegisterInfo] = useState()
+    const { isVisible, editModalInfo, onClickClose, onClickLogin } = props
+    const [registerInfo, setRegisterInfo] = useState(editModalInfo || {})
+    const [updatedData, setUpdatedData] = useState()
 
     const { nickName, avatar, email, walletAddress } = registerInfo || {}
     const [validationMessage, setValidationMessage] = useState({})
@@ -21,6 +23,7 @@ function Register(props) {
     } = validationMessage
 
     const dispatch = useDispatch()
+    const isEditing = editModalInfo ? true : false
 
     const [
         {
@@ -39,10 +42,17 @@ function Register(props) {
     ] = useFetchAPI()
 
     useEffect(() => {
+        if (editModalInfo) {
+            setRegisterInfo(editModalInfo)
+            const { nickName, avatar, walletAddress, userId, signature } = editModalInfo
+            setUpdatedData({ nickName, avatar, walletAddress, userId, signature })
+        }
+    }, [editModalInfo])
+
+    useEffect(() => {
         if(isVisible) {
             (async () => {
                 const walletAddress = await getAccount()
-                // const signature = await signMsg(walletAddress)
     
                 handleOnChange({ walletAddress })
             })()
@@ -61,13 +71,20 @@ function Register(props) {
         if (isRegisterLoading === false) {
             if (isRegisterSuccess && registerData) {
                 // console.log('registerData===============', registerData)
-                dispatch({ type: authAction.SET_WEB_USER_INFO, payload: registerData })
+                if (isEditing) {
+                    dispatch({ type: authAction.SET_WEB_USER_INFO, payload: { ...editModalInfo, ...updatedData } })
+                } else {
+                    dispatch({ type: authAction.SET_WEB_USER_INFO, payload: registerData })
+                }
                 onClickClose()
             }
         }
     }, [isRegisterLoading, isRegisterSuccess, registerData])
 
     const handleOnChange = info => {
+        if (isEditing) {
+            setUpdatedData({ ...updatedData, ...info })
+        }
         setRegisterInfo({ ...registerInfo, ...info })
     }
 
@@ -91,18 +108,21 @@ function Register(props) {
         } else {
             validationMessage.nickNameValidationMessage = undefined
         }
-        if (!email) {
+
+        if (!email && !isEditing) {
             validationMessage.emailValidationMessage = 'Email required'
             status = false
         } else {
             validationMessage.emailValidationMessage = undefined
         }
+
         if (!avatar) {
             validationMessage.avatarValidationMessage = 'File required'
             status = false
         } else {
             validationMessage.avatarValidationMessage = undefined
         }
+
         if (!walletAddress) {
             validationMessage.walletAddressValidationMessage = 'Wallet address required'
             status = false
@@ -116,33 +136,39 @@ function Register(props) {
 
     const onClickRegister = () => {
         if (validation()) {
-            // console.log('registerInfo===========', registerInfo)
-
-            (async () => {
-                const signature = await signMsg(walletAddress)
-                
-                if (signature) {
-                    postRegister({
-                        api: postRegistrationAPI,
-                        payload: {
-                            body: {
-                                ...registerInfo,
-                                signature
-                            }
+            if (isEditing) {
+                console.log('updatedData===========', updatedData)
+                postRegister({
+                    api: postUpdateProfileAPI,
+                    payload: {
+                        body: {
+                            ...updatedData
                         }
-                    })
-                }
-            })()
+                    }
+                })
+            } else {
+                (async () => {
+                    const signature = await signMsg(walletAddress)
+                    
+                    if (signature) {
+                        postRegister({
+                            api: postRegistrationAPI,
+                            payload: {
+                                body: {
+                                    ...registerInfo,
+                                    signature
+                                }
+                            }
+                        })
+                    }
+                })()
+            }
         }
     }
 
-    if (!isVisible) {
-        return null
-    }
-
     return (
-        <section className="at-login-form">
-            <div className="modal fade" id="at-signup-form" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div className='rmodal'>
+            <Modal isOpen={isVisible} contentLabel='Example Modal'>
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -167,36 +193,44 @@ function Register(props) {
                             </div>
                             <div className="form-group">
                                 <label for="Nickname">Nickname</label>
-                                <input type="text" className="form-control-form " placeholder="Nickname" value={nickName} onChange={e => handleOnChange({ nickName: e.target.value })} />
+                                <input type="text" className="form-control-form" placeholder="Nickname" value={nickName} onChange={e => handleOnChange({ nickName: e.target.value })} />
                                 <ValidationTextComponent validationMessage={nickNameValidationMessage} />
                             </div>
-                            <div className="form-group">
-                                <label for="Email">Email</label>
-                                <input type="email" className="form-control-form " placeholder="Email" value={email} onChange={e => handleOnChange({ email: e.target.value })} />
-                                <ValidationTextComponent validationMessage={emailValidationMessage} />
-                            </div>
-                            <div className="form-group">
-                                <label for="wallet_address">Wallet Address</label>
-                                <input type="text" className="form-control-form " placeholder="Wallet Address" value={walletAddress} disabled />
-                                <ValidationTextComponent validationMessage={walletAddressValidationMessage} />
-                            </div>
-                            <Button className="btn-lgin" isLoading={isRegisterLoading} label="Register" onClick={onClickRegister} />
-                        </div>
-                        <div className="p-4 border-top">
-                            <div className="row align-items-center">
-                                <div className="col-md-6">
-                                    <p className="ta-l mb-0">Already have an account ? </p>
+                            {!isEditing ? (
+                                <>
+                                <div className="form-group">
+                                    <label for="Email">Email</label>
+                                    <input type="email" className="form-control-form" placeholder="Email" value={email} onChange={e => handleOnChange({ email: e.target.value })} />
+                                    <ValidationTextComponent validationMessage={emailValidationMessage} />
                                 </div>
-                                <div className="col-md-6">
-                                    <button className="site-btn" data-toggle="modal" data-dismiss="modal"
-                                        data-target="#at-login" onClick={onClickLogin}>Login </button>
+                                <div className="form-group">
+                                    <label for="wallet_address">Wallet Address</label>
+                                    <input type="text" className="form-control-form" placeholder="Wallet Address" value={walletAddress} disabled />
+                                    <ValidationTextComponent validationMessage={walletAddressValidationMessage} />
+                                </div>
+                                </>
+                            ) : null}
+                            <div class="text-center">
+                                <Button className="bg-primary site-btn" isLoading={isRegisterLoading} label={isEditing ? "Update" : "Register"} onClick={onClickRegister} />
+                            </div>  
+                        </div>  
+                        {!isEditing ? (
+                            <div className="p-4 border-top">
+                                <div className="row align-items-center">
+                                    <div className="col-md-6 mb-3">
+                                        <p className="ta-l mb-0">Already have an account ? </p>
+                                    </div>
+                                    <div className="col-md-6 text-md-right">
+                                        <button className="site-btn" data-toggle="modal" data-dismiss="modal"
+                                            data-target="#at-login" onClick={onClickLogin}>Login </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        ) : null}
                     </div>
                 </div>
-            </div>
-        </section>
+            </Modal>
+        </div>
     )
 }
 

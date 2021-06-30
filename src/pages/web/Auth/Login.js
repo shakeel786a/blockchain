@@ -40,10 +40,6 @@ function Login(props) {
         })()
     }
 
-    if (!isVisible) {
-        return null
-    }
-
     return (
         <div className='rmodal'>
             <Modal isOpen={isVisible} contentLabel='Example Modal'>
@@ -58,13 +54,13 @@ function Login(props) {
                         <div className="modal-body">
                             <div className="form-group">
                                 <button type="button" className="w-100 btn btn-outline-success" onClick={onClickMetamask}>
-                                    <img src_x="./webAssets/img/metamask.png" src="./webAssets/img/metamask.png" height="28" width="28" className="mr-1 v-align-middle" />
+                                    <img src_x="./webAssets/img/metamask.png" src="./webAssets/img/metamask.png" height="28" width="28" className="mr-1 v-align-middle wallet_image" />
                                     MetaMask
                                 </button>
                             </div>
                             <div className="form-group mb-0">
                                 <button type="button" className="w-100 btn btn-outline-success">
-                                    <img src_x="./webAssets/img/binance.png" src="./webAssets/img/binance.png" height="28" width="28" className="mr-1 v-align-middle" />
+                                    <img src_x="./webAssets/img/binance.png" src="./webAssets/img/binance.png" height="28" width="28" className="mr-1 v-align-middle wallet_image" />
                                     BinanceChain
                                 </button>
                             </div>
