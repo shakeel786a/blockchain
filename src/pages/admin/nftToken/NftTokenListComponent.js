@@ -29,7 +29,7 @@ function NftTokenListComponent(props) {
     let listSection = null
     if (list && list.length) {
         listSection = (
-            <table class="table table-responsive-lg mb-0 table-striped">
+            <table className="table table-responsive-lg mb-0 table-striped">
                 <thead>
                     <tr>
                         <th>File</th>
@@ -50,30 +50,30 @@ function NftTokenListComponent(props) {
             </table>
         )
     } else {
-        listSection = <p class='text-center text-danger'>No data found!</p>
+        listSection = <p className='text-center text-danger'>No data found!</p>
     }
 
     return (
-        <div class="content-body">
-            <div class="container-fluid">
-                <label class="title-container">{getTitleTag(type)} NFT token list</label>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-6">
+        <div className="content-body">
+            <div className="container-fluid">
+                <label className="title-container">{getTitleTag(type)} NFT token list</label>
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="card">
+                            <div className="card-body">
+                                <div className="row">
+                                    <div className="col-lg-6">
                                         <h6>NFT Id</h6>
-                                        <input type="text" class="form-control" placeholder="Search with NFT id" /* value={nftName} onChange={e => handleOnChange({ nftName: e.target.value })} */ />
+                                        <input type="text" className="form-control" placeholder="Search with NFT id" /* value={nftName} onChange={e => handleOnChange({ nftName: e.target.value })} */ />
                                     </div>
 
-                                    <div class="col-lg-6">
+                                    <div className="col-lg-6">
                                         <h6>NFT Name</h6>
-                                        <input type="text" class="form-control" placeholder="Search with NFT name" /* value={nftName} onChange={e => handleOnChange({ nftName: e.target.value })} */ />
+                                        <input type="text" className="form-control" placeholder="Search with NFT name" /* value={nftName} onChange={e => handleOnChange({ nftName: e.target.value })} */ />
                                     </div>
                                 </div>
                                 <hr />
-                                <div class="table-responsive">
+                                <div className="table-responsive">
                                     {listSection}
                                 </div>
                             </div>

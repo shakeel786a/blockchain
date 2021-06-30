@@ -92,12 +92,12 @@ function FormComponent(props) {
             return (
                 <>
                     {index !== 0 ? <br /> : null}
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" placeholder="e.g. size" value={Key} onChange={e => onChangePropertiesKey(index, e.target.value)} />
+                    <div className="row">
+                        <div className="col-sm-6">
+                            <input type="text" className="form-control" placeholder="e.g. size" value={Key} onChange={e => onChangePropertiesKey(index, e.target.value)} />
                         </div>
-                        <div class="col-sm-6 mt-2 mt-sm-0">
-                            <input type="text" class="form-control" placeholder="e.g. M, L, XL" value={Value} onChange={e => onChangePropertiesValue(index, e.target.value)} />
+                        <div className="col-sm-6 mt-2 mt-sm-0">
+                            <input type="text" className="form-control" placeholder="e.g. M, L, XL" value={Value} onChange={e => onChangePropertiesValue(index, e.target.value)} />
                         </div>
                     </div>
                 </>
@@ -113,20 +113,20 @@ function FormComponent(props) {
     }
 
     return (
-        <div class="content-body">
-            <div class="container-fluid">
+        <div className="content-body">
+            <div className="container-fluid">
                 {/* Page titled start */}
-                <div class="page-titles">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Create Collection</a></li>
+                <div className="page-titles">
+                    <ol className="breadcrumb">
+                        <li className="breadcrumb-item active"><a href="javascript:void(0)">Create Collection</a></li>
                     </ol>
                 </div>
                 {/* Page titled end */}
 
-                <div class="row">
-                    <div class="col-xl-6 col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
+                <div className="row">
+                    <div className="col-xl-6 col-lg-12">
+                        <div className="card">
+                            <div className="card-body">
                                 <div>
                                     <FileDropSection name="Choose File" formatText="PNG, GIF, JPG" selectedFile={handleOnSelectFile} isLoading={isFileUploadLoading} isDisable={isEditing || isView} />
                                 </div>
@@ -134,7 +134,7 @@ function FormComponent(props) {
                                                                 
                                 <br />
                                 <label><b>NFT Name</b></label>
-                                <input type="text" class="form-control" placeholder="NFT name" value={nftName} onChange={e => handleOnChange({ nftName: e.target.value })} />
+                                <input type="text" className="form-control" placeholder="NFT name" value={nftName} onChange={e => handleOnChange({ nftName: e.target.value })} />
                                 <ValidationTextComponent validationMessage={nameValidationMessage} />
                                 
                                 <br />
@@ -145,7 +145,7 @@ function FormComponent(props) {
                                 <br />
                                 <label><b>Starting Price</b></label>
                                 <Text.DecimalNumberInput
-                                    class="form-control"
+                                    className="form-control"
                                     placeholder="e.g. 10"
                                     value={startingPrice}
                                     onChange={e => handleOnChange({ startingPrice: e.target.value })}
@@ -156,7 +156,7 @@ function FormComponent(props) {
                                 <br />
                                 <label><b>Reserve Price</b></label>
                                 <Text.DecimalNumberInput
-                                    class="form-control"
+                                    className="form-control"
                                     placeholder="e.g. 10"
                                     value={reservePrice}
                                     onChange={e => handleOnChange({ reservePrice: e.target.value })}
@@ -167,7 +167,7 @@ function FormComponent(props) {
                                 <br />
                                 <label><b>Protection Time</b></label>  
                                 <Text.NumberInput
-                                    class="form-control"
+                                    className="form-control"
                                     placeholder="Protection time should be in minutes"
                                     value={protectionTime}
                                     onChange={e => handleOnChange({ protectionTime: e.target.value })}
@@ -177,9 +177,9 @@ function FormComponent(props) {
 
                                 <br />
                                 <label><b>Physical Artwork</b></label>
-                                <div class="form-group mb-0">
-                                    <label class="radio-inline mr-3 c-pointer"><input type="radio" name="artworkGroup" checked={physcicalArtworkIsAvailable} onClick={e => handleOnChange({ physcicalArtworkIsAvailable: e.target.checked })} /> Yes</label>
-                                    <label class="radio-inline mr-3 c-pointer"><input type="radio" name="artworkGroup" checked={!physcicalArtworkIsAvailable && physcicalArtworkIsAvailable !== undefined} onClick={e => handleOnChange({ physcicalArtworkIsAvailable: !e.target.checked })} /> No</label>
+                                <div className="form-group mb-0">
+                                    <label className="radio-inline mr-3 c-pointer"><input type="radio" name="artworkGroup" checked={physcicalArtworkIsAvailable} onClick={e => handleOnChange({ physcicalArtworkIsAvailable: e.target.checked })} /> Yes</label>
+                                    <label className="radio-inline mr-3 c-pointer"><input type="radio" name="artworkGroup" checked={!physcicalArtworkIsAvailable && physcicalArtworkIsAvailable !== undefined} onClick={e => handleOnChange({ physcicalArtworkIsAvailable: !e.target.checked })} /> No</label>
                                 </div>
                                 <ValidationTextComponent validationMessage={physicalArtworkValidationMessage} />
 
@@ -188,7 +188,7 @@ function FormComponent(props) {
                                         <br />
                                         <label><b>Additional Price</b></label>
                                         <Text.DecimalNumberInput
-                                            class="form-control"
+                                            className="form-control"
                                             placeholder="e.g. 10"
                                             value={additionalPrice}
                                             onChange={e => handleOnChange({ additionalPrice: e.target.value })}
@@ -200,7 +200,7 @@ function FormComponent(props) {
 
                                 <br />
                                 <label><b>Short Description</b></label>
-                                <textarea type="text" class="form-control" placeholder="Short description" value={shortDescription} onChange={e => handleOnChange({ shortDescription: e.target.value })} />
+                                <textarea type="text" className="form-control" placeholder="Short description" value={shortDescription} onChange={e => handleOnChange({ shortDescription: e.target.value })} />
                                 <ValidationTextComponent validationMessage={shortDescriptionValidationMessage} />
 
                                 <br />
@@ -216,7 +216,7 @@ function FormComponent(props) {
                                 <br />
                                 <label><b>Step for bid</b></label>
                                 <Text.NumberInput
-                                    class="form-control"
+                                    className="form-control"
                                     placeholder="e.g. 1"
                                     value={step}
                                     onChange={e => handleOnChange({ step: e.target.value })}
@@ -230,8 +230,8 @@ function FormComponent(props) {
 
                                 <br />
                                 <label><b>Status</b></label>
-                                <div class="form-group">
-                                    <select class="form-control default-select" onChange={e => handleOnChange({ status: e.target.value })}>
+                                <div className="form-group">
+                                    <select className="form-control default-select" onChange={e => handleOnChange({ status: e.target.value })}>
                                         <option>Select</option>
                                         <option value={1} selected={status === "1"}>1</option>
                                         <option value={2} selected={status === "2"}>2</option>
@@ -246,9 +246,9 @@ function FormComponent(props) {
                     </div>
                     
                     {/* Preview section of file start */}
-                    <div class="col-xl-6 col-lg-12" style={{ height: "400px" }}>
+                    <div className="col-xl-6 col-lg-12" style={{ height: "400px" }}>
                         <label><b>Preview</b></label>
-                        <div class="card" style={{ alignItems: 'center', justifyContent: 'center' }}>
+                        <div className="card" style={{ alignItems: 'center', justifyContent: 'center' }}>
                             {imageOrVideo ? <Avatar uri={imageOrVideo} style={{ height: '300px', width: '300px' }} /> : <label>Prevlew of collection</label>}
                         </div>
                     </div>

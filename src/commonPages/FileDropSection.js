@@ -37,7 +37,7 @@ function FileDropSection(props) {
     isDisable ? (
       <>
         <Button className="btn btn-info" label={name} isLoading={isLoading} isDisable={isDisable} />
-        <input type="text" readonly class="form-control-plaintext" value={formatText} />
+        <input type="text" readonly className="form-control-plaintext" value={formatText} />
       </>
     ) : 
       <div {...getRootProps({ className: 'dropzone cursor-pointer' })}>
@@ -45,7 +45,7 @@ function FileDropSection(props) {
         {children || (
           <>
             <Button className="btn btn-info" label={name} isLoading={isLoading} />
-            <input type="text" readonly class="form-control-plaintext" value={formatText} />
+            <input type="text" readonly className="form-control-plaintext" value={formatText} />
           </>
         )}
 

@@ -112,7 +112,7 @@ var Gymove = function(){
 		$('[data-action="reload"]').on("click", function() {
 			var e = $(this);
 			e.parents(".card").addClass("card-load"),
-				e.parents(".card").append('<div class="card-loader"><i class=" ti-reload rotate-refresh"></div>'),
+				e.parents(".card").append('<div className="card-loader"><i className=" ti-reload rotate-refresh"></div>'),
 				setTimeout(function() {
 					e.parents(".card").children(".card-loader").remove(),
 						e.parents(".card").removeClass("card-load")
@@ -213,7 +213,7 @@ var Gymove = function(){
 		$(".dz-load-more").on('click', function(e)
 		{
 			e.preventDefault();	//STOP default action
-			$(this).append(' <i class="fa fa-refresh"></i>');
+			$(this).append(' <i className="fa fa-refresh"></i>');
 			
 			var dzLoadMoreUrl = $(this).attr('rel');
 			var dzLoadMoreId = $(this).attr('id');

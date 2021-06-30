@@ -404,7 +404,7 @@
 	
 	
 	function showTooltip(x, y, contents) {
-		$('<div id="tooltip" class="tooltipflot">' + contents + '</div>').css({
+		$('<div id="tooltip" className="tooltipflot">' + contents + '</div>').css({
 			position: 'absolute',
 			display: 'none',
 			top: y + 5,

@@ -26,8 +26,8 @@ const getInitialInfo = () => {
         info.contract = new ethers.Contract(address, tokenAbi, info.signer)
         info._exchangeContract= new ethers.Contract(exchangecontract,exchangeAbi,info.signer)
     }
-    info._tokenContract = new info._web3.eth.Contract(tokenAbi, address);
-    info._tokenContract4 = new info._web4.eth.Contract(tokenAbi, address);
+    info._tokenContract = info._web3 && new info._web3.eth.Contract(tokenAbi, address);
+    info._tokenContract4 = info._web4 && new info._web4.eth.Contract(tokenAbi, address);
 }
 
 getInitialInfo()

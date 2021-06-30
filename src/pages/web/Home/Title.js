@@ -4,9 +4,9 @@ function Title(props) {
     const { label } = props
 
     return (
-        <div class="row">
-            <div class="col-lg-12 col-md-12">
-                <div class="section-title">
+        <div className="row">
+            <div className="col-lg-12 col-md-12">
+                <div className="section-title">
                     <h4>{label}</h4>
                 </div>
             </div>
