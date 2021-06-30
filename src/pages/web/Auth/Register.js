@@ -167,27 +167,29 @@ function Register(props) {
                             </div>
                             <div className="form-group">
                                 <label for="Nickname">Nickname</label>
-                                <input type="text" className="form-control-form " placeholder="Nickname" value={nickName} onChange={e => handleOnChange({ nickName: e.target.value })} />
+                                <input type="text" className="form-control-form" placeholder="Nickname" value={nickName} onChange={e => handleOnChange({ nickName: e.target.value })} />
                                 <ValidationTextComponent validationMessage={nickNameValidationMessage} />
                             </div>
                             <div className="form-group">
                                 <label for="Email">Email</label>
-                                <input type="email" className="form-control-form " placeholder="Email" value={email} onChange={e => handleOnChange({ email: e.target.value })} />
+                                <input type="email" className="form-control-form" placeholder="Email" value={email} onChange={e => handleOnChange({ email: e.target.value })} />
                                 <ValidationTextComponent validationMessage={emailValidationMessage} />
                             </div>
                             <div className="form-group">
                                 <label for="wallet_address">Wallet Address</label>
-                                <input type="text" className="form-control-form " placeholder="Wallet Address" value={walletAddress} disabled />
+                                <input type="text" className="form-control-form" placeholder="Wallet Address" value={walletAddress} disabled />
                                 <ValidationTextComponent validationMessage={walletAddressValidationMessage} />
                             </div>
-                            <Button className="btn-lgin" isLoading={isRegisterLoading} label="Register" onClick={onClickRegister} />
-                        </div>
+                            <div class="text-center">
+                            <Button className="bg-primary site-btn" isLoading={isRegisterLoading} label="Register" onClick={onClickRegister} />
+                        </div>  
+                        </div>  
                         <div className="p-4 border-top">
                             <div className="row align-items-center">
-                                <div className="col-md-6">
+                                <div className="col-md-6 mb-3">
                                     <p className="ta-l mb-0">Already have an account ? </p>
                                 </div>
-                                <div className="col-md-6">
+                                <div className="col-md-6 text-md-right">
                                     <button className="site-btn" data-toggle="modal" data-dismiss="modal"
                                         data-target="#at-login" onClick={onClickLogin}>Login </button>
                                 </div>
