@@ -74,21 +74,20 @@ function Header(props) {
             <header className="header">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-2">
+                        <div className="col-3 col-lg-2">
                             <div className="header__logo">
-                                <h2>Demo</h2>
-                                <a href="#" className="d-block d-md-none" data-toggle="modal" data-target="#at-signup-form">Register</a>
+                                <h2 className="mb-0">Demo</h2>
                             </div>
                         </div>
                         
-                        <div className="col-lg-10 d-flex justify-content-end">
-                            <div className="header__right">
+                        <div className="col-9 col-lg-10 d-flex justify-content-end">
+                            <div className="d-inline-block header__right">
                                 <div className="header__right__auth">
                                     {avatarSection}
                                     {registerButttonSection}
                                 </div>
                             </div>
-                            <div className="header__right">
+                            <div className="d-inline-block header__right">
                                 <div className="header__right__auth">
                                     {connectWalletSection}
                                 </div>
