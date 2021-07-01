@@ -91,6 +91,14 @@ export async function signMsg(address) {
     return signature
 }
 
+export async function getNetworkId() {
+    const walletAddress = await getAccount()
+    const networkId = info._web3 && info._web3.eth && await info._web3.eth.net.getId()
+
+    return { networkId, walletAddress }
+    // console.log('Id=============', id)
+}
+
 // async function getUserBalance() {
 //     let account = await getAccount();
 //     console.log('account===getUserBalance========', account);

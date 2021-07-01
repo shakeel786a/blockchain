@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
+import { getNetworkId } from '../../../web3Integration/global.service'
 import { authAction } from '../../../actions'
 import { Avatar } from '../../../commonPages'
 import Register from '../Auth/Register'
@@ -13,6 +14,7 @@ function Header(props) {
 
     const { walletAddress, avatar, isNewUser } = authData
     const [isChangedAccount, setIsChangedAccount] = useState(false)
+    const [networkInfo, setNetworkInfo] = useState({})
 
     const [
         {
@@ -22,15 +24,23 @@ function Header(props) {
         checkRegistration
     ] = useGetIsRegisterAPI()
 
+    const checkBadNetwork = () => {
+        const network = getNetworkId()
+        network && network.then(({ networkId, walletAddress }) => setNetworkInfo({ isBadNetwork: networkId !== 97, walletAddress }))
+    }
+
     //#region change the metamask id
-    window.ethereum.on('accountsChanged', function (accounts) {
+    window.ethereum && window.ethereum.on('accountsChanged', function (accounts) {
         if (walletAddress !== accounts[0]) {
             setIsChangedAccount(true)
-            // console.log('changedAccount=============', accounts[0])
             checkRegistration({ address: accounts[0] }) 
         }
     })
     //#endregion change the metamask id
+
+    useEffect(() => {
+        checkBadNetwork()
+    }, [])
 
     useEffect(() => {
         if (isCheckRegisterLoading === false && isChangedAccount) {
@@ -43,6 +53,8 @@ function Header(props) {
                 } else {
                     setAuthData({ isNewUser })
                 }
+
+                checkBadNetwork()
                 onClickClose()
             }
         }
@@ -59,7 +71,7 @@ function Header(props) {
 
     if (isNewUser) {
         registerButttonSection = <a role="button" className="site-btn bg-primary text-white" data-toggle="modal" data-target="#at-signup-form" onClick={onClickRegister}>Register</a>
-        connectWalletSection = <a role="button" className="site-btn text-white">Wrong Network</a>
+        connectWalletSection = <a role="button" className="site-btn text-white">{networkInfo.isBadNetwork ? 'Wrong Network' : walletAddress || networkInfo.walletAddress}</a>
     } else if (walletAddress) {
         avatarSection = (
             <button className="circle_img" onClick={onClickAvatar}>

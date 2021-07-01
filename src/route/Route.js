@@ -46,7 +46,8 @@ const Routes = () => {
         <WebRoute exact path={getFullRoute(webProductDetailRoute)} component={ProductDetail} />
 
         {/* ======= Common ============= */}
-        <Route exact path='/' component={Landing} />
+        <WebRoute exact path='/' component={WebHome} />
+        {/* <Route exact path='/' component={Landing} /> */}
         <Route exact path='*' component={FourZeroFour} />
         <Route exact path={getFullRoute(testRoute)} component={Test} />
       </Switch>
