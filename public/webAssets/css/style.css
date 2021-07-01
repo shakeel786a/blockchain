@@ -181,7 +181,11 @@ ol {
 	padding: 12px 30px;
 	border-radius: 50px;
 }
-
+@media (max-width:768px) {
+	.site-btn {
+		padding: 12px 10px;
+	}
+}
 /* Preloder */
 
 #preloder {
@@ -332,7 +336,7 @@ a {
 }
 
 .header__logo {
-	padding: 26px 0;
+	padding: 30px 0 27px;
 }
 
 .header__logo a {
@@ -438,7 +442,7 @@ a {
 
 .header__right__auth {
 	display: inline-block;
-	margin-right: 25px;
+	margin-right: 0px;
 }
 
 .header__right__auth a {
@@ -446,6 +450,14 @@ a {
 	color: #666666;
 	position: relative;
 	margin-right: 8px;
+}
+
+.header__right__auth a {
+    max-width: 142px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+	margin-left: 5px;
 }
 
 .header__right__auth a:last-child {

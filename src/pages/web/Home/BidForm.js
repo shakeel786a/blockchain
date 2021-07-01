@@ -6,7 +6,7 @@ import { checkAuth, showToastMessage } from '../../../helper/utility'
 import { postPlaceBidAPI } from '../../../http/common.http.service'
 
 function BidForm(props) {
-    const { detailInfo, authData, bidFormSuccess, onRequestLogin } = props
+    const { detailInfo, authData, bidFormSuccess, onRequestLogin, onRequestRegister } = props
     const { nftID, lastBidPrice, startingPrice, step } = detailInfo
     const { userId, walletAddress } = authData || {}
     const transactionHash = "abcdefghijklm"
@@ -43,8 +43,8 @@ function BidForm(props) {
     }
 
     const onClickPlaceBid = () => {
-        const isLogin = checkAuth(authData)
-        if (isLogin) {
+        const { isLogin, status, isNewUser } = checkAuth(authData)
+        if (status) {
             console.log('formInfo================', formInfo)
             placeBid({
                 api: postPlaceBidAPI,
@@ -54,8 +54,10 @@ function BidForm(props) {
                     }
                 }
             })
-        } else {
+        } else if (!isNewUser) {
             onRequestLogin()
+        } else if (isNewUser) {
+            onRequestRegister()
         }
     }
 

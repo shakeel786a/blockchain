@@ -37,6 +37,9 @@ export function getNftDetailsAPI(payload) {
 export function getIsRegister(payload) {
     return GET('api/api/isRegister')(payload)
 }
+export function getPriceEthUsd(payload) {
+    return GET('https://api.coingecko.com/api/v3/simple/price')(payload)
+}
 // Post API
 export function postUploadProfilePicAPI(payload) {
     return FILE_UPLOAD('api/api/UploadProfilePic')(payload)
