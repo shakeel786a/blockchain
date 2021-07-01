@@ -41,7 +41,12 @@ const APIPath = (endPoint, params) => {
       .join('&')}`
   }
   // const path = `${API_BASE + getApiPort(endPoint)}/${endPoint}`
-  const path = `${API_BASE}/${endPoint}`
+  let path = ''
+  if (endPoint.indexOf('://') >= 0) {
+    path = endPoint
+  } else {
+    path = `${API_BASE}/${endPoint}`
+  }
   return querystring === '' ? path : `${path}?${querystring}`
 }
 
