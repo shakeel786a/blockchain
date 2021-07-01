@@ -23,7 +23,7 @@ function Register(props) {
     } = validationMessage
 
     const dispatch = useDispatch()
-    const isEditing = editModalInfo ? true : false
+    const isEditing = editModalInfo && editModalInfo.isNewUser === false
 
     const [
         {

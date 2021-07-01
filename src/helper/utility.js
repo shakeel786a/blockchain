@@ -59,7 +59,7 @@ export const showToastMessage = (message, type) => {
 
 export const checkAuth = authData => {
   let status = true
-  const { userId } = authData
+  const { userId, isNewUser } = authData
 
   if (!userId) {
       status = false
@@ -67,5 +67,5 @@ export const checkAuth = authData => {
 
   console.log('status===========', status)
 
-  return status
+  return { status, isNewUser }
 }

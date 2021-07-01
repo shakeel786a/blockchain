@@ -240,7 +240,7 @@ function ProductDetail(props) {
                                         {lastBidPrice || startingPrice}
                                     </li>
                                 </div>
-                                <BidForm detailInfo={nftDetail} bidFormSuccess={handleBidFormSuccess} onRequestLogin={onClickLogin} />
+                                <BidForm detailInfo={nftDetail} bidFormSuccess={handleBidFormSuccess} onRequestLogin={onClickLogin} onRequestRegister={onClickRegister} />
                                 <p>{shortDescription}</p>
 
                                 <div className="product__details__widget">
