@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { useFetchAPI } from '../../../hooks'
-import { getNftDetailsAPI } from '../../../http/common.http.service'
+import { getNftDetailsAPI, getPriceEthUsd } from '../../../http/common.http.service'
 import { Avatar, HTMLParser, ValidationTextComponent } from '../../../commonPages'
 import Login from '../Auth/Login'
 import Register from '../Auth/Register'
@@ -11,7 +11,7 @@ import BidForm from './BidForm'
 function ProductDetail(props) {
     const { match: { params: { nftId } } = {} } = props
     const [nftDetail, setNftDetail] = useState(undefined)
-    // const [isVisibleLogin, setIsVisibleLogin] = useState(false)
+    const [usdValue, setUsdValue] = useState()
     const [isVisibleInfo, setIsVisibleInfo] = useState({ isLoginVisible: false, isRegisterVisible: false })
 
     const [
@@ -22,12 +22,39 @@ function ProductDetail(props) {
         getNftDetail
     ] = useFetchAPI()
 
+    const [
+        {
+            isLoading: isUsdValueLoading,
+            response: usdValueReponse
+        },
+        getUsdValue
+    ] = useFetchAPI()
+
+    useEffect(() => {
+        if (isUsdValueLoading === false) {
+            if (usdValueReponse) {
+                const { binancecoin: { usd } = {} } = usdValueReponse
+                setUsdValue(usd)
+            }
+        }
+    }, [isUsdValueLoading, usdValueReponse])
+
     useEffect(() => {
         if (nftId) {
             getNftDetail({
                 api: getNftDetailsAPI,
                 payload: {
                     params: { nftId }
+                }
+            })
+
+            getUsdValue({
+                api: getPriceEthUsd,
+                payload: {
+                    params: {
+                        ids: 'binancecoin',
+                        vs_currencies: 'USD'
+                    }
                 }
             })
         }
@@ -89,7 +116,9 @@ function ProductDetail(props) {
         let bidsSection = null
         if (bids && bids.length) {
             bidsSection = bids.map(item => {
-                const { price, walletAddress, userId } = item
+                const { price, nickName } = item
+                const doller = usdValue && price * usdValue
+                const dollerValue = doller && doller.toFixed(2)
                 return (
                     <tr>
                         <td>
@@ -98,12 +127,8 @@ function ProductDetail(props) {
                             </span>
                             <strong>{price}</strong>
                         </td>
-                        <td>$ 35,766.67</td>
-                        <td>
-                            in 3 Days </td>
-                        <td>
-                            {userId}
-                        </td>
+                        <td>${dollerValue}</td>
+                        <td>{nickName}</td>
                     </tr>
                 )
             })
@@ -467,7 +492,6 @@ function ProductDetail(props) {
                                                                     <tr>
                                                                         <th scope="col">Price</th>
                                                                         <th scope="col">USD Price</th>
-                                                                        <th scope="col">Expiration</th>
                                                                         <th scope="col">From</th>
                                                                     </tr>
                                                                 </thead>
