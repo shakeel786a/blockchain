@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
-import { walletAddressVisibleFormat } from '../../../helper/utility'
+import { walletAddressVisibleFormat, refreshPage } from '../../../helper/utility'
 import { getNetworkId } from '../../../web3Integration/global.service'
 import { authAction } from '../../../actions'
 import { Avatar } from '../../../commonPages'
@@ -55,8 +55,8 @@ function Header(props) {
                     setAuthData({ isNewUser })
                 }
 
-                checkBadNetwork()
                 onClickClose()
+                refreshPage()
             }
         }
     }, [isCheckRegisterSuccess, checkRegisterData])
