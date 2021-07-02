@@ -72,7 +72,7 @@ function Header(props) {
 
     if (isNewUser) {
         registerButttonSection = <a role="button" className="site-btn bg-primary text-white" data-toggle="modal" data-target="#at-signup-form" onClick={onClickRegister}>Register</a>
-        connectWalletSection = <a role="button" className="site-btn text-white">{networkInfo.isBadNetwork ? 'Wrong Network' : walletAddress || networkInfo.walletAddress}</a>
+        connectWalletSection = <a role="button" className="site-btn text-white">{networkInfo.isBadNetwork ? 'Wrong Network' : walletAddressVisibleFormat(walletAddress || networkInfo.walletAddress)}</a>
     } else if (walletAddress) {
         avatarSection = (
             <button className="circle_img" onClick={onClickAvatar}>
@@ -115,7 +115,7 @@ function Header(props) {
             </header>
 
             {/* Register */}
-            <Register isVisible={isVisibleInfo.isRegisterVisible} editModalInfo={authData} onClickClose={onClickClose} onClickLogin={onClickLogin} />
+            <Register isVisible={isVisibleInfo.isRegisterVisible} editModalInfo={authData} onClickClose={onClickClose} />
             {/* Login */}
             <Login isVisible={isVisibleInfo.isLoginVisible} onClickClose={onClickClose} />
         </>

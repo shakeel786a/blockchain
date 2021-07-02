@@ -75,7 +75,11 @@ export const refreshPage = () => {
 }
 
 export const walletAddressVisibleFormat = walletAddress => {
-  const data = `${walletAddress.substring(0, 4)}...${walletAddress.substring(walletAddress.length - 4, walletAddress.length)}`
+  const data = walletAddress && `${walletAddress.substring(0, 4)}...${walletAddress.substring(walletAddress.length - 4, walletAddress.length)}`
 
   return data
+}
+
+export function isValidEmailAddress(text) {
+  return /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/.test(text)
 }

@@ -110,7 +110,7 @@ function Category() {
                 </div>
             </section>
             {/* Register */}
-            <Register isVisible={isVisibleInfo.isRegisterVisible} editModalInfo={authData} onClickClose={onClickClose} onClickLogin={onClickLogin} />
+            <Register isVisible={isVisibleInfo.isRegisterVisible} editModalInfo={authData} onClickClose={onClickClose} />
             {/* Login */}
             <Login isVisible={isVisibleInfo.isLoginVisible} onClickClose={onClickClose} />
         </>
