@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import { useFetchAPI } from '../../../hooks'
-import { checkAuth, showToastMessage } from '../../../helper/utility'
+import { checkAuth, showToastMessage, refreshPage } from '../../../helper/utility'
 import { postPlaceBidAPI } from '../../../http/common.http.service'
 
 function BidForm(props) {
@@ -25,6 +25,7 @@ function BidForm(props) {
             if (isPlaceBidSuccess && placeBidData) {
                 bidFormSuccess(formInfo.price)
                 showToastMessage(message, 'success')
+                refreshPage()
             } else {
                 showToastMessage(message)
             }
@@ -43,7 +44,7 @@ function BidForm(props) {
     }
 
     const onClickPlaceBid = () => {
-        const { isLogin, status, isNewUser } = checkAuth(authData)
+        const { status, isNewUser } = checkAuth(authData)
         if (status) {
             console.log('formInfo================', formInfo)
             placeBid({

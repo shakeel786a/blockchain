@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
+import { walletAddressVisibleFormat } from '../../../helper/utility'
 import { getNetworkId } from '../../../web3Integration/global.service'
 import { authAction } from '../../../actions'
 import { Avatar } from '../../../commonPages'
@@ -78,7 +79,7 @@ function Header(props) {
                 <Avatar uri={avatar || "https://upload.wikimedia.org/wikipedia/commons/7/70/User_icon_BLACK-01.png"} className="img-fluid avatar" />
             </button>
         )
-        connectWalletSection =  <a role="button" className="site-btn text-white">{walletAddress}</a>
+        connectWalletSection =  <a role="button" className="site-btn text-white">{walletAddressVisibleFormat(walletAddress)}</a>
     }
 
     return (

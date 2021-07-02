@@ -7,6 +7,7 @@ import { useFetchAPI } from '../../../hooks'
 import { postUploadProfilePicAPI, postRegistrationAPI, postUpdateProfileAPI } from '../../../http/common.http.service'
 import { getAccount, signMsg } from '../../../web3Integration/global.service'
 import { Avatar, Button, FileDropSection, ValidationTextComponent } from '../../../commonPages'
+import { refreshPage } from '../../../helper/utility'
 
 function Register(props) {
     const { isVisible, editModalInfo, onClickClose, onClickLogin } = props
@@ -76,6 +77,8 @@ function Register(props) {
                 } else {
                     dispatch({ type: authAction.SET_WEB_USER_INFO, payload: registerData })
                 }
+
+                refreshPage()
                 onClickClose()
             }
         }
