@@ -34,7 +34,7 @@ getInitialInfo()
 
 export async function getAccount() {
     if (info._account == null) {
-        await window.ethereum.enable();
+        await window.ethereum && window.ethereum.enable();
         info._account = await new Promise((resolve, reject) => {
             info._web3 && info._web3.eth.getAccounts((err, accs) => {
                 if (err != null) {
@@ -77,6 +77,34 @@ export async function create(tokenId) {
         .on('receipt', function (receipt) {
             status = receipt.status
         })
+    } catch(err) {
+        status = false
+    }
+    
+    return { status, transHash }
+}
+
+export async function getTransHashByPlaceBid(nftID, amount) {
+    let status
+    let transHash
+    const params1 =nftID; //randon no 6 digit
+    const params2 = amount;//betAmount;
+    const params3 = address;//nftaddress
+    
+    const tempSign = ethers.utils.splitSignature('');
+
+    console.log('info._exchangeContract==========', info._exchangeContract)
+    
+    try {
+        await info._exchangeContract.submitBet(params1, params2, params3, tempSign)
+        .send({ from: info._account, value: 0, gas: 2100000 })
+        .on('transactionHash', function (transactionHash) {
+            status = false
+            transHash = transactionHash
+        })
+        // .on('receipt', function (receipt) {
+        //     status = receipt.status
+        // })
     } catch(err) {
         status = false
     }

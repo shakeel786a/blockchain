@@ -4,13 +4,13 @@ import { connect } from 'react-redux'
 import { useFetchAPI } from '../../../hooks'
 import { checkAuth, showToastMessage, refreshPage } from '../../../helper/utility'
 import { postPlaceBidAPI } from '../../../http/common.http.service'
+import { getTransHashByPlaceBid } from '../../../web3Integration/global.service'
 
 function BidForm(props) {
     const { detailInfo, authData, bidFormSuccess, onRequestLogin, onRequestRegister } = props
     const { nftID, lastBidPrice, startingPrice, step } = detailInfo
     const { userId, walletAddress } = authData || {}
-    const transactionHash = "abcdefghijklm"
-    const [formInfo, setFormInfo] = useState({ dateTime: new Date(), userId, walletAddress, nftID, transactionHash, price: (lastBidPrice || startingPrice) })
+    const [formInfo, setFormInfo] = useState({ dateTime: new Date(), userId, walletAddress, nftID, price: (lastBidPrice || startingPrice) })
 
     const [
         {
@@ -25,7 +25,7 @@ function BidForm(props) {
             if (isPlaceBidSuccess && placeBidData) {
                 bidFormSuccess(formInfo.price)
                 showToastMessage(message, 'success')
-                refreshPage()
+                // refreshPage()
             } else {
                 showToastMessage(message)
             }
@@ -46,15 +46,19 @@ function BidForm(props) {
     const onClickPlaceBid = () => {
         const { status, isNewUser } = checkAuth(authData)
         if (status) {
-            console.log('formInfo================', formInfo)
-            placeBid({
-                api: postPlaceBidAPI,
-                payload: {
-                    body: {
-                        ...formInfo
+            const { status: transHashStatus, transHash } = getTransHashByPlaceBid(nftID, formInfo.price)
+            console.log('formInfo================', transHashStatus, transHash, formInfo )
+            if (transHashStatus) {
+                placeBid({
+                    api: postPlaceBidAPI,
+                    payload: {
+                        body: {
+                            ...formInfo,
+                            transactionHash: transHash
+                        }
                     }
-                }
-            })
+                })
+            }
         } else if (!isNewUser) {
             onRequestLogin()
         } else if (isNewUser) {
