@@ -1,6 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+
+import { checkAuth } from '../../../helper/utility'
+import Register from '../Auth/Register'
+import Login from '../Auth/Login'
 
 function Category() {
+    const [isVisibleInfo, setIsVisibleInfo] = useState({ isLoginVisible: false, isRegisterVisible: false })
+
+    const authData = useSelector(state => state.web.app.auth.authData)
+    const { status, isNewUser } = checkAuth(authData)
+
+    const onClickClose = () => setIsVisibleInfo({ isLoginVisible: false, isRegisterVisible: false })
+    const onClickLogin = () => setIsVisibleInfo({ isLoginVisible: true, isRegisterVisible: false })
+    const onClickRegister = () => setIsVisibleInfo({ isLoginVisible: false, isRegisterVisible: true })
+
+    const onClickSignUp = () => {
+        if (!isNewUser) {
+            onClickLogin()
+        } else if (isNewUser) {
+            onClickRegister()
+        }
+    }
+
     return (
         <>
             <section className="categories">
@@ -12,7 +34,7 @@ function Category() {
                                 <div className="categories__text">
                                     <h1>Exhibition</h1>
                                     <h3 className="text-white">At the bottom</h3>
-                                    <button type="submit" className="mt-3 site-btn px-5 py-3">Sign Up</button>
+                                    {!status ? <button type="submit" className="mt-3 site-btn px-5 py-3" onClick={onClickSignUp}>Sign Up</button> : null}
                                 </div>
                                 <div className="categories__text justify-content-between d-flex">
                                     <div className="">
@@ -87,6 +109,10 @@ function Category() {
 
                 </div>
             </section>
+            {/* Register */}
+            <Register isVisible={isVisibleInfo.isRegisterVisible} editModalInfo={authData} onClickClose={onClickClose} />
+            {/* Login */}
+            <Login isVisible={isVisibleInfo.isLoginVisible} onClickClose={onClickClose} />
         </>
     )
 }

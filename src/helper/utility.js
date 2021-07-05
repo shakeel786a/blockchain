@@ -59,13 +59,27 @@ export const showToastMessage = (message, type) => {
 
 export const checkAuth = authData => {
   let status = true
-  const { userId, isNewUser } = authData
+  const { userId, isNewUser } = authData || {}
 
   if (!userId) {
       status = false
   }
 
-  console.log('status===========', status)
-
   return { status, isNewUser }
+}
+
+export const refreshPage = () => {
+  setTimeout(() => {
+    window.location.reload()
+  }, 2000)
+}
+
+export const walletAddressVisibleFormat = walletAddress => {
+  const data = walletAddress && `${walletAddress.substring(0, 4)}...${walletAddress.substring(walletAddress.length - 4, walletAddress.length)}`
+
+  return data
+}
+
+export function isValidEmailAddress(text) {
+  return /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/.test(text)
 }

@@ -96,7 +96,6 @@ export async function getNetworkId() {
     const networkId = info._web3 && info._web3.eth && await info._web3.eth.net.getId()
 
     return { networkId, walletAddress }
-    // console.log('Id=============', id)
 }
 
 // async function getUserBalance() {
