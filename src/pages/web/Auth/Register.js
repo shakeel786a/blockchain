@@ -7,9 +7,10 @@ import { useFetchAPI } from '../../../hooks'
 import { postUploadProfilePicAPI, postRegistrationAPI, postUpdateProfileAPI } from '../../../http/common.http.service'
 import { getAccount, signMsg } from '../../../web3Integration/global.service'
 import { Avatar, Button, FileDropSection, ValidationTextComponent } from '../../../commonPages'
+import { refreshPage, showToastMessage, isValidEmailAddress } from '../../../helper/utility'
 
 function Register(props) {
-    const { isVisible, editModalInfo, onClickClose, onClickLogin } = props
+    const { isVisible, editModalInfo, onClickClose } = props
     const [registerInfo, setRegisterInfo] = useState(editModalInfo || {})
     const [updatedData, setUpdatedData] = useState()
 
@@ -36,7 +37,7 @@ function Register(props) {
     const [
         {
             isLoading: isRegisterLoading,
-            response: { isSuccess: isRegisterSuccess, data: registerData } = {}
+            response: { isSuccess: isRegisterSuccess, data: registerData, message: registerMessage } = {}
         },
         postRegister
     ] = useFetchAPI()
@@ -71,15 +72,17 @@ function Register(props) {
         if (isRegisterLoading === false) {
             if (isRegisterSuccess && registerData) {
                 // console.log('registerData===============', registerData)
+                showToastMessage(registerMessage, 'success')
                 if (isEditing) {
                     dispatch({ type: authAction.SET_WEB_USER_INFO, payload: { ...editModalInfo, ...updatedData } })
                 } else {
                     dispatch({ type: authAction.SET_WEB_USER_INFO, payload: registerData })
                 }
                 onClickClose()
+                refreshPage()
             }
         }
-    }, [isRegisterLoading, isRegisterSuccess, registerData])
+    }, [isRegisterLoading, isRegisterSuccess, registerData, registerMessage])
 
     const handleOnChange = info => {
         if (isEditing) {
@@ -111,6 +114,13 @@ function Register(props) {
 
         if (!email && !isEditing) {
             validationMessage.emailValidationMessage = 'Email required'
+            status = false
+        } else {
+            validationMessage.emailValidationMessage = undefined
+        }
+
+        if (email && !isValidEmailAddress(email)) {
+            validationMessage.emailValidationMessage = 'Invalid email format'
             status = false
         } else {
             validationMessage.emailValidationMessage = undefined
@@ -214,19 +224,6 @@ function Register(props) {
                                 <Button className="bg-primary site-btn" isLoading={isRegisterLoading} label={isEditing ? "Update" : "Register"} onClick={onClickRegister} />
                             </div>  
                         </div>  
-                        {!isEditing ? (
-                            <div className="p-4 border-top">
-                                <div className="row align-items-center">
-                                    <div className="col-md-6 mb-3">
-                                        <p className="ta-l mb-0">Already have an account ? </p>
-                                    </div>
-                                    <div className="col-md-6 text-md-right">
-                                        <button className="site-btn" data-toggle="modal" data-dismiss="modal"
-                                            data-target="#at-login" onClick={onClickLogin}>Login </button>
-                                    </div>
-                                </div>
-                            </div>
-                        ) : null}
                     </div>
                 </div>
             </Modal>

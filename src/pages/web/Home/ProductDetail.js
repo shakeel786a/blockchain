@@ -529,9 +529,9 @@ function ProductDetail(props) {
             {isNftDetailLoading ? <Loader /> : null}
             {detailSection}
             {/* Register */}
-            <Register isVisible={isVisibleInfo.isRegisterVisible} onClickClose={onClickClose} onClickLogin={onClickLogin} />
+            <Register isVisible={isVisibleInfo.isRegisterVisible} onClickClose={onClickClose} />
             {/* Login */}
-            <Login isVisible={isVisibleInfo.isLoginVisible} onClickClose={onClickClose} onClickRegister={onClickRegister} />
+            <Login isVisible={isVisibleInfo.isLoginVisible} onClickClose={onClickClose} />
         </body>
     )
 }

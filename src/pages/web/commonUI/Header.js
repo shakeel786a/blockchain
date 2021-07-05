@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
+import { walletAddressVisibleFormat, refreshPage } from '../../../helper/utility'
 import { getNetworkId } from '../../../web3Integration/global.service'
 import { authAction } from '../../../actions'
 import { Avatar } from '../../../commonPages'
@@ -54,8 +55,8 @@ function Header(props) {
                     setAuthData({ isNewUser })
                 }
 
-                checkBadNetwork()
                 onClickClose()
+                refreshPage()
             }
         }
     }, [isCheckRegisterSuccess, checkRegisterData])
@@ -71,14 +72,14 @@ function Header(props) {
 
     if (isNewUser) {
         registerButttonSection = <a role="button" className="site-btn bg-primary text-white" data-toggle="modal" data-target="#at-signup-form" onClick={onClickRegister}>Register</a>
-        connectWalletSection = <a role="button" className="site-btn text-white">{networkInfo.isBadNetwork ? 'Wrong Network' : walletAddress || networkInfo.walletAddress}</a>
+        connectWalletSection = <a role="button" className="site-btn text-white">{networkInfo.isBadNetwork ? 'Wrong Network' : walletAddressVisibleFormat(walletAddress || networkInfo.walletAddress)}</a>
     } else if (walletAddress) {
         avatarSection = (
             <button className="circle_img" onClick={onClickAvatar}>
                 <Avatar uri={avatar || "https://upload.wikimedia.org/wikipedia/commons/7/70/User_icon_BLACK-01.png"} className="img-fluid avatar" />
             </button>
         )
-        connectWalletSection =  <a role="button" className="site-btn text-white">{walletAddress}</a>
+        connectWalletSection =  <a role="button" className="site-btn text-white">{walletAddressVisibleFormat(walletAddress)}</a>
     }
 
     return (
@@ -114,7 +115,7 @@ function Header(props) {
             </header>
 
             {/* Register */}
-            <Register isVisible={isVisibleInfo.isRegisterVisible} editModalInfo={authData} onClickClose={onClickClose} onClickLogin={onClickLogin} />
+            <Register isVisible={isVisibleInfo.isRegisterVisible} editModalInfo={authData} onClickClose={onClickClose} />
             {/* Login */}
             <Login isVisible={isVisibleInfo.isLoginVisible} onClickClose={onClickClose} />
         </>
