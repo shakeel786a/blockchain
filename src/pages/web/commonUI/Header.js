@@ -13,7 +13,7 @@ function Header(props) {
     const { authData, setAuthData } = props
     const [isVisibleInfo, setIsVisibleInfo] = useState({ isLoginVisible: false, isRegisterVisible: false })
 
-    const { walletAddress, avatar, isNewUser } = authData
+    const { walletAddress, avatar, isNewUser } = authData || {}
     const [isChangedAccount, setIsChangedAccount] = useState(false)
     const [networkInfo, setNetworkInfo] = useState({})
 
