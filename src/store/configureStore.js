@@ -1,13 +1,14 @@
 import { createStore } from 'redux'
 import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import AsyncStorage from '@react-native-community/async-storage'
 
 import { reducers } from '../reducers'
 
 const persistConfig = {
     key: 'root',
-    storage,
-    whitelist: ['web']
+    storage: AsyncStorage,
+    whitelist: ['web', 'admin'],
+    timeout: 7000
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)

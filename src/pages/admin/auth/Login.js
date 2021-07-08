@@ -27,7 +27,7 @@ function Login(props) {
 
     useEffect(() => {
         if (isSignInLoading === false && isSignInSuccess) {
-            tokenDispatch({ type: authAction.SET_TOKEN, payload: 'loggedIn' })
+            tokenDispatch({ type: authAction.SET_TOKEN, payload: true })
             history.push({ pathname: getFullRoute(formRoute) })
         } else {
             data && showToastMessage(data)

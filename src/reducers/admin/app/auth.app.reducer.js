@@ -1,14 +1,13 @@
 import { authAction } from "../../../actions";
 
 const initialState = {
-    token: null
+    isLogin: null
 }
 
 export default function authAppReducer(state = initialState, action) {
     switch(action.type) {
         case authAction.SET_TOKEN:
-            console.log('action============', action)
-            return { token: action.payload }
+            return { ...state, isLogin: action.payload }
         default:
             return state
     }

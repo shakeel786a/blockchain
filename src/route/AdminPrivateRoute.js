@@ -9,28 +9,37 @@ const {
   auth: { loginRoute }
 } = fixedData.routeName
 
-const AdminPrivateRoute = ({ component: Component, render, customState, token, ...rest }) => {
-console.log('token===============', token)
+const AdminPrivateRoute = ({ component: Component, render, customState, isLogin, isLoading, ...rest }) => {
+  const [isAvailable, setIsAvailable] = useState(false)
+
+  // console.log('isLogin===============', isLogin, isLoading)
+
+  setTimeout(function(){
+    setIsAvailable(true)
+  }, 1000)
+
   return (
     <Route
       {...rest}
       render={props =>
-        token ? (
-          render ? render() : <Component {...props} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: getFullRoute(loginRoute)
-            }}
-          />
-        )
+        isAvailable ? (
+          !isLogin ? (
+            <Redirect
+              to={{
+                pathname: getFullRoute(loginRoute)
+              }}
+            />
+          ) : (
+            render ? render() : <Component {...props} />
+          )
+        ) : null
       }
     />
   )
 }
 
 const mapStateToProps = state => ({
-  token: state && state.admin && state.admin.app && state.admin.app.auth && state.admin.app.auth.token
+  isLogin: state && state.admin && state.admin.app && state.admin.app.auth && state.admin.app.auth.isLogin
 })
 
 export default connect(mapStateToProps)(AdminPrivateRoute)
